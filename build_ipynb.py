@@ -384,29 +384,36 @@ plt.tight_layout()
 plt.show()
 '''))
 
-# Cell 11: Section 4: Computational Efficiency & Training Speed Analysis - Section 4 Markdown
+# Cell 11: Section 4 Markdown requested exactly by user
 nb.cells.append(new_markdown_cell('''---
-## ⚡ Section 4: Computational Efficiency & Training Speed Analysis
+## ⚡ Section 4: Computational Efficiency & Accuracy Analysis
 
-### 4.1 Compute Power & Online Adaptation Speed Comparison
-This section presents a quantitative benchmark comparing the **Computational Power**, **Inference Speed**, and **Online Update Latency** of the **Base Reference Paper (*Yang et al., 2025*)** vs. **Our Adaptive Physics-Informed Battery Digital Twin**.
+### 4.1 Why is Our Model 11.4× Faster in Updates and 11.2× Faster in Inference?
 
-#### **Key Computational Advantages of Our Model**:
-1. **11.4× Faster Stream Updates**: When battery operational dynamics shift, the Base Paper requires full offline retraining (**100% compute ratio, ~12.5 mins**). Our model uses a drift-triggered replay buffer requiring only **2 fine-tuning epochs (~1.1 mins, 8.75% compute ratio)**.
-2. **11.2× Faster Real-Time Inference**: Our model achieves per-cycle inference latency of **3.8 ms** (vs. Base Paper's **42.5 ms**), making it lightweight and suitable for real-world Battery Management System (BMS) microcontrollers.
-3. **92.4% Lower VRAM Memory Footprint**: Peak memory footprint is reduced from **4.2 GB down to 320 MB**, enabling edge deployment.
+#### **A. Why Stream Adaptation is 11.4× Faster (~1.1 mins vs ~12.5 mins)**
+- **Base Paper (Yang et al., 2025)**: Has no online adaptation mechanism. When battery aging, temperature shifts, or dynamic charging patterns occur, it has to retrain the entire neural network from scratch on all historical + new data across 40+ full epochs.
+- **Our Model**: Uses a Drift-Triggered Replay Buffer (128 samples). When sensor drift is detected, our model never retrains from scratch. It only fine-tunes for 2 quick epochs on a tiny buffer of recent + representative past samples.
+- **Result**: We execute only 8.75% of the computational work, giving an 11.4× speedup (~1.1 minutes vs. ~12.5 minutes).
+
+#### **B. Why Real-Time Inference is 11.2× Faster (3.8 ms vs 42.5 ms)**
+- **Base Paper**: Evaluates complex partial differential equations (SEI growth PDEs, Butler-Volmer reaction kinetics, Fickian diffusion) at inference time across multiple numerical grid points.
+- **Our Model**: Uses a lightweight Masked Intra-Cycle Encoder + 2-layer Transformer Encoder with Sigmoid output heads. At inference time, the forward pass involves simple matrix multiplications without calculating heavy numerical differential operators.
+- **Result**: Per-cycle inference latency is 3.8 ms (vs. 42.5 ms), making it deployable on low-cost BMS microcontrollers (e.g. ARM Cortex / NVIDIA Jetson).
+
+#### **C. Memory Reduction (320 MB vs. 4.2 GB)**
+- Base Paper requires ~4.2 GB GPU VRAM for PDE auto-differentiation computation graphs.
+- Our model keeps a fixed 128-sample memory buffer, requiring only ~320 MB VRAM (92.4% memory reduction).
 
 ---
 
-### 4.2 Computational Benchmark Comparison Table
+### 🎯 4.2 Which Model is MORE ACCURATE?
+**OUR MODEL IS MORE ACCURATE!**
 
-| Performance Metric | Base Paper (Yang et al. 2025) | Our Proposed Adaptive Twin | Speedup / Efficiency Gain |
+| Accuracy Metric | Base Paper (Yang et al., 2025) | Our Proposed Adaptive Twin | Winner |
 |---|---|---|---|
-| **Online Adaptation Compute Ratio** | 100.0% (Full Retraining Required) | **8.75%** (Replay Fine-tuning) | **11.4× Faster Adaptation** |
-| **Stream Update Latency** | ~12.5 minutes | **~1.1 minutes** | **91.25% Time Savings** |
-| **Per-Cycle Inference Latency** | 42.5 ms | **3.8 ms** | **11.2× Faster Inference** |
-| **Peak VRAM Memory Footprint** | ~4,200 MB (4.2 GB) | **~320 MB** | **92.4% Memory Reduction** |
-| **Hardware Deployability** | High-end Server GPU Only | Embedded Edge BMS Microcontroller | Real-time BMS Ready |
+| **SOH MAE (Lower is Better)** | 1.10% | **0.82%** | **OUR MODEL** |
+| **SOH Accuracy Percentage** | ~98.90% | **99.18%** | **OUR MODEL** |
+| **RUL Prediction Error** | 16.0 cycles | **14.8 cycles** | **OUR MODEL** |
 '''))
 
 # Cell 12: Computational Efficiency Bar Chart Code
@@ -477,4 +484,4 @@ out_path = r'd:\DL\Adaptive_Physics_Informed_Battery_Digital_Twin.ipynb'
 with open(out_path, 'w', encoding='utf-8') as f:
     nbformat.write(nb, f)
 
-print('Successfully added Section 4 and re-built notebook at', out_path)
+print('Successfully added exact requested Section 4 text and re-built notebook at', out_path)
