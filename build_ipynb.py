@@ -9,7 +9,7 @@ nb = new_notebook()
 nb.cells.append(new_markdown_cell('''# Adaptive Physics-Informed Battery Digital Twin for SOH & RUL Prediction
 **Course**: BCSE332L - Deep Learning (Phase II Review)  
 **Team No**: 12 | **Members**: 23BAI0093, 23BAI0157, 23BAI0143  
-**Faculty Evaluator**: CHELLATAMILAN SIR  
+**Reviewer Evaluator**: CHELLATAMILAN SIR  
 **Base Reference Paper**: *L. Yang et al., "Physics-informed neural network for co-estimation of state of health, remaining useful life, and short-term degradation path in lithium-ion batteries", Applied Energy, 2025.*
 
 ---

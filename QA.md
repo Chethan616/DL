@@ -3,7 +3,7 @@
 **Project Title**: Adaptive Physics-Informed Battery Digital Twin for State-of-Health (SOH) and Remaining Useful Life (RUL) Prediction  
 **Course**: BCSE332L - Deep Learning (Phase II Review)  
 **Team**: 12 (Reg Nos: 23BAI0093, 23BAI0157, 23BAI0143)  
-**Faculty Evaluator**: CHELLATAMILAN SIR  
+**Reviewer Evaluator**: CHELLATAMILAN SIR  
 
 ---
 
@@ -113,7 +113,7 @@ The base paper (*Yang et al. 2025*) proposed a PINN framework based on internal 
 
 ---
 
-## 📊 2. Data Analysis & Data Preparation Deep Dive (FACULTY FOCUS AREA)
+## 📊 2. Data Analysis & Data Preparation Deep Dive (DATA PREPARATION & SYSTEM ANALYSIS)
 
 ### Q2: How did you process the data? Explain the Data Analysis & Preparation step-by-step.
 
@@ -213,7 +213,7 @@ We executed a 54-combination grid search across 3 random seeds:
 
 ---
 
-## ❓ 5. Likely Faculty Viva Questions & 10/10 Answers
+## ❓ 5. Likely Likely Viva Questions & 10/10 Answers
 
 ### Q5: "Why did you use Transformer instead of simple LSTM or CNN?"
 
