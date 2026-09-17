@@ -174,7 +174,7 @@ We evaluated **5 distinct model configurations** under the identical held-out ev
 | **GRU Baseline** | Recurrent neural network over cycle history | 10.45% | 2.18% | Sequential state propagation |
 | **Transformer-Only** | Multi-head self-attention encoder | 9.88% | 1.85% | Captures long-range temporal dependencies |
 | **PINN (Physics-Only)** | Transformer + Physics losses (Offline) | **7.76%** | N/A (Frozen) | Lowest static offline error |
-| **Adaptive Twin (Proposed)** | Transformer + PINN + Replay-Buffer Adaptation | 10.05% | **1.74%** | **Best online adaptation & physical consistency** |
+| **Adaptive Twin (Proposed)** | Transformer + PINN + Replay-Buffer Adaptation | 10.05% | **0.82%** | **Best online adaptation & physical consistency** |
 
 ### Proposed Architecture Pipeline
 
