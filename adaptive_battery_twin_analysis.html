@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Faculty-facing analysis and implementation plan for an adaptive physics-informed battery digital twin.">
+  <title>Adaptive battery digital twin | Project analysis</title>
+  <style>
+    :root {
+      --ink: #13222b;
+      --ink-soft: #38505d;
+      --paper: #f5f7f6;
+      --paper-warm: #fbfaf6;
+      --line: #cbd6d5;
+      --line-dark: #8ea1a2;
+      --blue: #1967a3;
+      --blue-dark: #0d426c;
+      --green: #718c45;
+      --green-soft: #e6eed8;
+      --amber: #c47d1f;
+      --amber-soft: #f8ead3;
+      --red: #9d4d43;
+      --red-soft: #f4dfdc;
+      --slate: #dce7ea;
+      --shadow: 0 18px 50px rgba(19, 34, 43, .12);
+      --radius: 16px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Aptos", "Segoe UI", Arial, sans-serif;
+      --mono: "Cascadia Code", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #d8e2e3;
+      font-family: var(--sans);
+      line-height: 1.58;
+    }
+    a { color: var(--blue-dark); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--amber); }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 3px solid #f2bd59;
+      outline-offset: 3px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.12; }
+    h1, h2 { font-family: var(--serif); font-weight: 600; }
+    h1 { font-size: clamp(2.8rem, 7vw, 6.6rem); letter-spacing: -.055em; max-width: 10ch; margin-bottom: 1rem; }
+    h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -.035em; margin-bottom: .8rem; }
+    h3 { font-size: 1.18rem; margin-bottom: .55rem; }
+    p { max-width: 74ch; }
+    code, .mono { font-family: var(--mono); }
+    code {
+      color: var(--blue-dark);
+      background: #e8eff0;
+      border: 1px solid #d1dddf;
+      padding: .12em .34em;
+      border-radius: 5px;
+      font-size: .92em;
+    }
+    pre {
+      overflow: auto;
+      margin: 0;
+      padding: 1rem 1.1rem;
+      border: 1px solid #b9c8ca;
+      border-radius: 10px;
+      background: #edf3f3;
+      color: #17394a;
+      font: .84rem/1.65 var(--mono);
+    }
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -5rem;
+      z-index: 10;
+      padding: .65rem .9rem;
+      color: white;
+      background: var(--blue-dark);
+      border-radius: 8px;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .shell { max-width: 1500px; margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: .9rem clamp(1rem, 4vw, 3.5rem);
+      border-bottom: 1px solid var(--line);
+      background: rgba(245, 247, 246, .96);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+    .brand { display: flex; align-items: center; gap: .7rem; font-weight: 700; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 1.75rem;
+      height: 1.75rem;
+      display: grid;
+      place-items: center;
+      color: var(--paper-warm);
+      background: var(--ink);
+      border-radius: 5px;
+      font: .78rem var(--mono);
+    }
+    .topbar nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .55rem 1rem; }
+    .topbar nav a { color: var(--ink-soft); font-size: .86rem; text-decoration: none; }
+    .topbar nav a:hover { color: var(--blue); }
+
+    main { overflow: hidden; }
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: clamp(2rem, 6vw, 7rem);
+      padding: clamp(3.5rem, 8vw, 8rem) clamp(1.25rem, 6vw, 6rem) clamp(3rem, 6vw, 6rem);
+      color: var(--paper-warm);
+      background:
+        linear-gradient(135deg, rgba(25, 103, 163, .36), transparent 45%),
+        radial-gradient(circle at 90% 8%, rgba(196, 125, 31, .24), transparent 23%),
+        var(--ink);
+    }
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--green) 0 41%, var(--amber) 41% 73%, var(--blue) 73% 100%);
+    }
+    .hero h1 { color: white; }
+    .hero p { color: #d7e2e3; font-size: clamp(1.05rem, 1.6vw, 1.28rem); max-width: 58ch; }
+    .hero-kicker {
+      margin-bottom: 1.2rem;
+      color: #f4c36a;
+      font: .78rem var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.7rem; }
+    .hero-meta span { padding: .4rem .65rem; border: 1px solid rgba(215, 226, 227, .35); border-radius: 99px; color: #e4eeef; font-size: .84rem; }
+    .hero-side { align-self: end; border-left: 2px solid var(--amber); padding-left: 1.25rem; }
+    .hero-side strong { display: block; color: #f4c36a; font: 2.7rem var(--serif); line-height: 1; }
+    .hero-side p { margin: .65rem 0 0; font-size: .95rem; }
+    .hero-side .mini-note { margin-top: 1.7rem; color: #a9c4ca; font-size: .85rem; }
+
+    .section { padding: clamp(2.75rem, 6vw, 5.5rem) clamp(1.25rem, 6vw, 6rem); border-bottom: 1px solid var(--line); }
+    .section:nth-of-type(even) { background: var(--paper-warm); }
+    .section-heading { display: grid; grid-template-columns: minmax(180px, .3fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; margin-bottom: 2rem; }
+    .section-number { color: var(--blue); font: .86rem var(--mono); padding-top: .25rem; }
+    .section-heading p { color: var(--ink-soft); margin-bottom: 0; }
+    .lead { font-size: 1.12rem; color: var(--ink-soft); }
+    .rule { height: 1px; background: var(--line-dark); margin: 1.7rem 0; }
+
+    .verdict-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); }
+    .verdict { padding: 1.2rem; background: var(--paper-warm); min-height: 145px; }
+    .verdict .label { display: block; color: var(--blue-dark); font: .72rem var(--mono); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .55rem; }
+    .verdict strong { display: block; font: 1.3rem var(--serif); }
+    .verdict p { margin: .45rem 0 0; font-size: .88rem; color: var(--ink-soft); }
+
+    .legend { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.25rem 0; }
+    .tag { display: inline-flex; align-items: center; gap: .35rem; border-radius: 99px; padding: .28rem .6rem; font-size: .76rem; font-weight: 700; line-height: 1.2; }
+    .tag:before { content: ""; width: .45rem; height: .45rem; border-radius: 50%; background: currentColor; }
+    .tag.verified { color: var(--green); background: var(--green-soft); }
+    .tag.proposed { color: var(--blue); background: #e0edf6; }
+    .tag.required { color: var(--amber); background: var(--amber-soft); }
+    .tag.future { color: var(--red); background: var(--red-soft); }
+    .tag.instruction { color: #64577d; background: #ece6f4; }
+
+    .role-table, .compare-table, .test-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .role-table th, .role-table td, .compare-table th, .compare-table td, .test-table th, .test-table td { padding: .85rem .75rem; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    .role-table th, .compare-table th, .test-table th { color: var(--blue-dark); font: .74rem var(--mono); letter-spacing: .035em; text-transform: uppercase; background: #eaf0f0; }
+    .role-table tr:last-child td, .compare-table tr:last-child td, .test-table tr:last-child td { border-bottom: 0; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+
+    .scope-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0 0; }
+    .scope-strip div { border-top: 3px solid var(--blue); padding: .85rem 0 0; }
+    .scope-strip div:nth-child(2) { border-color: var(--amber); }
+    .scope-strip div:nth-child(3) { border-color: var(--green); }
+    .scope-strip strong { display: block; margin-bottom: .3rem; }
+    .scope-strip span { display: block; color: var(--ink-soft); font-size: .88rem; }
+
+    .cycle-map { margin: 2rem 0 0; padding: 1.15rem; border: 1px solid var(--line-dark); background: #eef3f1; }
+    .cycle-label { display: flex; justify-content: space-between; gap: 1rem; color: var(--ink-soft); font: .73rem var(--mono); }
+    .cycle-line { display: flex; height: 46px; margin: .6rem 0 .8rem; border: 1px solid #9db0af; background: #fff; }
+    .cycle-line span { display: flex; align-items: center; justify-content: center; padding: .35rem; color: white; font-size: .78rem; font-weight: 700; text-align: center; }
+    .cycle-line .early { width: 29%; background: var(--green); }
+    .cycle-line .middle { width: 36%; background: var(--blue); }
+    .cycle-line .shift { width: 21%; background: var(--amber); }
+    .cycle-line .eol { width: 14%; background: var(--red); }
+    .cycle-note { margin: 0; color: var(--ink-soft); font-size: .87rem; }
+
+    .flow { display: grid; grid-template-columns: repeat(8, minmax(100px, 1fr)); gap: 0; align-items: stretch; margin-top: 1.75rem; overflow-x: auto; padding-bottom: .45rem; }
+    .flow-step { position: relative; min-width: 120px; padding: .85rem .8rem 1rem; border: 1px solid var(--line-dark); border-right: 0; background: #f9fbfa; }
+    .flow-step:last-child { border-right: 1px solid var(--line-dark); }
+    .flow-step:after { content: ""; position: absolute; right: -9px; top: 50%; width: 16px; height: 1px; background: var(--amber); z-index: 1; }
+    .flow-step:last-child:after { display: none; }
+    .flow-step .step-no { display: block; margin-bottom: .55rem; color: var(--amber); font: .73rem var(--mono); }
+    .flow-step strong { display: block; font-size: .91rem; line-height: 1.2; }
+    .flow-step small { display: block; margin-top: .5rem; color: var(--ink-soft); font-size: .76rem; line-height: 1.35; }
+
+    .equation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .equation { padding: 1.1rem; border: 1px solid var(--line); background: #f0f5f4; }
+    .equation h3 { color: var(--blue-dark); }
+    .formula { display: block; padding: .7rem .8rem; margin: .7rem 0; background: var(--ink); color: #f8d590; border-radius: 8px; font: .93rem var(--mono); overflow-x: auto; }
+    .equation p { font-size: .87rem; color: var(--ink-soft); margin-bottom: 0; }
+    .notice { padding: 1rem 1.1rem; border-left: 4px solid var(--amber); background: var(--amber-soft); color: #5d431f; }
+
+    .paper-toolbar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 1.2rem 0; }
+    .paper-toolbar span { color: var(--ink-soft); font-size: .83rem; margin-right: .35rem; }
+    .filter { cursor: pointer; border: 1px solid var(--line-dark); border-radius: 99px; padding: .38rem .68rem; color: var(--ink); background: transparent; font: .8rem var(--sans); }
+    .filter:hover, .filter[aria-pressed="true"] { color: white; background: var(--blue-dark); border-color: var(--blue-dark); }
+    .compare-table { min-width: 990px; }
+    .compare-table td:first-child { min-width: 190px; font-weight: 700; color: var(--blue-dark); }
+    .compare-table .result { color: #5b421c; font-weight: 700; }
+    .paper-details { margin-top: 1.2rem; border-top: 1px solid var(--line); }
+    details { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; padding: .95rem 0; font-weight: 700; color: var(--blue-dark); }
+    details > div { padding: 0 0 1rem; color: var(--ink-soft); font-size: .91rem; }
+
+    .novelty { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: 1.4rem; margin-top: 1.5rem; }
+    .novelty-box { padding: 1.2rem; border: 1px solid var(--line); background: #f0f5f4; }
+    .novelty-box h3 { color: var(--blue-dark); }
+    .novelty-box ul, .checklist { margin: .7rem 0 0; padding-left: 1.2rem; }
+    .novelty-box li, .checklist li { margin: .46rem 0; }
+    .claim { margin-top: 1.5rem; padding: 1.3rem; border: 2px solid var(--green); background: var(--green-soft); }
+    .claim strong { color: #415c23; }
+
+    .dataset-layout { display: grid; grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); gap: 1.5rem; align-items: start; }
+    .dataset-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+    .fact { padding: .85rem; border-top: 2px solid var(--blue); background: #edf3f3; }
+    .fact:nth-child(2n) { border-color: var(--amber); }
+    .fact strong { display: block; font: 1.4rem var(--serif); }
+    .fact span { display: block; color: var(--ink-soft); font-size: .8rem; }
+    .data-contract { margin-top: 1.2rem; }
+
+    .roadmap { position: relative; margin-top: 1.4rem; padding-left: 1.5rem; border-left: 2px solid var(--line-dark); }
+    .milestone { position: relative; padding: 0 0 1.55rem 1.1rem; }
+    .milestone:before { content: ""; position: absolute; left: -1.93rem; top: .18rem; width: .72rem; height: .72rem; border: 3px solid var(--paper); border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+    .milestone:nth-child(2):before { background: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+    .milestone:nth-child(3):before { background: var(--green); box-shadow: 0 0 0 1px var(--green); }
+    .milestone:nth-child(4):before { background: var(--red); box-shadow: 0 0 0 1px var(--red); }
+    .milestone .phase { color: var(--blue-dark); font: .76rem var(--mono); }
+    .milestone h3 { margin: .25rem 0 .35rem; }
+    .milestone p { color: var(--ink-soft); font-size: .9rem; margin-bottom: 0; }
+
+    .rubric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); margin-top: 1.25rem; }
+    .rubric { padding: 1.15rem; background: var(--paper-warm); }
+    .rubric h3 { margin-bottom: .3rem; }
+    .rubric .marks { color: var(--amber); font: .78rem var(--mono); }
+    .rubric p { color: var(--ink-soft); font-size: .86rem; }
+    .test-table { margin-top: 1.25rem; }
+    .test-table td:first-child { min-width: 205px; font-weight: 700; }
+    .status-cell { white-space: nowrap; }
+
+    .risk-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.3rem; }
+    .risk { padding: 1rem; border-left: 4px solid var(--red); background: var(--red-soft); }
+    .risk strong { display: block; margin-bottom: .35rem; }
+    .risk p { color: #6b403b; font-size: .87rem; margin-bottom: 0; }
+
+    footer { padding: 2rem clamp(1.25rem, 6vw, 6rem); background: var(--ink); color: #d7e2e3; }
+    footer h2 { color: white; font-size: 1.8rem; }
+    footer a { color: #b8d8ed; }
+    .source-list { columns: 2 300px; column-gap: 2.5rem; padding-left: 1.2rem; }
+    .source-list li { break-inside: avoid; margin: .55rem 0; font-size: .87rem; }
+    .footer-note { margin: 1.7rem 0 0; color: #9db5bc; font-size: .8rem; }
+
+    @media (max-width: 980px) {
+      .hero, .dataset-layout, .novelty { grid-template-columns: 1fr; }
+      .hero-side { max-width: 50ch; }
+      .verdict-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(8, 135px); }
+    }
+    @media (max-width: 680px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .topbar nav { justify-content: flex-start; }
+      .section-heading { grid-template-columns: 1fr; gap: .4rem; }
+      .verdict-grid, .scope-strip, .equation-grid, .rubric-grid, .risk-grid { grid-template-columns: 1fr; }
+      .dataset-facts { grid-template-columns: 1fr 1fr; }
+      .hero { padding-top: 3.6rem; }
+      h1 { font-size: clamp(2.9rem, 15vw, 4.8rem); }
+    }
+    @media print {
+      body { background: white; }
+      .shell { box-shadow: none; }
+      .topbar { position: static; }
+      .topbar nav { display: none; }
+      .hero { color: black; background: white; padding: 2rem 0; }
+      .hero h1, .hero p, .hero-side strong, .hero-side p { color: black; }
+      .hero:after { display: none; }
+      .section { padding: 2rem 0; break-inside: avoid; }
+      a { color: black; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to report</a>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">BT</span><span>Battery twin / project file</span></div>
+      <nav aria-label="Report sections">
+        <a href="#brief">Brief</a>
+        <a href="#papers">Papers</a>
+        <a href="#physics">Physics</a>
+        <a href="#build">Build</a>
+        <a href="#poc">Proof of concept</a>
+        <a href="#final-results">Results</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="brief" aria-labelledby="title">
+        <div>
+          <div class="hero-kicker">Faculty and team analysis / 13 September 2026</div>
+          <h1 id="title">A battery model that keeps learning</h1>
+          <p>Project analysis, literature evidence, physics choices, and a reproducible NASA-first implementation plan for an adaptive Physics-Informed Battery Digital Twin.</p>
+          <div class="hero-meta" aria-label="Project scope">
+            <span>SOH estimation</span>
+            <span>RUL prediction</span>
+            <span>Continual adaptation</span>
+            <span>NASA PCoE first</span>
+          </div>
+        </div>
+        <aside class="hero-side">
+          <strong>10 + 10 + 10</strong>
+          <p>The faculty rubric rewards literature analysis, model design and tuning, then comparative metrics and justification.</p>
+          <p class="mini-note">The central question is whether incremental adaptation improves later-life predictions without the cost of retraining the whole model.</p>
+        </aside>
+      </section>
+
+      <section class="section" aria-labelledby="verdict-title">
+        <div class="section-heading">
+          <div class="section-number">Read this first</div>
+          <div><h2 id="verdict-title">The project in one page</h2><p class="lead">The proposal is technically plausible, but its strongest novelty claim is still an experiment to run, not a result to announce.</p></div>
+        </div>
+        <div class="verdict-grid">
+          <div class="verdict"><span class="label">Problem</span><strong>Battery health changes over time</strong><p>SOH and RUL estimates must remain useful as cycling, temperature, load, and aging change the signal.</p></div>
+          <div class="verdict"><span class="label">Inputs</span><strong>Observable battery signals</strong><p>Voltage, current, temperature, elapsed time, cycle index, and optional BMS-derived state features.</p></div>
+          <div class="verdict"><span class="label">Outputs</span><strong>SOH and RUL together</strong><p>Capacity health as a percentage and remaining cycles to a declared end-of-life threshold.</p></div>
+          <div class="verdict"><span class="label">Contribution</span><strong>Physics-preserving updates</strong><p>A replay-buffer learner that adapts to new battery behavior while retaining old knowledge.</p></div>
+        </div>
+        <div class="legend" aria-label="Evidence legend">
+          <span class="tag verified">Verified source evidence</span>
+          <span class="tag proposed">Project proposal</span>
+          <span class="tag required">Required experiment</span>
+          <span class="tag future">Future extension</span>
+          <span class="tag instruction">Faculty instruction</span>
+        </div>
+        <div class="notice" style="margin-top:1.2rem"><strong>User requirements:</strong> analyze the complete project and dataset situation, explain the system and novelty against the remaining papers, give a neat implementation plan, and document the proof-of-concept experiments faculty can evaluate. The labels below distinguish those requested deliverables from claims made by the attachments and from results reported in the literature.</div>
+        <div class="scope-strip">
+          <div><strong>Primary dataset</strong><span>NASA PCoE B0005, B0006, B0007, B0018</span></div>
+          <div><strong>Primary physics</strong><span>Capacity, degradation-trend, and SOH/RUL consistency constraints</span></div>
+          <div><strong>Novelty test</strong><span>Post-deployment adaptation under temporally ordered data</span></div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="document-title">
+        <div class="section-heading">
+          <div class="section-number">01 / Source roles</div>
+          <div><h2 id="document-title">What each attachment is allowed to prove</h2><p>Project claims, faculty instructions, and scientific evidence serve different purposes. Keeping them separate prevents an intended architecture from being mistaken for a validated result.</p></div>
+        </div>
+        <div class="table-wrap">
+          <table class="role-table">
+            <thead><tr><th>Attachment</th><th>Role in this report</th><th>What it supports</th><th>What it does not prove</th></tr></thead>
+            <tbody>
+              <tr><td><a href="phse.pdf">phse.pdf</a></td><td><span class="tag proposed">Project proposal</span></td><td>Problem, objectives, NASA dataset choice, proposed PINN / Transformer / adaptive-learning direction.</td><td>Measured accuracy, online adaptation, or a completed experiment.</td></tr>
+              <tr><td><a href="dl.pptx">dl.pptx</a></td><td><span class="tag proposed">Project presentation</span></td><td>Architecture narrative, literature positioning, applications, and the intended incremental-learning story.</td><td>That the five dataset families were actually acquired or evaluated.</td></tr>
+              <tr><td><a href="RUBRICS%20FOR%20COURSE%20BASED%20DESIGN%20PROJECT%20-%20FALL%2026-27.pdf">RUBRICS...</a></td><td><span class="tag instruction">Faculty instruction</span></td><td>Phase I literature review, Phase II model design and tuning, final comparative metrics and viva requirements. The two supplied Phase II screenshots corroborate the 10-mark rows for architecture, multiple models, tuning, experimental analysis, and presentation/reflection.</td><td>Scientific evidence about battery models.</td></tr>
+              <tr><td><a href="0.base_paper.pdf">0.base_paper.pdf</a></td><td><span class="tag verified">Methodological review</span></td><td>Taxonomy of battery PINNs, physics sources, applications, and deployment challenges.</td><td>A single proposed model or a student-project proof of concept.</td></tr>
+              <tr><td><a href="1.pdf">1.pdf</a>, <a href="2.pdf">2.pdf</a>, <a href="3.pdf">3.pdf</a>, <a href="4.pdf">4.pdf</a></td><td><span class="tag verified">Research papers</span></td><td>Published model designs, datasets, baselines, ablations, and reported metrics.</td><td>That the proposed adaptive digital twin has already been demonstrated.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="notice" style="margin-top:1.3rem"><strong>Documentation issue to fix:</strong> the proposal names NASA as the standard dataset, while slide 7 lists five dataset families—NASA/Oxford, Severson Stanford–MIT–Toyota, TJU/XJTU, CALCE/Panasonic 18650PF, and second-life LIB. This implementation uses the NASA-first decision and labels the other families as literature context or future extensions.</div>
+      </section>
+
+      <section class="section" id="papers" aria-labelledby="papers-title">
+        <div class="section-heading">
+          <div class="section-number">02 / Literature evidence</div>
+          <div><h2 id="papers-title">What the previous papers actually experimented on</h2><p>These are the proof points your faculty is asking for: datasets, inputs, baselines, comparisons, ablations, and robustness checks.</p></div>
+        </div>
+        <div class="paper-toolbar" aria-label="Filter literature table">
+          <span>Show:</span>
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All papers</button>
+          <button class="filter" type="button" data-filter="multi" aria-pressed="false">SOH + RUL</button>
+          <button class="filter" type="button" data-filter="soh" aria-pressed="false">SOH-focused</button>
+          <button class="filter" type="button" data-filter="rul" aria-pressed="false">RUL-focused</button>
+        </div>
+        <div class="table-wrap">
+          <table class="compare-table" id="paper-table">
+            <thead><tr><th>Paper</th><th>Method and data</th><th>Experimental proof</th><th>Reported result</th><th>Relevance to this project</th></tr></thead>
+            <tbody>
+              <tr data-kind="multi">
+                <td>Applied Energy, 2025<br><small>Yang et al.<br><a href="https://www.sciencedirect.com/science/article/pii/S0306261925011572" target="_blank" rel="noopener">Publisher page</a></small></td>
+                <td>Gated multi-task PINN plus a simplified Transformer. Uses voltage/current features around the constant-voltage charging phase. Evaluates LFP, NCA, and NCM public battery data.</td>
+                <td>Approximately 70/15/15 train/validation/test split; model comparison; training-sample sensitivity; and transfer-learning analysis.</td>
+                <td class="result">SOH MAPE 0.75% on the reported NCM case; S-DP deviation about 0.01; RUL MAE 104 cycles on the reported NCA case.</td>
+                <td>Closest precedent for joint SOH/RUL plus Transformer/PINN. The project adds post-deployment adaptation.</td>
+              </tr>
+              <tr data-kind="soh">
+                <td>Energy, 2026<br><small>Gao et al.<br><a href="https://www.sciencedirect.com/science/article/pii/S0360544225053964" target="_blank" rel="noopener">Publisher page</a></small></td>
+                <td>EM-PINN connects SEI-layer growth to SOH degradation. The loss includes PDE, boundary-condition, initial-condition, and SOH-physics terms. Uses XJTU, MIT, and HUST datasets.</td>
+                <td>Cross-dataset evaluation and six testing scenarios with different data volumes, including small-sample conditions.</td>
+                <td class="result">Reported MAPE as low as 0.873% across the six testing scenarios.</td>
+                <td>Provides the advanced SEI-PDE extension. It estimates SOH only and does not provide the proposed replay-based digital twin.</td>
+              </tr>
+              <tr data-kind="rul">
+                <td>Scientific Reports, 2025<br><small>Chen et al.<br><a href="https://www.nature.com/articles/s41598-025-28505-5" target="_blank" rel="noopener">Open article</a></small></td>
+                <td>Bat-T-GNN combines cycle-aware patching, time-aware convolution, Transformer history, dynamic sensor-correlation GNNs, and a PINN-RUL loss. Uses NASA, CALCE, and UNIBO data.</td>
+                <td>Baseline comparisons, hyperparameter sensitivity, component ablations, case studies, learned-correlation visualization, noise, missingness, and sensor-drift stress tests.</td>
+                <td class="result">Reports NASA RMSE 0.014, MAE 0.007, MAPE 0.008; also reports strong ablation and robustness gains.</td>
+                <td>Strong template for the project’s experiment matrix and physical-consistency checks. Its novelty is input/loss design, not continual adaptation.</td>
+              </tr>
+              <tr data-kind="soh">
+                <td>Complex &amp; Intelligent Systems, 2026<br><small>Jung et al.<br><a href="https://doi.org/10.1007/s40747-025-02194-z" target="_blank" rel="noopener">DOI page</a></small></td>
+                <td>PINN-based SOH estimation with physics-guided data augmentation and momentum contrastive learning. Uses NASA B0005, B0006, B0007, and B0018 with voltage, current, temperature, time, SOC, resistance, capacity, load, and voltage-load features.</td>
+                <td>Compares CNN, BPINN, Informer, and XGBoost-ARIMA; runs ablations; adds SHAP analysis; reports parameter count, training time, and CPU inference latency.</td>
+                <td class="result">Average MAE about 0.0952% and RMSE about 0.117% in the headline comparison; ablation full model MAE 0.174% and RMSE 0.197%.</td>
+                <td>Useful NASA benchmark and efficiency reference. Contrastive learning improves representation quality, while the proposed work tests continual model updates.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="paper-details">
+          <details open><summary>Applied Energy / Yang et al. — joint SOH, RUL, and degradation-path study</summary><div>Reported evidence includes a gated multi-task PINN with a simplified Transformer, constant-voltage charging features, model comparisons, training-sample sensitivity, and transfer-learning analysis. The paper uses roughly 70/15/15 train/validation/test splits and reports 20 input features. Its headline values include 0.75% SOH MAPE in the reported NCM case, about 0.01 normalized short-term degradation-path deviation, and 104-cycle RUL MAE in the reported NCA case.</div></details>
+          <details><summary>Energy / Gao et al. — electrochemical-mechanism EM-PINN</summary><div>Reported evidence includes an SEI-layer-growth formulation, separate PDE, boundary-condition, initial-condition, and SOH-physics losses, cross-dataset evaluation on XJTU, MIT, and HUST, and six testing scenarios with different data volumes. The paper’s low reported MAPE is 0.873% in its scenario table. This is a SOH-focused mechanism extension, not evidence for replay-based continual adaptation.</div></details>
+          <details><summary>Scientific Reports / Chen et al. — cycle-aware Bat-T-GNN</summary><div>Reported evidence includes cycle-aware patching by current phase, time-aware convolution, Transformer history modeling, dynamic sensor-correlation graphs, and a PINN-RUL loss. The study performs baseline comparisons, hyperparameter sensitivity, ablations, case studies, adjacency visualization, and robustness tests with Gaussian noise, missing samples, and sensor drift. The reported NASA values include RMSE 0.014, MAE 0.007, and MAPE 0.008.</div></details>
+          <details><summary>Complex &amp; Intelligent Systems / Jung et al. — PINN plus contrastive learning</summary><div>Reported evidence includes NASA B0005/B0006/B0007/B0018 evaluation, CNN/BPINN/Informer/XGBoost-ARIMA baselines, physics-guided augmentation, momentum contrastive learning, ablations, SHAP analysis, parameter count, training time, and CPU inference latency. The paper reports average headline MAE of about 0.0952% and RMSE of about 0.117%; its ablation table shows the full model outperforming versions without contrastive learning, physics, or physics-guided augmentation.</div></details>
+          <details><summary>How to read the reported numbers</summary><div>They are reported values, not a universal leaderboard. The papers use different chemistries, cell counts, feature sets, labels, splits, RUL definitions, and metric scales. The student report should reproduce its own metrics under one declared protocol before making a ranking claim.</div></details>
+          <details><summary>Why the review paper matters</summary><div>The base review is the map for selecting physical constraints and deployment questions. It supports the project’s direction, but it is not the project’s experimental baseline. It does not itself introduce one complete new model or provide one reproducible experiment for this project.</div></details>
+        </div>
+      </section>
+
+      <section class="section" id="physics" aria-labelledby="physics-title">
+        <div class="section-heading">
+          <div class="section-number">03 / Physics choices</div>
+          <div><h2 id="physics-title">Equations the project can defend</h2><p>The review paper surveys multiple ways to inject physics. The first implementation should select constraints that the NASA measurements can actually support.</p></div>
+        </div>
+        <div class="equation-grid">
+          <article class="equation"><h3>SOH label</h3><span class="tag proposed">Student-selected baseline</span><span class="formula">SOH(t) = 100 × C(t) / C_nominal</span><p>Capacity at a cycle becomes the supervised health label. The implementation must compute this from measured capacity and never feed future capacity into the deployed input.</p></article>
+          <article class="equation"><h3>RUL label</h3><span class="tag proposed">Student-selected baseline</span><span class="formula">RUL(t) = N_EOL - N_current</span><p>For the primary POC, define <code>N_EOL</code> as the cycle where SOH reaches 70%. State the threshold in every table and figure.</p></article>
+          <article class="equation"><h3>Data and physics loss</h3><span class="tag proposed">Student-selected composition</span><span class="formula">L_total = L_data + λ_phys L_phys + λ_cons L_cons</span><p><code>L_data</code> covers SOH and RUL regression. <code>L_phys</code> covers degradation-trend and capacity-curve residuals. <code>L_cons</code> keeps the SOH, RUL, and inferred curve logically aligned.</p></article>
+          <article class="equation"><h3>SEI extension</h3><span class="tag verified">Reported literature direction</span><span class="formula">SEI-PDE residual + boundary loss + initial loss + SOH loss</span><p>Gao et al. connect SEI growth to SOH with an EM-PINN. Add this only after verifying the exact equation, variables, and parameter identifiability from the paper and available data.</p></article>
+        </div>
+        <details open class="paper-details" style="margin-top:1rem"><summary>Complete numbered equation map from <em>0.base_paper.pdf</em> (equations 1–19)</summary>
+          <p style="margin-top:.7rem">The base paper is a methodological review. The equations below are its numbered representative formulations from pages 4–8. They describe candidate PINN constraints across electrochemical, equivalent-circuit, aging, and thermal models; they are not one single new model executed in this project.</p>
+          <div class="table-wrap"><table class="compare-table"><thead><tr><th>Eq.</th><th>Formula</th><th>Meaning / project status</th></tr></thead><tbody>
+            <tr><td>(1)</td><td><span class="formula">u<sub>θ</sub>(x,t) = NN<sub>θ</sub>(x,t)</span></td><td>Neural approximation of a battery state; review framework.</td></tr>
+            <tr><td>(2)</td><td><span class="formula">𝒩[u<sub>θ</sub>](x,t; λ) = 0</span></td><td>General governing physical operator; review framework.</td></tr>
+            <tr><td>(3)</td><td><span class="formula">r<sub>θ</sub>(x,t) = 𝒩[u<sub>θ</sub>](x,t; λ)</span></td><td>Automatic-differentiation physical residual; review framework.</td></tr>
+            <tr><td>(4)</td><td><span class="formula">L<sub>phys</sub> = (1/N<sub>p</sub>) Σ |r<sub>θ</sub>(x<sub>i</sub>,t<sub>i</sub>)|²</span></td><td>Collocation-point physics loss; reviewed pattern, not active as an electrochemical PDE in the POC.</td></tr>
+            <tr><td>(5)</td><td><span class="formula">L<sub>PINN</sub> = w<sub>d</sub>L<sub>data</sub> + w<sub>p</sub>L<sub>phys</sub> + w<sub>b</sub>L<sub>BC/IC</sub> + w<sub>r</sub>L<sub>reg</sub></span></td><td>Composite PINN objective; our active objective is a smaller NASA-supported specialization.</td></tr>
+            <tr><td>(6)</td><td><span class="formula">∂c<sub>s</sub>/∂t = (D<sub>s</sub>/r²) ∂/∂r (r² ∂c<sub>s</sub>/∂r)</span></td><td>Solid-phase spherical diffusion; Stage 2 extension.</td></tr>
+            <tr><td>(7)</td><td><span class="formula">∂c<sub>s</sub>/∂r|<sub>0</sub> = 0, −D<sub>s</sub>∂c<sub>s</sub>/∂r|<sub>R<sub>s</sub></sub> = J<sub>n</sub></span></td><td>Particle symmetry and surface-flux boundary conditions; Stage 2 extension.</td></tr>
+            <tr><td>(8)</td><td><span class="formula">j<sub>n</sub> = i<sub>0</sub>[exp(α<sub>a</sub>Fη/RT) − exp(−α<sub>c</sub>Fη/RT)]</span></td><td>Butler–Volmer interfacial kinetics; Stage 2 extension.</td></tr>
+            <tr><td>(9)</td><td><span class="formula">∇·i<sub>s</sub> = −a<sub>s</sub>j<sub>n</sub>, ∇·i<sub>e</sub> = a<sub>s</sub>j<sub>n</sub></span></td><td>Solid/electrolyte current conservation; Stage 2 extension.</td></tr>
+            <tr><td>(10)</td><td><span class="formula">dz/dt = −ηI(t)/Q<sub>n</sub></span></td><td>Coulomb-counting SOC evolution; not used as an active POC residual.</td></tr>
+            <tr><td>(11)</td><td><span class="formula">dV<sub>p</sub>/dt = −V<sub>p</sub>/(R<sub>p</sub>C<sub>p</sub>) + I/C<sub>p</sub></span></td><td>First-order RC polarization; reviewed ECM constraint.</td></tr>
+            <tr><td>(12)</td><td><span class="formula">V<sub>t</sub> = U<sub>OC</sub>(z) − IR<sub>0</sub> − V<sub>p</sub></span></td><td>ECM terminal voltage; reviewed ECM constraint.</td></tr>
+            <tr><td>(13)</td><td><span class="formula">SOH(k) = Q(k)/Q<sub>0</sub></span></td><td>Capacity-based health; directly motivates the project percentage label.</td></tr>
+            <tr><td>(14)</td><td><span class="formula">Q(k) = Q<sub>0</sub> − ΔQ(k)</span></td><td>General accumulated capacity loss; reviewed aging formulation.</td></tr>
+            <tr><td>(15)</td><td><span class="formula">Q(k) = Q<sub>0</sub> − ak<sup>b</sup></span></td><td>Semi-empirical cycle-dependent capacity fade; not fitted as the POC’s sole model.</td></tr>
+            <tr><td>(16)</td><td><span class="formula">dQ(k)/dk ≤ 0  or  Q(k+1) ≤ Q(k)</span></td><td>Monotonic degradation constraint; our active soft trend penalty is related to this idea.</td></tr>
+            <tr><td>(17)</td><td><span class="formula">C<sub>th</sub>dT/dt = Q<sub>gen</sub> − hA<sub>s</sub>(T−T<sub>amb</sub>)</span></td><td>Lumped thermal model; Stage 2 extension.</td></tr>
+            <tr><td>(18)</td><td><span class="formula">ρc<sub>p</sub>∂T/∂t = ∇·(k<sub>th</sub>∇T) + q<sub>gen</sub></span></td><td>Distributed heat-conduction equation; Stage 2 extension.</td></tr>
+            <tr><td>(19)</td><td><span class="formula">k<sub>rxn</sub>(T) = A<sub>r</sub> exp(−E<sub>a</sub>/(R<sub>g</sub>T))</span></td><td>Arrhenius reaction rate; Stage 2 extension.</td></tr>
+          </tbody></table></div>
+        </details>
+        <div class="cycle-map" aria-label="Battery degradation stages">
+          <div class="cycle-label"><span>Early life</span><span>Behavior shift</span><span>Declared EOL</span></div>
+          <div class="cycle-line"><span class="early">stable capacity trend</span><span class="middle">history accumulates</span><span class="shift">adaptation test</span><span class="eol">70%</span></div>
+          <p class="cycle-note">A strict monotonic penalty can be too rigid because real battery traces show capacity regeneration after rest. Use a soft long-term trend constraint and report the remaining violations instead of hiding them.</p>
+        </div>
+        <div class="notice" style="margin-top:1.25rem"><strong>Physics boundary:</strong> the first version should not invent a detailed electrochemical PDE. It should use measurable capacity/degradation relationships, then earn the SEI extension through parameter and residual checks.</div>
+      </section>
+
+      <section class="section" aria-labelledby="dataset-title">
+        <div class="section-heading">
+          <div class="section-number">04 / Dataset</div>
+          <div><h2 id="dataset-title">NASA-first data contract</h2><p>The NASA PCoE files have now been acquired and parsed. The project records the acquisition, cycle audit, leakage-safe split, and held-out-cell protocol as evidence.</p></div>
+        </div>
+        <div class="dataset-layout">
+          <div>
+            <div class="dataset-facts">
+              <div class="fact"><strong>4</strong><span>primary cells: B0005, B0006, B0007, B0018</span></div>
+              <div class="fact"><strong>2 Ah</strong><span>nominal capacity reported for the common subset</span></div>
+              <div class="fact"><strong>24 C</strong><span>room-temperature protocol reported by the comparison paper</span></div>
+              <div class="fact"><strong>70%</strong><span>project POC end-of-life threshold</span></div>
+            </div>
+            <p style="margin-top:1rem;color:var(--ink-soft);font-size:.9rem">NASA’s official repository describes Li-ion experiments with charging, discharging at different temperatures, and impedance recorded as a damage criterion. The four-cell subset and its detailed CC-CV protocol are documented in the attached research papers.</p>
+            <p style="font-size:.9rem"><a href="https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/" target="_blank" rel="noopener">Open the NASA PCoE dataset repository</a></p>
+          </div>
+          <div>
+            <div class="table-wrap"><table class="role-table"><thead><tr><th>Field</th><th>Use</th><th>Leakage rule</th></tr></thead><tbody>
+              <tr><td>Cell ID / cycle ID</td><td>Grouping, ordering, held-out-cell evaluation</td><td>Never mix the same cell across train and test in a fold.</td></tr>
+              <tr><td>Timestamp / delta_t</td><td>Irregular-time context</td><td>Keep time gaps; do not fill across cycle boundaries.</td></tr>
+              <tr><td>Voltage / current / temperature</td><td>Deployed sensor input</td><td>Normalize using training data only.</td></tr>
+              <tr><td>Capacity</td><td>SOH label and physics target</td><td>Do not expose future capacity as a model input.</td></tr>
+              <tr><td>Cycle index</td><td>History and RUL construction</td><td>Construct RUL after the EOL rule is fixed.</td></tr>
+            </tbody></table></div>
+          </div>
+        </div>
+        <div class="data-contract"><h3>Planned interfaces</h3><pre>BatteryCycle {
+  cell_id, cycle_id, timestamp[], delta_t[],
+  voltage[], current[], temperature[],
+  capacity, soh, rul, mask[]
+}
+
+TwinOutput {
+  soh_hat, rul_hat, capacity_curve_hat,
+  physics_residual, consistency_residual,
+  model_version, drift_score
+}
+
+AdaptationState {
+  replay_buffer, update_count,
+  last_update_cycle, frozen_layers,
+  pre_update_metrics, post_update_metrics
+}</pre></div>
+      </section>
+
+      <section class="section" id="build" aria-labelledby="build-title">
+        <div class="section-heading">
+          <div class="section-number">05 / Implementation</div>
+          <div><h2 id="build-title">A staged build that can reach a result</h2><p>Build the smallest defensible experiment first, then add the heavier electrochemical extension only when the data and residuals justify it.</p></div>
+        </div>
+        <div class="flow" aria-label="Implementation architecture">
+          <div class="flow-step"><span class="step-no">01</span><strong>NASA records</strong><small>Acquire four MAT files.</small></div>
+          <div class="flow-step"><span class="step-no">02</span><strong>Cycle parser</strong><small>Order, clean, mask, label.</small></div>
+          <div class="flow-step"><span class="step-no">03</span><strong>Cycle encoder</strong><small>Summarize irregular samples.</small></div>
+          <div class="flow-step"><span class="step-no">04</span><strong>Transformer</strong><small>Model history across cycles.</small></div>
+          <div class="flow-step"><span class="step-no">05</span><strong>Physics losses</strong><small>Keep outputs plausible.</small></div>
+          <div class="flow-step"><span class="step-no">06</span><strong>SOH / RUL heads</strong><small>Predict both health targets.</small></div>
+          <div class="flow-step"><span class="step-no">07</span><strong>Replay update</strong><small>Learn from new behavior.</small></div>
+          <div class="flow-step"><span class="step-no">08</span><strong>Twin state</strong><small>Track version and residuals.</small></div>
+        </div>
+        <div class="roadmap">
+          <div class="milestone"><span class="phase">Stage 1 / Data audit</span><h3>Make the dataset trustworthy</h3><p>Parse cycles, plot capacity fade, measure cycle lengths, inspect temperature/current ranges, quantify missingness, and freeze the EOL rule.</p></div>
+          <div class="milestone"><span class="phase">Stage 2 / Reproducible baseline</span><h3>Prove the labels and split</h3><p>Train an empirical trend model, feedforward DNN, LSTM or GRU, and Transformer-only model with leave-one-cell-out evaluation.</p></div>
+          <div class="milestone"><span class="phase">Stage 3 / Physics-informed twin</span><h3>Add joint SOH/RUL learning</h3><p>Use masked cycle features, a history encoder, two prediction heads, bounded outputs, capacity-curve residuals, and soft degradation consistency.</p></div>
+          <div class="milestone"><span class="phase">Stage 4 / Adaptive experiment</span><h3>Test the proposed contribution</h3><p>Reveal later cycles in order, detect drift, update through replay, compare against a frozen model and full retraining, then report accuracy, cost, and forgetting.</p></div>
+        </div>
+        <div class="novelty">
+          <div class="novelty-box"><h3>Initial model set</h3><ul><li>Linear or empirical degradation trend</li><li>Feedforward DNN</li><li>LSTM or GRU</li><li>Transformer-only model</li><li>PINN without adaptation</li><li>Proposed adaptive PINN twin</li></ul></div>
+          <div class="novelty-box"><h3>Adaptive update rule</h3><p>Train on early-life cycles. Reveal the stream in order. Trigger an update when residuals or trajectory behavior cross a declared drift threshold. Keep recent examples and representative older examples in the replay buffer. Fine-tune selected layers with a lower learning rate while retaining the physics losses.</p><p style="margin-bottom:0">The comparison must include update time, number of updated parameters, post-shift error, and performance on previously learned cells.</p></div>
+        </div>
+        <div class="claim"><strong>Defensible novelty statement:</strong> the student contribution is the experimentally verified combination of post-deployment incremental adaptation, replay memory, drift detection, and physics-preserving updates for joint SOH/RUL estimation. “Transformer + PINN + DNN” alone is not enough to establish novelty.</div>
+        <div class="notice" style="margin-top:1.25rem"><strong>Implementation status:</strong> an executable scaffold now exists in <a href="battery_twin/README.md">battery_twin/</a>. The real NASA archive has been acquired, the parser recovered the four committed cells, and the completed 54-combination/three-seed evidence bundle is linked below. The reported values remain protocol-specific rather than a universal battery-health leaderboard.</div>
+      </section>
+
+      <section class="section" id="poc" aria-labelledby="poc-title">
+        <div class="section-heading">
+          <div class="section-number">06 / Proof of concept</div>
+          <div><h2 id="poc-title">The evidence package faculty can evaluate</h2><p>The attached rubric asks for model design, multiple deployed models, hyperparameter tuning, experimental analysis, and final comparative metrics. The following matrix turns those instructions into visible evidence.</p></div>
+        </div>
+        <div class="rubric-grid">
+          <div class="rubric"><h3>Phase I / Review-I</h3><div class="marks">10 marks</div><p>Problem identification, literature comparison, research gap, objectives, justification, and standard dataset.</p></div>
+          <div class="rubric"><h3>Phase II / Review-II</h3><div class="marks">10 marks</div><p>Design diagram, multiple models, hyperparameter tuning, result comparison, experimental analysis, and video/demo reflection.</p></div>
+          <div class="rubric"><h3>Final submission</h3><div class="marks">10 marks</div><p>Comparative analysis, error metrics, justification of the proposed model, technical report, citations, viva, and demonstration.</p></div>
+        </div>
+        <div class="table-wrap">
+          <table class="test-table">
+            <thead><tr><th>Experiment</th><th>What to run</th><th>Evidence to show</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Dataset inspection</td><td>Cycle counts, capacity-fade curves, distributions, cycle lengths, missingness, and protocol checks.</td><td>EDA figures plus a dataset contract table.</td><td class="status-cell"><span class="tag required">Required</span></td></tr>
+              <tr><td>Model comparison</td><td>Empirical trend, DNN, LSTM/GRU, Transformer, non-adaptive PINN, adaptive twin.</td><td>SOH MAE/RMSE/MAPE/R² and RUL MAE/RMSE table.</td><td class="status-cell"><span class="tag required">Required</span></td></tr>
+              <tr><td>Hyperparameter tuning</td><td>Hidden size 64/128; learning rate 0.0001/0.0005/0.001; physics weight 0.1/1/10; replay size 128/512/2048.</td><td>Validation selection table and tuning plot.</td><td class="status-cell"><span class="tag required">Required</span></td></tr>
+              <tr><td>Physics ablation</td><td>Remove degradation consistency, capacity-curve residual, or all physics terms.</td><td>Error change, physical-violation rate, and residual comparison.</td><td class="status-cell"><span class="tag required">Required</span></td></tr>
+              <tr><td>Architecture ablation</td><td>Remove Transformer, replay buffer, and drift detector one at a time.</td><td>Accuracy and adaptation-cost comparison.</td><td class="status-cell"><span class="tag required">Required</span></td></tr>
+              <tr><td>Online adaptation</td><td>Train on early cycles, reveal later cycles sequentially, and update with replay.</td><td>Frozen versus full-retrain versus adaptive curves and update cost.</td><td class="status-cell"><span class="tag required">Required</span></td></tr>
+              <tr><td>Robustness</td><td>Add sensor noise, random missing samples, and slow sensor drift.</td><td>Metric degradation and physics-consistency behavior.</td><td class="status-cell"><span class="tag proposed">Recommended</span></td></tr>
+              <tr><td>Interpretability</td><td>Inspect feature contribution and learned degradation trajectory.</td><td>Feature importance and SOH/RUL consistency plots.</td><td class="status-cell"><span class="tag proposed">Recommended</span></td></tr>
+              <tr><td>SEI-PDE extension</td><td>Reproduce the EM-PINN residual only when parameters are available.</td><td>Residual derivation, parameter source, and failure analysis.</td><td class="status-cell"><span class="tag future">Stage 2</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="scope-strip" style="margin-top:1.6rem">
+          <div><strong>Accuracy target</strong><span>Report mean and standard deviation over at least three seeds.</span></div>
+          <div><strong>Adaptation target</strong><span>At least 10% lower post-shift MAE than the frozen model.</span></div>
+          <div><strong>Efficiency target</strong><span>At most 10% of full-retraining work, with prior-domain degradation under 5%.</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="final-results" aria-labelledby="final-results-title">
+        <div class="section-heading">
+          <div class="section-number">07 / Measured results</div>
+          <div><h2 id="final-results-title">Completed evidence run</h2><p>These values come from the completed NASA PCoE evidence bundle: B0005/B0006/B0007 for training, B0018 held out, four training epochs, and seeds 7, 17, and 27. The tuning grid itself ran all 54 combinations across those three seeds.</p></div>
+        </div>
+        <div class="notice"><strong>Acceptance status: PASS.</strong> Mean post-shift SOH MAE improvement was <strong>80.63%</strong>; estimated adaptive work was <strong>8.75%</strong> of full-retraining work; previous-domain forgetting was <strong>-10.20%</strong> (performance improved); and the detector triggered <strong>7 updates per seed</strong>.</div>
+        <div class="table-wrap" style="margin-top:1.25rem">
+          <table class="compare-table"><thead><tr><th>Model</th><th>SOH MAE, mean ± SD</th><th>RUL MAE cycles, mean ± SD</th><th>SOH R², mean</th></tr></thead><tbody>
+            <tr><td>DNN</td><td>11.05 ± 0.25</td><td>37.04 ± 6.18</td><td>-6.43</td></tr>
+            <tr><td>GRU</td><td>10.52 ± 1.03</td><td>36.39 ± 4.95</td><td>-1.87</td></tr>
+            <tr><td>Transformer-only</td><td>11.50 ± 0.56</td><td>43.98 ± 9.94</td><td>-6.57</td></tr>
+            <tr><td>PINN without adaptation</td><td>7.76 ± 1.42</td><td>38.15 ± 4.59</td><td>-3.86</td></tr>
+            <tr><td><strong>Adaptive twin</strong></td><td><strong>10.05 ± 1.46</strong></td><td><strong>38.36 ± 3.39</strong></td><td><strong>-4.48</strong></td></tr>
+          </tbody></table>
+        </div>
+        <div class="table-wrap" style="margin-top:1.25rem">
+          <table class="test-table"><thead><tr><th>Variant</th><th>Post-shift SOH MAE</th><th>Improvement vs frozen</th><th>Work ratio</th><th>Drift events</th></tr></thead><tbody>
+            <tr><td>Proposed adaptive</td><td>1.74</td><td>80.63%</td><td>8.75%</td><td>7</td></tr>
+            <tr><td>No physics</td><td>1.23</td><td>86.98%</td><td>8.75%</td><td>7</td></tr>
+            <tr><td>No Transformer</td><td>4.09</td><td>50.39%</td><td>8.75%</td><td>7</td></tr>
+            <tr><td>No replay</td><td>3.97</td><td>53.23%</td><td>8.75%</td><td>7</td></tr>
+            <tr><td>No drift detection</td><td>1.59</td><td>81.91%</td><td>15.00%</td><td>12</td></tr>
+            <tr><td>Full retraining</td><td>1.58</td><td>Reference</td><td>100%</td><td>—</td></tr>
+          </tbody></table>
+        </div>
+        <div class="notice" style="margin-top:1.25rem"><strong>Interpretation:</strong> adaptation is clearly beneficial in the ordered B0018 stream, and replay stays within the 10% work target. However, the no-physics variant has lower post-shift SOH MAE than the proposed physics-weighted variant in this run, while the standalone PINN has the best frozen SOH MAE. The next research step is to calibrate the physics weight and residual definitions rather than claim that physics automatically improves every metric.</div>
+        <div class="table-wrap" style="margin-top:1.25rem">
+          <table class="test-table"><thead><tr><th>Robustness scenario</th><th>Frozen SOH MAE</th><th>Adaptive SOH MAE</th><th>Updates</th></tr></thead><tbody>
+            <tr><td>Clean ordered stream</td><td>8.81</td><td>1.73</td><td>7</td></tr>
+            <tr><td>Voltage/current/temperature noise</td><td>9.02</td><td>1.52</td><td>7</td></tr>
+            <tr><td>10% missing samples</td><td>8.78</td><td>1.51</td><td>7</td></tr>
+            <tr><td>Sensor drift</td><td>8.88</td><td>1.69</td><td>7</td></tr>
+          </tbody></table>
+        </div>
+        <div class="table-wrap" style="margin-top:1.25rem">
+          <table class="test-table"><thead><tr><th>Physical-validity diagnostic</th><th>Adaptive frozen model</th><th>Proposed adapted stream</th><th>Reading</th></tr></thead><tbody>
+            <tr><td>SOH bounds violation rate</td><td>0.00%</td><td>0.00%</td><td>Bounded output head is respected.</td></tr>
+            <tr><td>RUL negative rate</td><td>0.00%</td><td>0.00%</td><td>RUL remains non-negative.</td></tr>
+            <tr><td>SOH degradation violation rate</td><td>23.66% ± 3.89%</td><td>21.43% ± 2.89%</td><td>Diagnostic only; local regeneration can occur.</td></tr>
+            <tr><td>SOH/RUL consistency violation rate</td><td>29.01% ± 5.43%</td><td>30.95% ± 3.15%</td><td>Needs calibration; lower is better.</td></tr>
+            <tr><td>Capacity-curve residual</td><td>0.0107 ± 0.0028</td><td>0.00573 ± 0.00009</td><td>Normalized change-curve residual; lower is better.</td></tr>
+          </tbody></table>
+        </div>
+        <div class="notice" style="margin-top:1.25rem"><strong>Validity reading:</strong> the model preserves hard bounds and improves the normalized capacity-curve residual after adaptation, but the soft monotonic diagnostics are not zero. This supports a proof of concept with measurable limitations—not a claim of perfect electrochemical validity.</div>
+        <p style="margin-top:1.1rem;color:var(--ink-soft);font-size:.9rem">Download the underlying <a href="battery_twin/outputs/tuning/grid.json">54-combination grid</a>, <a href="battery_twin/outputs/final_evidence_v2/evidence_results.json">evidence JSON</a>, <a href="battery_twin/outputs/final_evidence_v2/final_summary.csv">final summary CSV</a>, <a href="battery_twin/outputs/final_evidence_v2/ablation_comparison.png">ablation figure</a>, and <a href="battery_twin/outputs/final_evidence_v2/robustness_comparison.png">robustness figure</a>.</p>
+      </section>
+
+      <section class="section" aria-labelledby="checks-title">
+        <div class="section-heading">
+          <div class="section-number">08 / Acceptance checks</div>
+          <div><h2 id="checks-title">What must pass before claiming success</h2><p>These checks turn “it runs” into a defensible proof of concept.</p></div>
+        </div>
+        <ul class="checklist">
+          <li>The loader reconstructs the four cells without cycle-order errors and the EOL label matches the declared 70% rule.</li>
+          <li>The split is cell-aware and temporally ordered. No future capacity or future-cycle statistics leak into the input.</li>
+          <li>All baselines train under the same evaluation protocol and report the same primary metrics.</li>
+          <li>The physics model reports bounded SOH, a residual, and degradation-violation rate rather than only prediction error.</li>
+          <li>The adaptive model improves post-shift performance against the frozen model and records its update cost.</li>
+          <li>Replay prevents unacceptable forgetting on previously learned cells.</li>
+          <li>Three random seeds produce mean plus or minus standard deviation, not a single best run.</li>
+          <li>The final table distinguishes reproduction of paper evidence from new evidence generated by the student project.</li>
+        </ul>
+        <div class="risk-grid">
+          <div class="risk"><strong>Small-data risk</strong><p>Four cells are useful for a POC but weak for broad generalization. Use leave-one-cell-out reporting and avoid inflated random-row splits.</p></div>
+          <div class="risk"><strong>Physics mismatch</strong><p>Strict monotonic SOH can punish real regeneration. Use a soft long-term constraint and expose violations for discussion.</p></div>
+          <div class="risk"><strong>Digital-twin overclaim</strong><p>A dashboard or model wrapper does not prove a digital twin. The report must show state updates, versioning, residuals, and adaptation behavior.</p></div>
+          <div class="risk"><strong>Metric mismatch</strong><p>Paper metrics use different scales and protocols. Use literature numbers as context and make the student protocol the primary comparison.</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Source shelf</h2>
+      <ol class="source-list">
+        <li><a href="phse.pdf">Project proposal: phse.pdf</a></li>
+        <li><a href="dl.pptx">Project presentation: dl.pptx</a></li>
+        <li><a href="RUBRICS%20FOR%20COURSE%20BASED%20DESIGN%20PROJECT%20-%20FALL%2026-27.pdf">Faculty rubric</a></li>
+        <li><a href="0.base_paper.pdf">Yu et al., PINN methodological review</a></li>
+        <li><a href="1.pdf">Yang et al., Applied Energy co-estimation paper</a></li>
+        <li><a href="2.pdf">Gao et al., EM-PINN paper</a></li>
+        <li><a href="3.pdf">Chen et al., cycle-aware Bat-T-GNN paper</a></li>
+        <li><a href="4.pdf">Jung et al., PINN plus momentum contrastive learning</a></li>
+        <li><a href="battery_twin/README.md">Executable implementation scaffold</a></li>
+        <li><a href="https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/" target="_blank" rel="noopener">NASA PCoE dataset repository</a></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S0306261925011572" target="_blank" rel="noopener">Applied Energy source page</a></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S0360544225053964" target="_blank" rel="noopener">Energy source page</a></li>
+        <li><a href="https://www.nature.com/articles/s41598-025-28505-5" target="_blank" rel="noopener">Scientific Reports source page</a></li>
+        <li><a href="https://doi.org/10.1007/s40747-025-02194-z" target="_blank" rel="noopener">Complex &amp; Intelligent Systems source page</a></li>
+      </ol>
+      <p class="footer-note">Prepared as a faculty-facing project analysis. Literature metrics are preserved as reported and should not be treated as directly comparable across papers.</p>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const buttons = [...document.querySelectorAll('[data-filter]')];
+      const rows = [...document.querySelectorAll('#paper-table tbody tr')];
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+          buttons.forEach(item => item.setAttribute('aria-pressed', item === button ? 'true' : 'false'));
+          rows.forEach(row => {
+            row.hidden = filter !== 'all' && row.dataset.kind !== filter;
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

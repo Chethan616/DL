@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+outputs/*
+data/raw/*.zip
+data/raw/5. Battery Data Set/

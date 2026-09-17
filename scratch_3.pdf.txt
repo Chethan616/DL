@@ -1,0 +1,52 @@
+A cycle-aware and physics-
+informed framework for battery 
+remaining useful life prediction
+Yixuan Chen1, Yueran Wu2 & Conghui Li1
+Accurate prediction of the Remaining Useful Life (RUL) of Li-ion batteries is essential for safe and 
+efficient energy systems, but it is difficult because sensor data are multivariate and irregularly sampled. 
+Many state-of-the-art deep learning methods are domain-agnostic. For example, T-PATCHGNN 
+uses generic patching that cuts charge–discharge cycles into fragments with little physical meaning, 
+weakening the input signal and limiting learning of true degradation. We propose Bat-T-GNN, which 
+injects domain knowledge at both the input and objective levels. First, Cycle-Aware Patching segments 
+the time series by actual charge–discharge cycles, giving the model coherent, physically meaningful 
+inputs. Second, a Physics-Informed Consistency Loss (PINN-RUL) regularizes training by requiring 
+the final RUL prediction to be consistent with a physically plausible degradation curve learned from 
+the data. This method experimented on public benchmarks show that proposed method significantly 
+outperforms prior methods, including T-PATCHGNN. Ablation studies confirm that both proposed 
+components drive the performance gains, establishing a new state of the art in battery RUL prediction.
+Lithium-ion batteries power many modern systems, from electric vehicles to grid storage. Safe and cost-effective 
+operation requires accurate prediction of Remaining Useful Life (RUL)1,2. This is difficult because RUL is a time-
+series forecasting problem in which battery health declines due to many interacting factors3–6.
+The main challenge comes from the properties of real battery data. First, sampling within operating cycles 
+is inconsistent and irregular. In practice, a Battery Management System (BMS) does not measure at a fixed rate: 
+sampling can be denser during rapid changes and sparser during stable or resting periods 7–9. This violates the 
+uniform-grid assumption used by many standard models such as CNNs and Transformers. Moreover, the time 
+gap between two measurements is informative, such as response rates, so simple fixes like linear interpolation 
+can add artificial points and hide true non-linear behavior. Second, RUL prediction must model complex, 
+evolving relationships among multiple variables, including voltage, current, temperature, and internal resistance. 
+No single sensor captures battery health; it emerges from their joint behavior. These correlations change as the 
+battery ages. For example, internal resistance may have little effect early on, but it increases with degradation 
+and then strongly drives voltage drop and heat generation near end-of-life. Thus, a useful model cannot assume 
+fixed correlations. It must adapt to stage-dependent interactions to predict critical transitions, including the late 
+“knee-point” decline.
+Historically, battery prognostics relied on physics-based models that simulate the underlying electrochemical 
+processes10–14. While offering deep theoretical insight, many state-of-the-art deep learning methods are not 
+well suited to this problem. Transformer models work well for general time-series forecasting, but they assume 
+regularly sampled data and struggle with the irregular time gaps common in battery datasets15–17. Pre-processing 
+to force regular sampling can introduce errors and hide important details. Graph Neural Networks (GNNs) 
+can model multiple variables together, but they often assume fixed relationships among sensors 18–20. This is 
+unrealistic for aging batteries, where the importance of factors such as internal resistance increases over time. 
+Methods based on Neural Ordinary Differential Equations (ODEs) can handle irregular sampling, but they are 
+often too slow for practical use 21,22. The Transformable Patching Graph Neural Network (T-PATCHGNN) is a 
+recent model that addresses both irregular data and changing correlations23. However, it has a key limitation for 
+battery applications: it splits time series into generic, equal-duration windows that ignore the natural charge–
+discharge cycle. This cycle is the basic unit of battery operation. By fragmenting it, the model loses meaningful 
+structure and struggles to learn the true degradation process24,25.
+To bridge this critical gap, we introduce Cycle-Aware Patching. This strategy replaces the domain-agnostic 
+segmentation used by models like T-PATCHGNN with a physically-informed approach. Instead of dividing 
+1School of Information Technology, Monash University, 47500 Subang Jaya, Malaysia. 2College of 
+Information Science and Technology, Hangzhou Normal University, Hangzhou 311121, China. email:  
+Conghui.Li@monash.edu
+OPEN
+Scientific Reports |        (2025) 15:45775 1| https://doi.org/10.1038/s41598-025-28505-5
+www.nature.com/scientificreports

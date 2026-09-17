@@ -1,0 +1,52 @@
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"SOH  ·  RUL","textShapes":8}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":""}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"DOMAIN & MOTIVATION","textShapes":13}
+{"kind":"table","id":"tb/w3u1wvqh","slide":2,"name":"Table 0","rows":8,"cols":2,"preview":"Use Case | Impact","bbox":[614.4,179.52,617.28,96]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":""}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"MOTIVATION","textShapes":13}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":""}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"SYSTEM DESIGN","textShapes":20}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":""}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"FOUNDATION REFERENCE","textShapes":12}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":""}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"POSITIONING OUR WORK","textShapes":6}
+{"kind":"table","id":"tb/obu5sjut","slide":6,"name":"Table 0","rows":6,"cols":4,"preview":"Paper | Key Contribution | Limitation | Our Improvement","bbox":[48,235.2,1183.68,96]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":""}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"FOUNDATION FOR TRAINING","textShapes":6}
+{"kind":"table","id":"tb/alg7adcj","slide":7,"name":"Table 0","rows":6,"cols":4,"preview":"Dataset | Scope | Link | Why This Dataset","bbox":[48,235.2,1183.68,96]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":""}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"WHAT SETS THIS WORK APART","textShapes":30}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":""}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"REAL-WORLD IMPACT","textShapes":19}
+{"kind":"notes","id":"nt/udsvah03","slide":9,"text":""}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"CONCLUSION","textShapes":11}
+{"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":""}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"SOURCES","textShapes":19}
+{"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":""}
+{"kind":"slide","id":"sl/8f2psfyx","slide":12,"title":"PHASE II · REVIEW 2","textShapes":9}
+{"kind":"notes","id":"nt/8f2psfyx","slide":12,"text":"Phase II section appended to the supplied deck. Evidence source: D:/DL/battery_twin/outputs/final_evidence_v2/evidence_results.json."}
+{"kind":"slide","id":"sl/hgzapcr6","slide":13,"title":"PHASE II · DELIVERABLE","textShapes":23}
+{"kind":"notes","id":"nt/hgzapcr6","slide":13,"text":"Project implementation files: D:/DL/battery_twin/src/battery_twin and D:/DL/battery_twin/scripts. The source audit in the HTML report distinguishes proposal claims, literature evidence, and new student evidence."}
+{"kind":"slide","id":"sl/6lsnupw7","slide":14,"title":"PHASE II · DATASET","textShapes":15}
+{"kind":"table","id":"tb/1sjap8zi","slide":14,"name":"","rows":6,"cols":3,"preview":"Item | Project choice | Why it matters","bbox":[58,205,1165,270]}
+{"kind":"notes","id":"nt/6lsnupw7","slide":14,"text":"Dataset source: https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/. Local audit and labels are implemented in data.py and features.py. The 636-cycle count is the parser audit across the four selected NASA files."}
+{"kind":"slide","id":"sl/vaxsvy10","slide":15,"title":"PHASE II · ARCHITECTURE","textShapes":26}
+{"kind":"notes","id":"nt/vaxsvy10","slide":15,"text":"Implementation sources: models.py, physics.py, training.py. The methodology review and EM-PINN paper inform the physics discussion, but the student POC does not claim to reproduce the SEI-PDE experiment."}
+{"kind":"slide","id":"sl/gny5sjyp","slide":16,"title":"PHASE II · TUNING","textShapes":16}
+{"kind":"table","id":"tb/5kb2xwby","slide":16,"name":"","rows":6,"cols":2,"preview":"Grid dimension | Values tested","bbox":[58,210,520,280]}
+{"kind":"notes","id":"nt/gny5sjyp","slide":16,"text":"Tuning source: D:/DL/battery_twin/outputs/tuning/grid.json. The grid JSON records combinations_requested = 54, combinations_run = 54, and seeds = [7, 17, 27]."}
+{"kind":"slide","id":"sl/14bup87q","slide":17,"title":"PHASE II · MODEL COMPARISON","textShapes":9}
+{"kind":"table","id":"tb/rid0z25g","slide":17,"name":"","rows":6,"cols":4,"preview":"Model | SOH MAE | RUL MAE (cycles) | SOH R²","bbox":[58,205,1165,285]}
+{"kind":"notes","id":"nt/14bup87q","slide":17,"text":"Metrics source: D:/DL/battery_twin/outputs/final_evidence_v2/evidence_results.json and final_summary.csv. Paper metrics are not numerically ranked against this table because datasets, splits, labels, and metric scales differ."}
+{"kind":"slide","id":"sl/y5wne50z","slide":18,"title":"PHASE II · ABLATIONS","textShapes":13}
+{"kind":"table","id":"tb/doju50bi","slide":18,"name":"","rows":7,"cols":5,"preview":"Variant | Post-shift SOH MAE | Improvement | Work | Events","bbox":[58,200,1165,310]}
+{"kind":"notes","id":"nt/y5wne50z","slide":18,"text":"Ablation source: evidence_results.json and ablation_summary.csv. Negative forgetting means the initial-domain SOH MAE improved after adaptation. Full retraining is the cost reference."}
+{"kind":"slide","id":"sl/nid43ytk","slide":19,"title":"PHASE II · ROBUSTNESS","textShapes":7}
+{"kind":"table","id":"tb/14ryhsbq","slide":19,"name":"","rows":5,"cols":4,"preview":"Scenario | Frozen SOH MAE | Adaptive SOH MAE | Updates","bbox":[58,195,650,250]}
+{"kind":"table","id":"tb/03ihonu5","slide":19,"name":"","rows":6,"cols":2,"preview":"Diagnostic | Mean ± SD","bbox":[750,195,473,250]}
+{"kind":"notes","id":"nt/nid43ytk","slide":19,"text":"Robustness and physical-validity source: evidence_results.json. The monotonic rates are diagnostics because real cells can show local capacity regeneration. Capacity-curve residual is the first-stage data-supported residual, not an SEI-PDE residual."}
+{"kind":"slide","id":"sl/zyxsni5k","slide":20,"title":"PHASE II · FACULTY EVIDENCE","textShapes":7}
+{"kind":"table","id":"tb/jy1wvit0","slide":20,"name":"","rows":6,"cols":3,"preview":"Rubric criterion | What to show | Artifact","bbox":[58,200,1165,300]}
+{"kind":"notes","id":"nt/zyxsni5k","slide":20,"text":"Faculty rubric source: D:/DL/RUBRICS FOR COURSE BASED DESIGN PROJECT - FALL 26-27.pdf and the supplied Phase II screenshots. The actual recording must be made and uploaded by the student; this slide and video_reflection_script.md prepare the evidence."}
+{"kind":"slide","id":"sl/m1wvqtk3","slide":21,"title":"PHASE II · FINAL STATUS","textShapes":16}
+{"kind":"notes","id":"nt/m1wvqtk3","slide":21,"text":"Closing reflection: AI helped translate the proposal and rubric into code, tests, and evidence tables. Human scientific judgment kept unsupported SEI-PDE claims out of the first NASA implementation. Manual video recording remains the only presentation step not automated here."}

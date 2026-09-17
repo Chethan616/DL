@@ -1,0 +1,489 @@
+{"kind":"deck","id":"pr/gwbzmh","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"DEFAULT"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"SOH  ·  RUL","textShapes":8}
+{"kind":"shape","id":"sh/547294r6","slide":1,"name":"Shape 0","bbox":[854.4,0,425.28,720]}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"Shape 1","bbox":[890.88,441.6,69.12,192]}
+{"kind":"shape","id":"sh/7qp4be9c","slide":1,"name":"Shape 2","bbox":[898.56,453.12,53.76,170.88]}
+{"kind":"shape","id":"sh/65g3298r","slide":1,"name":"Shape 3","bbox":[981.12,441.6,69.12,192]}
+{"kind":"shape","id":"sh/ts7md4r2","slide":1,"name":"Shape 4","bbox":[988.8,433.92,53.76,190.08]}
+{"kind":"shape","id":"sh/sryl4zqx","slide":1,"name":"Shape 5","bbox":[1071.36,441.6,69.12,192]}
+{"kind":"shape","id":"sh/fu94fe98","slide":1,"name":"Shape 6","bbox":[1079.04,510.72,53.76,113.28]}
+{"kind":"shape","id":"sh/utg3698n","slide":1,"name":"Shape 7","bbox":[1161.6,441.6,69.12,192]}
+{"kind":"shape","id":"sh/wn6dc7eh","slide":1,"name":"Shape 8","bbox":[1169.28,433.92,53.76,190.08]}
+{"kind":"textbox","id":"sh/hofulsf2","slide":1,"name":"Text 9","text":"SOH  ·  RUL","textPreview":"SOH  ·  RUL","textChars":11,"textLines":1,"bbox":[881.28,401.28,359.04,28.8]}
+{"kind":"textbox","id":"sh/ul4vaxgb","slide":1,"name":"Text 10","text":"SCOPE  ·  B.TECH PROJECT","textPreview":"SCOPE  ·  B.TECH PROJECT","textChars":24,"textLines":1,"bbox":[48,148.8,748.8,33.6]}
+{"kind":"textbox","id":"sh/vmdcj2xw","slide":1,"name":"Text 11","text":"Adaptive Physics-Informed Battery Digital Twin for SOH and RUL Prediction","textPreview":"Adaptive Physics-Informed Battery Digital Twin for SOH and RUL Prediction","textChars":73,"textLines":1,"bbox":[48,196.8,777.6,201.6]}
+{"kind":"textbox","id":"sh/4r6dg7et","slide":1,"name":"Text 12","text":"Energy AI  ·  Battery Management Systems  ·  Physics-Informed Neural Networks","textPreview":"Energy AI  ·  Battery Management Systems  ·  Physics-Informed Neural Networks","textChars":77,"textLines":1,"bbox":[48,398.4,768,38.4]}
+{"kind":"textbox","id":"sh/5sfepcfe","slide":1,"name":"Text 13","text":"TEAM","textPreview":"TEAM","textChars":4,"textLines":1,"bbox":[48,513.6,384,28.8]}
+{"kind":"textbox","id":"sh/ipovexwn","slide":1,"name":"Text 14","text":"M. Chethan Krishna   23BAI0093","textPreview":"M. Chethan Krishna   23BAI0093","textChars":30,"textLines":1,"bbox":[48,549.12,720,33.6]}
+{"kind":"textbox","id":"sh/3qxwn2x8","slide":1,"name":"Text 15","text":"K. Shanmukha Santhosh   23BAI0157","textPreview":"K. Shanmukha Santhosh   23BAI0157","textChars":33,"textLines":1,"bbox":[48,587.52,720,33.6]}
+{"kind":"textbox","id":"sh/sfqdkrep","slide":1,"name":"Text 16","text":"Ashok Reddy   23BAI0143","textPreview":"Ashok Reddy   23BAI0143","textChars":23,"textLines":1,"bbox":[48,625.92,720,33.6]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":""}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"DOMAIN & MOTIVATION","textShapes":13}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"name":"Text 0","text":"DOMAIN & MOTIVATION","textPreview":"DOMAIN & MOTIVATION","textChars":19,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/ozy1ofad","slide":2,"name":"Text 1","text":"Project Overview & Use Cases","textPreview":"Project Overview & Use Cases","textChars":28,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"shape","id":"sh/b29kza94","slide":2,"name":"Shape 2","bbox":[48,148.8,528,513.6]}
+{"kind":"textbox","id":"sh/a10jqpsj","slide":2,"name":"Text 3","text":"DOMAIN","textPreview":"DOMAIN","textChars":6,"textLines":1,"bbox":[76.8,177.6,470.4,24]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":2,"name":"Text 4","text":"Energy AI  ·  Battery Management Systems","textPreview":"Energy AI  ·  Battery Management Systems","textChars":40,"textLines":1,"bbox":[76.8,200.64,470.4,38.4]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":2,"name":"Text 5","text":"TYPE OF DNN","textPreview":"TYPE OF DNN","textChars":11,"textLines":1,"bbox":[76.8,246.72,470.4,24]}
+{"kind":"textbox","id":"sh/r65knqtk","slide":2,"name":"Text 6","text":"Physics-Informed Neural Network (PINN) + Feedforward DNN","textPreview":"Physics-Informed Neural Network (PINN) + Feedforward DNN","textChars":56,"textLines":1,"bbox":[76.8,269.76,470.4,38.4]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"name":"Text 7","text":"THE CHALLENGE","textPreview":"THE CHALLENGE","textChars":13,"textLines":1,"bbox":[76.8,333.12,470.4,24]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"name":"Text 8","text":"Li-ion batteries degrade with cycling, temperature and age. Pure deep-learning models need large labeled datasets and can be physically inconsistent; pure physics models are too slow for real-time use.","textPreview":"Li-ion batteries degrade with cycling, temperature and age. Pure deep-learning models need large labeled datasets and can be physically i...","textChars":201,"textLines":1,"bbox":[76.8,360,470.4,91.2]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"name":"Text 9","text":"OUR APPROACH","textPreview":"OUR APPROACH","textChars":12,"textLines":1,"bbox":[76.8,460.8,470.4,24]}
+{"kind":"textbox","id":"sh/mtwrmxg7","slide":2,"name":"Text 10","text":"An Adaptive PINN Battery Digital Twin fuses PINNs, a Transformer Encoder and Incremental Adaptive Learning to continuously estimate SOH and RUL — adapting to new data without full retraining.","textPreview":"An Adaptive PINN Battery Digital Twin fuses PINNs, a Transformer Encoder and Incremental Adaptive Learning to continuously estimate SOH a...","textChars":191,"textLines":1,"bbox":[76.8,487.68,470.4,110.4]}
+{"kind":"textbox","id":"sh/nu58f2hs","slide":2,"name":"Text 11","text":"WHERE IT APPLIES","textPreview":"WHERE IT APPLIES","textChars":16,"textLines":1,"bbox":[614.4,148.8,617.28,26.88]}
+{"kind":"textbox","id":"sh/xk7qlczu","slide":2,"name":"Text 12","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/ahwrqhgj","slide":2,"name":"Text 13","text":"2 / 10","textPreview":"2 / 10","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"table","id":"tb/w3u1wvqh","slide":2,"name":"Table 0","rows":8,"cols":2,"preview":"Use Case | Impact","bbox":[614.4,179.52,617.28,96]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":""}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"MOTIVATION","textShapes":13}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"name":"Text 0","text":"MOTIVATION","textPreview":"MOTIVATION","textChars":10,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/d0jax03i","slide":3,"name":"Text 1","text":"Problem Statement","textPreview":"Problem Statement","textChars":17,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"textbox","id":"sh/298ryl4v","slide":3,"name":"Text 2","text":"Lithium-ion batteries power electric vehicles and renewable energy storage, but their performance degrades with charge cycles, temperature, current load and age. Accurately estimating State of Health (SOH) and Remaining Useful Life (RUL) is essential for safety, reliability and efficient maintenance.","textPreview":"Lithium-ion batteries power electric vehicles and renewable energy storage, but their performance degrades with charge cycles, temperatur...","textChars":301,"textLines":1,"bbox":[48,144,1183.68,96]}
+{"kind":"shape","id":"sh/3ah8rqlg","slide":3,"name":"Shape 3","bbox":[48,264,567.84,393.6]}
+{"kind":"shape","id":"sh/obq90bml","slide":3,"name":"Shape 4","bbox":[76.8,292.8,48,48]}
+{"kind":"textbox","id":"sh/pcjqtg36","slide":3,"name":"Text 5","text":"Deep Learning Models","textPreview":"Deep Learning Models","textChars":20,"textLines":1,"bbox":[76.8,355.2,510.24,43.2]}
+{"kind":"textbox","id":"sh/m5cra54z","slide":3,"name":"Text 6","text":"Require large volumes of labeled training data","textPreview":"Require large volumes of labeled training data","textChars":46,"textLines":1,"bbox":[76.8,412.8,510.24,72]}
+{"kind":"textbox","id":"sh/n6ls3alk","slide":3,"name":"Text 7","text":"May produce physically inconsistent predictions","textPreview":"May produce physically inconsistent predictions","textChars":47,"textLines":1,"bbox":[76.8,487.68,510.24,72]}
+{"kind":"textbox","id":"sh/n2l4fq98","slide":3,"name":"Text 8","text":"Limited generalization to unseen operating conditions","textPreview":"Limited generalization to unseen operating conditions","textChars":53,"textLines":1,"bbox":[76.8,562.56,510.24,72]}
+{"kind":"shape","id":"sh/m1c3mlsn","slide":3,"name":"Shape 9","bbox":[663.84,264,567.84,393.6]}
+{"kind":"shape","id":"sh/943mhgre","slide":3,"name":"Shape 10","bbox":[692.64,292.8,48,48]}
+{"kind":"textbox","id":"sh/83ulovat","slide":3,"name":"Text 11","text":"Physics-Based Models","textPreview":"Physics-Based Models","textChars":20,"textLines":1,"bbox":[692.64,355.2,510.24,43.2]}
+{"kind":"textbox","id":"sh/v6l4jq94","slide":3,"name":"Text 12","text":"Computationally expensive to run","textPreview":"Computationally expensive to run","textChars":32,"textLines":1,"bbox":[692.64,412.8,510.24,72]}
+{"kind":"textbox","id":"sh/a5c3ql8z","slide":3,"name":"Text 13","text":"Difficult to deploy for real-time estimation","textPreview":"Difficult to deploy for real-time estimation","textChars":44,"textLines":1,"bbox":[692.64,487.68,510.24,72]}
+{"kind":"textbox","id":"sh/x8nml0ra","slide":3,"name":"Text 14","text":"Rely on complex electrochemical simulations","textPreview":"Rely on complex electrochemical simulations","textChars":43,"textLines":1,"bbox":[692.64,562.56,510.24,72]}
+{"kind":"textbox","id":"sh/w7ulsvqp","slide":3,"name":"Text 15","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/ja54na9g","slide":3,"name":"Text 16","text":"3 / 10","textPreview":"3 / 10","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":""}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"SYSTEM DESIGN","textShapes":20}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"name":"Text 0","text":"SYSTEM DESIGN","textPreview":"SYSTEM DESIGN","textChars":13,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/0ba143al","slide":4,"name":"Text 1","text":"Proposed Approach & Architecture","textPreview":"Proposed Approach & Architecture","textChars":32,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"textbox","id":"sh/rm1k7yt4","slide":4,"name":"Text 2","text":"Real-time sensor data, electrochemical battery physics and deep learning combine to estimate SOH and RUL. The Digital Twin continuously adapts to new battery behaviour through incremental learning — no full retraining required.","textPreview":"Real-time sensor data, electrochemical battery physics and deep learning combine to estimate SOH and RUL. The Digital Twin continuously a...","textChars":227,"textLines":1,"bbox":[48,144,1183.68,72]}
+{"kind":"shape","id":"sh/ql8jytsj","slide":4,"name":"Shape 3","bbox":[48,249.6,195.26,244.8]}
+{"kind":"shape","id":"sh/doj29oba","slide":4,"name":"Shape 4","bbox":[63.36,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/sna103ap","slide":4,"name":"Text 5","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[63.36,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"name":"Text 6","text":"Historical Battery Dataset","textPreview":"Historical Battery Dataset","textChars":26,"textLines":1,"bbox":[63.36,314.88,164.54,59.52]}
+{"kind":"textbox","id":"sh/ih8ju9sn","slide":4,"name":"Text 7","text":"Voltage, current, temperature and cycling history feed the pipeline.","textPreview":"Voltage, current, temperature and cycling history feed the pipeline.","textChars":68,"textLines":1,"bbox":[63.36,376.32,164.54,105.6]}
+{"kind":"shape","id":"sh/kbm987y5","slide":4,"name":"Shape 8","bbox":[246.43,358.56,30.72,26.88]}
+{"kind":"shape","id":"sh/5cva1cfq","slide":4,"name":"Shape 9","bbox":[295.1,249.6,195.26,244.8]}
+{"kind":"shape","id":"sh/i94r6xgz","slide":4,"name":"Shape 10","bbox":[310.46,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/jadsz2xk","slide":4,"name":"Text 11","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[310.46,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/w72947yt","slide":4,"name":"Text 12","text":"Transformer Encoder","textPreview":"Transformer Encoder","textChars":19,"textLines":1,"bbox":[310.46,314.88,164.54,59.52]}
+{"kind":"textbox","id":"sh/x8vaxsfe","slide":4,"name":"Text 13","text":"Learns long-term degradation patterns across sensor streams.","textPreview":"Learns long-term degradation patterns across sensor streams.","textChars":60,"textLines":1,"bbox":[310.46,376.32,164.54,105.6]}
+{"kind":"shape","id":"sh/a5kr2xg3","slide":4,"name":"Shape 14","bbox":[493.54,358.56,30.72,26.88]}
+{"kind":"shape","id":"sh/v6tsv2xo","slide":4,"name":"Shape 15","bbox":[542.21,249.6,195.26,244.8]}
+{"kind":"shape","id":"sh/g36tgryd","slide":4,"name":"Shape 16","bbox":[557.57,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/h4fa9wfy","slide":4,"name":"Text 17","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[557.57,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"name":"Text 18","text":"PINN Layer","textPreview":"PINN Layer","textChars":10,"textLines":1,"bbox":[557.57,314.88,164.54,59.52]}
+{"kind":"textbox","id":"sh/oz29krqh","slide":4,"name":"Text 19","text":"Embeds electrochemical physics so outputs stay physically consistent.","textPreview":"Embeds electrochemical physics so outputs stay physically consistent.","textChars":69,"textLines":1,"bbox":[557.57,376.32,164.54,105.6]}
+{"kind":"shape","id":"sh/3ytsrmpw","slide":4,"name":"Shape 20","bbox":[740.64,358.56,30.72,26.88]}
+{"kind":"shape","id":"sh/2xkrih8b","slide":4,"name":"Shape 21","bbox":[789.31,249.6,195.26,244.8]}
+{"kind":"shape","id":"sh/1wbapc7q","slide":4,"name":"Shape 22","bbox":[804.67,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/gv29g7q5","slide":4,"name":"Text 23","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[804.67,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/fu9sn2p0","slide":4,"name":"Text 24","text":"Feedforward NN","textPreview":"Feedforward NN","textChars":14,"textLines":1,"bbox":[804.67,314.88,164.54,59.52]}
+{"kind":"textbox","id":"sh/et0reh8f","slide":4,"name":"Text 25","text":"Produces final SOH and RUL predictions.","textPreview":"Produces final SOH and RUL predictions.","textChars":39,"textLines":1,"bbox":[804.67,376.32,164.54,105.6]}
+{"kind":"shape","id":"sh/tsrqlc7u","slide":4,"name":"Shape 26","bbox":[987.74,358.56,30.72,26.88]}
+{"kind":"shape","id":"sh/sri9s7q9","slide":4,"name":"Shape 27","bbox":[1036.42,249.6,195.26,244.8]}
+{"kind":"shape","id":"sh/ilwf69kv","slide":4,"name":"Shape 28","bbox":[1051.78,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/jm5gze1g","slide":4,"name":"Text 29","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1051.78,268.8,32.64,32.64]}
+{"kind":"textbox","id":"sh/knex8j21","slide":4,"name":"Text 30","text":"Adaptive Learning Module","textPreview":"Adaptive Learning Module","textChars":24,"textLines":1,"bbox":[1051.78,314.88,164.54,59.52]}
+{"kind":"textbox","id":"sh/5ony1oj6","slide":4,"name":"Text 31","text":"Detects behaviour shifts and updates the twin incrementally.","textPreview":"Detects behaviour shifts and updates the twin incrementally.","textChars":60,"textLines":1,"bbox":[1051.78,376.32,164.54,105.6]}
+{"kind":"textbox","id":"sh/axcf29kj","slide":4,"name":"Text 32","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/vy5gbe14","slide":4,"name":"Text 33","text":"4 / 10","textPreview":"4 / 10","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":""}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"FOUNDATION REFERENCE","textShapes":12}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"name":"Text 0","text":"FOUNDATION REFERENCE","textPreview":"FOUNDATION REFERENCE","textChars":20,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":5,"name":"Text 1","text":"Base Paper","textPreview":"Base Paper","textChars":10,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"shape","id":"sh/z2tcnm5s","slide":5,"name":"Shape 2","bbox":[48,148.8,1183.68,148.8]}
+{"kind":"textbox","id":"sh/yhkbe1o7","slide":5,"name":"Text 3","text":"Physics-Informed Neural Networks for Battery Modeling and State Estimation: A Methodological Review","textPreview":"Physics-Informed Neural Networks for Battery Modeling and State Estimation: A Methodological Review","textChars":99,"textLines":1,"bbox":[86.4,168,1106.88,81.6]}
+{"kind":"textbox","id":"sh/l4bupwny","slide":5,"name":"Text 4","text":"Renewable and Sustainable Energy Reviews, 2026","textPreview":"Renewable and Sustainable Energy Reviews, 2026","textChars":46,"textLines":1,"bbox":[86.4,254.4,1106.88,33.6]}
+{"kind":"textbox","id":"sh/032tgr6d","slide":5,"name":"Text 5","text":"WHY THIS PAPER WAS SELECTED","textPreview":"WHY THIS PAPER WAS SELECTED","textChars":27,"textLines":1,"bbox":[48,336,768,28.8]}
+{"kind":"shape","id":"sh/n6dcr65o","slide":5,"name":"Shape 6","bbox":[48,380.16,15.36,15.36]}
+{"kind":"textbox","id":"sh/m5kbi1oj","slide":5,"name":"Text 7","text":"Comprehensive review of Physics-Informed Neural Networks (PINNs) for battery applications","textPreview":"Comprehensive review of Physics-Informed Neural Networks (PINNs) for battery applications","textChars":89,"textLines":1,"bbox":[81.6,369.6,1150.08,48]}
+{"kind":"shape","id":"sh/w32dkbuh","slide":5,"name":"Shape 8","bbox":[48,433.92,15.36,15.36]}
+{"kind":"textbox","id":"sh/x4vedgvm","slide":5,"name":"Text 9","text":"Covers SOH, RUL, SOC, Digital Twins, thermal diagnosis and internal state reconstruction","textPreview":"Covers SOH, RUL, SOC, Digital Twins, thermal diagnosis and internal state reconstruction","textChars":88,"textLines":1,"bbox":[81.6,423.36,1150.08,48]}
+{"kind":"shape","id":"sh/ahkvi1cb","slide":5,"name":"Shape 10","bbox":[48,487.68,15.36,15.36]}
+{"kind":"textbox","id":"sh/v2twb6dw","slide":5,"name":"Text 11","text":"Explains multiple methods for embedding battery physics into neural networks","textPreview":"Explains multiple methods for embedding battery physics into neural networks","textChars":76,"textLines":1,"bbox":[81.6,477.12,1150.08,48]}
+{"kind":"shape","id":"sh/k7mxovud","slide":5,"name":"Shape 12","bbox":[48,541.44,15.36,15.36]}
+{"kind":"textbox","id":"sh/58vehgvy","slide":5,"name":"Text 13","text":"Discusses training stability, domain generalization, uncertainty quantification and interpretability","textPreview":"Discusses training stability, domain generalization, uncertainty quantification and interpretability","textChars":100,"textLines":1,"bbox":[81.6,530.88,1150.08,48]}
+{"kind":"shape","id":"sh/i54fmlc7","slide":5,"name":"Shape 14","bbox":[48,595.2,15.36,15.36]}
+{"kind":"textbox","id":"sh/j6dwfqds","slide":5,"name":"Text 15","text":"Lays out future research directions for intelligent Battery Management Systems","textPreview":"Lays out future research directions for intelligent Battery Management Systems","textChars":78,"textLines":1,"bbox":[81.6,584.64,1150.08,48]}
+{"kind":"textbox","id":"sh/sb6xsvu9","slide":5,"name":"Text 16","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/tcfel0vu","slide":5,"name":"Text 17","text":"5 / 10","textPreview":"5 / 10","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":""}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"POSITIONING OUR WORK","textShapes":6}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"name":"Text 0","text":"POSITIONING OUR WORK","textPreview":"POSITIONING OUR WORK","textChars":20,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/zi98nu94","slide":6,"name":"Text 1","text":"Literature Review & Research Gap","textPreview":"Literature Review & Research Gap","textChars":32,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"textbox","id":"sh/87ipkzal","slide":6,"name":"Text 2","text":"RESEARCH GAP","textPreview":"RESEARCH GAP","textChars":12,"textLines":1,"bbox":[48,144,768,26.88]}
+{"kind":"textbox","id":"sh/98rqt4r6","slide":6,"name":"Text 3","text":"Existing PINN models are trained offline, adapt poorly to changing battery behaviour, and remain difficult to deploy in real-time BMS. Lightweight, continual-learning methods are still an open problem.","textPreview":"Existing PINN models are trained offline, adapt poorly to changing battery behaviour, and remain difficult to deploy in real-time BMS. Li...","textChars":201,"textLines":1,"bbox":[48,170.88,1183.68,52.8]}
+{"kind":"textbox","id":"sh/7m98ru9g","slide":6,"name":"Text 4","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/oryp8fah","slide":6,"name":"Text 5","text":"6 / 10","textPreview":"6 / 10","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"table","id":"tb/obu5sjut","slide":6,"name":"Table 0","rows":6,"cols":4,"preview":"Paper | Key Contribution | Limitation | Our Improvement","bbox":[48,235.2,1183.68,96]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":""}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"FOUNDATION FOR TRAINING","textShapes":6}
+{"kind":"textbox","id":"sh/cb2tkvap","slide":7,"name":"Text 0","text":"FOUNDATION FOR TRAINING","textPreview":"FOUNDATION FOR TRAINING","textChars":23,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/dcbud0ra","slide":7,"name":"Text 1","text":"Datasets Used & Rationale","textPreview":"Datasets Used & Rationale","textChars":25,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"textbox","id":"sh/ydkbm5sv","slide":7,"name":"Text 2","text":"SELECTED DATASETS","textPreview":"SELECTED DATASETS","textChars":17,"textLines":1,"bbox":[48,144,768,26.88]}
+{"kind":"textbox","id":"sh/zedcfa9g","slide":7,"name":"Text 3","text":"Public benchmark battery datasets cited across the reviewed papers, spanning lab-aged, second-life, and vehicle-field conditions, chosen to validate SOH/RUL estimation under diverse chemistries and operating regimes.","textPreview":"Public benchmark battery datasets cited across the reviewed papers, spanning lab-aged, second-life, and vehicle-field conditions, chosen ...","textChars":216,"textLines":1,"bbox":[48,170.88,1183.68,52.8]}
+{"kind":"textbox","id":"sh/l0vuh0rm","slide":7,"name":"Text 4","text":"Datasets Used & Rationale","textPreview":"Datasets Used & Rationale","textChars":25,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/eh0ba1sr","slide":7,"name":"Text 5","text":"7 / 11","textPreview":"7 / 11","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"table","id":"tb/alg7adcj","slide":7,"name":"Table 0","rows":6,"cols":4,"preview":"Dataset | Scope | Link | Why This Dataset","bbox":[48,235.2,1183.68,96]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":""}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"WHAT SETS THIS WORK APART","textShapes":30}
+{"kind":"textbox","id":"sh/18byd4zy","slide":8,"name":"Text 0","text":"WHAT SETS THIS WORK APART","textPreview":"WHAT SETS THIS WORK APART","textChars":25,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/g72x4zyd","slide":8,"name":"Text 1","text":"Novel Contribution: Adaptive Incremental Learning","textPreview":"Novel Contribution: Adaptive Incremental Learning","textChars":49,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"textbox","id":"sh/ri9g7uhw","slide":8,"name":"Text 2","text":"Traditional models are trained once on historical data. When battery behaviour shifts with aging, temperature or charging patterns, the whole model must often be retrained — expensive and impractical for real-time BMS.","textPreview":"Traditional models are trained once on historical data. When battery behaviour shifts with aging, temperature or charging patterns, the w...","textChars":218,"textLines":1,"bbox":[48,142.08,1183.68,57.6]}
+{"kind":"shape","id":"sh/6h0fypgb","slide":8,"name":"Shape 3","bbox":[48,211.2,572.64,129.6]}
+{"kind":"textbox","id":"sh/tkby9kzm","slide":8,"name":"Text 4","text":"WITHOUT ADAPTIVE LEARNING","textPreview":"WITHOUT ADAPTIVE LEARNING","textChars":25,"textLines":1,"bbox":[72,222.72,524.64,26.88]}
+{"kind":"shape","id":"sh/sjix0zy1","slide":8,"name":"Shape 5","bbox":[72,264,149.28,57.6]}
+{"kind":"textbox","id":"sh/je9g3ahk","slide":8,"name":"Text 6","text":"Old + New\nDataset","textPreview":"Old + New | Dataset","textChars":17,"textLines":2,"bbox":[76.8,264,139.68,57.6]}
+{"kind":"shape","id":"sh/id0fu50z","slide":8,"name":"Shape 7","bbox":[223.01,279.36,21.12,26.88]}
+{"kind":"shape","id":"sh/o7ydoret","slide":8,"name":"Shape 8","bbox":[259.68,264,149.28,57.6]}
+{"kind":"textbox","id":"sh/98rehwve","slide":8,"name":"Text 9","text":"Retrain\nEverything","textPreview":"Retrain | Everything","textChars":18,"textLines":2,"bbox":[264.48,264,139.68,57.6]}
+{"kind":"shape","id":"sh/m5gvmhwn","slide":8,"name":"Shape 10","bbox":[410.69,279.36,21.12,26.88]}
+{"kind":"shape","id":"sh/n6pwfmd8","slide":8,"name":"Shape 11","bbox":[447.36,264,149.28,57.6]}
+{"kind":"textbox","id":"sh/0jydkreh","slide":8,"name":"Text 12","text":"Deploy New\nModel","textPreview":"Deploy New | Model","textChars":16,"textLines":2,"bbox":[452.16,264,139.68,57.6]}
+{"kind":"shape","id":"sh/1k7edwv2","slide":8,"name":"Shape 13","bbox":[659.04,211.2,572.64,129.6]}
+{"kind":"textbox","id":"sh/ehgvihwr","slide":8,"name":"Text 14","text":"WITH ADAPTIVE LEARNING (PROPOSED)","textPreview":"WITH ADAPTIVE LEARNING (PROPOSED)","textChars":33,"textLines":1,"bbox":[683.04,222.72,524.64,26.88]}
+{"kind":"shape","id":"sh/zipwbmdc","slide":8,"name":"Shape 15","bbox":[683.04,264,149.28,57.6]}
+{"kind":"textbox","id":"sh/kfixwbe1","slide":8,"name":"Text 16","text":"Existing Model\n+ New Data","textPreview":"Existing Model | + New Data","textChars":25,"textLines":2,"bbox":[687.84,264,139.68,57.6]}
+{"kind":"shape","id":"sh/lgbepgvm","slide":8,"name":"Shape 17","bbox":[834.05,279.36,21.12,26.88]}
+{"kind":"shape","id":"sh/tw7e9gnq","slide":8,"name":"Shape 18","bbox":[870.72,264,149.28,57.6]}
+{"kind":"textbox","id":"sh/svydgb65","slide":8,"name":"Text 19","text":"Fine-Tune\nOnly","textPreview":"Fine-Tune | Only","textChars":14,"textLines":2,"bbox":[875.52,264,139.68,57.6]}
+{"kind":"shape","id":"sh/7u5w765k","slide":8,"name":"Shape 20","bbox":[1021.73,279.36,21.12,26.88]}
+{"kind":"shape","id":"sh/6twve1oz","slide":8,"name":"Shape 21","bbox":[1058.4,264,149.28,57.6]}
+{"kind":"textbox","id":"sh/5sne5wne","slide":8,"name":"Text 22","text":"Updated\nModel","textPreview":"Updated | Model","textChars":13,"textLines":2,"bbox":[1063.2,264,139.68,57.6]}
+{"kind":"textbox","id":"sh/kredcr6t","slide":8,"name":"Text 23","text":"HOW IT WORKS","textPreview":"HOW IT WORKS","textChars":12,"textLines":1,"bbox":[48,379.2,567.84,26.88]}
+{"kind":"shape","id":"sh/jq5w365o","slide":8,"name":"Shape 24","bbox":[48,412.8,30.72,30.72]}
+{"kind":"textbox","id":"sh/i5wva1o3","slide":8,"name":"Text 25","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[48,412.8,30.72,30.72]}
+{"kind":"textbox","id":"sh/x4ne1wni","slide":8,"name":"Text 26","text":"Monitor real-time sensor data (V, I, temperature, SOC, cycle count)","textPreview":"Monitor real-time sensor data (V, I, temperature, SOC, cycle count)","textChars":67,"textLines":1,"bbox":[91.2,410.88,524.64,38.4]}
+{"kind":"shape","id":"sh/w3ed8r6x","slide":8,"name":"Shape 27","bbox":[48,456.96,30.72,30.72]}
+{"kind":"textbox","id":"sh/m9sb2x4v","slide":8,"name":"Text 28","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[48,456.96,30.72,30.72]}
+{"kind":"textbox","id":"sh/na1sb2lg","slide":8,"name":"Text 29","text":"Detect changes in degradation behaviour","textPreview":"Detect changes in degradation behaviour","textChars":39,"textLines":1,"bbox":[91.2,455.04,524.64,38.4]}
+{"kind":"shape","id":"sh/8bat47ml","slide":8,"name":"Shape 30","bbox":[48,501.12,30.72,30.72]}
+{"kind":"textbox","id":"sh/9w3uds36","slide":8,"name":"Text 31","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[48,501.12,30.72,30.72]}
+{"kind":"textbox","id":"sh/y5sbed4j","slide":8,"name":"Text 32","text":"Store important new data in a replay buffer","textPreview":"Store important new data in a replay buffer","textChars":43,"textLines":1,"bbox":[91.2,499.2,524.64,38.4]}
+{"kind":"shape","id":"sh/z61s7il4","slide":8,"name":"Shape 33","bbox":[48,545.28,30.72,30.72]}
+{"kind":"textbox","id":"sh/07atgnmp","slide":8,"name":"Text 34","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[48,545.28,30.72,30.72]}
+{"kind":"textbox","id":"sh/l8ja9s3a","slide":8,"name":"Text 35","text":"Incrementally fine-tune the existing model","textPreview":"Incrementally fine-tune the existing model","textChars":42,"textLines":1,"bbox":[91.2,543.36,524.64,38.4]}
+{"kind":"shape","id":"sh/q18bad4n","slide":8,"name":"Shape 36","bbox":[48,589.44,30.72,30.72]}
+{"kind":"textbox","id":"sh/b2hs3il8","slide":8,"name":"Text 37","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[48,589.44,30.72,30.72]}
+{"kind":"textbox","id":"sh/3u18fepo","slide":8,"name":"Text 38","text":"Update the Digital Twin — no full retraining","textPreview":"Update the Digital Twin — no full retraining","textChars":44,"textLines":1,"bbox":[91.2,587.52,524.64,38.4]}
+{"kind":"textbox","id":"sh/2ts769o3","slide":8,"name":"Text 39","text":"ADVANTAGES","textPreview":"ADVANTAGES","textChars":10,"textLines":1,"bbox":[663.84,379.2,567.84,26.88]}
+{"kind":"shape","id":"sh/pwjqho7u","slide":8,"name":"Shape 40","bbox":[663.84,417.6,17.28,17.28]}
+{"kind":"textbox","id":"sh/4vap8j69","slide":8,"name":"Text 41","text":"Eliminates full model retraining","textPreview":"Eliminates full model retraining","textChars":32,"textLines":1,"bbox":[697.44,410.88,534.24,38.4]}
+{"kind":"shape","id":"sh/fq1obeps","slide":8,"name":"Shape 42","bbox":[663.84,461.76,17.28,17.28]}
+{"kind":"textbox","id":"sh/up872987","slide":8,"name":"Text 43","text":"Adapts to changing battery behaviour","textPreview":"Adapts to changing battery behaviour","textChars":36,"textLines":1,"bbox":[697.44,455.04,534.24,38.4]}
+{"kind":"shape","id":"sh/hsjqd47y","slide":8,"name":"Shape 44","bbox":[663.84,505.92,17.28,17.28]}
+{"kind":"textbox","id":"sh/grap4zqd","slide":8,"name":"Text 45","text":"Personalized prediction per battery","textPreview":"Personalized prediction per battery","textChars":35,"textLines":1,"bbox":[697.44,499.2,534.24,38.4]}
+{"kind":"shape","id":"sh/72ho7upg","slide":8,"name":"Shape 46","bbox":[663.84,550.08,17.28,17.28]}
+{"kind":"textbox","id":"sh/6187yp8b","slide":8,"name":"Text 47","text":"Physics-consistent predictions via PINN","textPreview":"Physics-consistent predictions via PINN","textChars":39,"textLines":1,"bbox":[697.44,543.36,534.24,38.4]}
+{"kind":"shape","id":"sh/cvmdsb2h","slide":8,"name":"Shape 48","bbox":[663.84,594.24,17.28,17.28]}
+{"kind":"textbox","id":"sh/xwvelwj2","slide":8,"name":"Text 49","text":"Fit for real-time BMS deployment","textPreview":"Fit for real-time BMS deployment","textChars":32,"textLines":1,"bbox":[697.44,587.52,534.24,38.4]}
+{"kind":"textbox","id":"sh/at4vq1kr","slide":8,"name":"Text 50","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/budwj61c","slide":8,"name":"Text 51","text":"8 / 11","textPreview":"8 / 11","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":""}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"REAL-WORLD IMPACT","textShapes":19}
+{"kind":"textbox","id":"sh/1cfmhgne","slide":9,"name":"Text 0","text":"REAL-WORLD IMPACT","textPreview":"REAL-WORLD IMPACT","textChars":17,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/0b65obm9","slide":9,"name":"Text 1","text":"Applications","textPreview":"Applications","textChars":12,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"shape","id":"sh/nex4jq5k","slide":9,"name":"Shape 2","bbox":[48,158.4,372.16,192]}
+{"kind":"shape","id":"sh/mdonql4z","slide":9,"name":"Shape 3","bbox":[72,182.4,40.32,40.32]}
+{"kind":"textbox","id":"sh/9gzml0nq","slide":9,"name":"Text 4","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[72,182.4,40.32,40.32]}
+{"kind":"textbox","id":"sh/ofq5svm5","slide":9,"name":"Text 5","text":"Electric Vehicles","textPreview":"Electric Vehicles","textChars":17,"textLines":1,"bbox":[72,237.12,324.16,48]}
+{"kind":"textbox","id":"sh/bih4na5w","slide":9,"name":"Text 6","text":"Predict battery replacement before failure occurs.","textPreview":"Predict battery replacement before failure occurs.","textChars":50,"textLines":1,"bbox":[72,285.12,324.16,57.6]}
+{"kind":"shape","id":"sh/ah8nu54b","slide":9,"name":"Shape 7","bbox":[453.76,158.4,372.16,192]}
+{"kind":"shape","id":"sh/oza1gfyh","slide":9,"name":"Shape 8","bbox":[477.76,182.4,40.32,40.32]}
+{"kind":"textbox","id":"sh/p0ji9kf2","slide":9,"name":"Text 9","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[477.76,182.4,40.32,40.32]}
+{"kind":"textbox","id":"sh/2xsjepgb","slide":9,"name":"Text 10","text":"Solar Storage","textPreview":"Solar Storage","textChars":13,"textLines":1,"bbox":[477.76,237.12,324.16,48]}
+{"kind":"textbox","id":"sh/3y107axw","slide":9,"name":"Text 11","text":"Monitor home batteries and predict maintenance needs.","textPreview":"Monitor home batteries and predict maintenance needs.","textChars":53,"textLines":1,"bbox":[477.76,285.12,324.16,57.6]}
+{"kind":"shape","id":"sh/cnu1kzyd","slide":9,"name":"Shape 12","bbox":[859.52,158.4,372.16,192]}
+{"kind":"shape","id":"sh/do3id4fy","slide":9,"name":"Shape 13","bbox":[883.52,182.4,40.32,40.32]}
+{"kind":"textbox","id":"sh/qlcjipgn","slide":9,"name":"Text 14","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[883.52,182.4,40.32,40.32]}
+{"kind":"textbox","id":"sh/bml0buxs","slide":9,"name":"Text 15","text":"Smart Grids","textPreview":"Smart Grids","textChars":11,"textLines":1,"bbox":[883.52,237.12,324.16,48]}
+{"kind":"textbox","id":"sh/0ru1ozyp","slide":9,"name":"Text 16","text":"Avoid sudden, costly battery failures at scale.","textPreview":"Avoid sudden, costly battery failures at scale.","textChars":47,"textLines":1,"bbox":[883.52,285.12,324.16,57.6]}
+{"kind":"shape","id":"sh/lsn2h4fa","slide":9,"name":"Shape 17","bbox":[234.08,384,372.16,192]}
+{"kind":"shape","id":"sh/98ji147e","slide":9,"name":"Shape 18","bbox":[258.08,408,40.32,40.32]}
+{"kind":"textbox","id":"sh/87a18zqt","slide":9,"name":"Text 19","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[258.08,408,40.32,40.32]}
+{"kind":"textbox","id":"sh/76h0zup8","slide":9,"name":"Text 20","text":"Drones","textPreview":"Drones","textChars":6,"textLines":1,"bbox":[258.08,462.72,324.16,48]}
+{"kind":"textbox","id":"sh/ml8j6p8n","slide":9,"name":"Text 21","text":"Estimate safe remaining flying time in-flight.","textPreview":"Estimate safe remaining flying time in-flight.","textChars":46,"textLines":1,"bbox":[258.08,510.72,324.16,57.6]}
+{"kind":"shape","id":"sh/hcji5o7a","slide":9,"name":"Shape 22","bbox":[639.84,384,372.16,192]}
+{"kind":"shape","id":"sh/wba1cjqp","slide":9,"name":"Shape 23","bbox":[663.84,408,40.32,40.32]}
+{"kind":"textbox","id":"sh/va103ep4","slide":9,"name":"Text 24","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[663.84,408,40.32,40.32]}
+{"kind":"textbox","id":"sh/u9sja98z","slide":9,"name":"Text 25","text":"Laptops & Smartphones","textPreview":"Laptops & Smartphones","textChars":21,"textLines":1,"bbox":[663.84,462.72,324.16,48]}
+{"kind":"textbox","id":"sh/xgzitk76","slide":9,"name":"Text 26","text":"More accurate battery degradation estimates.","textPreview":"More accurate battery degradation estimates.","textChars":44,"textLines":1,"bbox":[663.84,510.72,324.16,57.6]}
+{"kind":"textbox","id":"sh/cf6h0fql","slide":9,"name":"Text 27","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/2l4faloj","slide":9,"name":"Text 28","text":"9 / 11","textPreview":"9 / 11","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/udsvah03","slide":9,"text":""}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"CONCLUSION","textShapes":11}
+{"kind":"textbox","id":"sh/xc3mho32","slide":10,"name":"Text 0","text":"CONCLUSION","textPreview":"CONCLUSION","textChars":10,"textLines":1,"bbox":[48,52.8,960,30.72]}
+{"kind":"textbox","id":"sh/cbu58j2h","slide":10,"name":"Text 1","text":"Project Summary","textPreview":"Project Summary","textChars":15,"textLines":1,"bbox":[48,81.6,1183.68,57.6]}
+{"kind":"shape","id":"sh/zelojyl8","slide":10,"name":"Shape 2","bbox":[48,184.32,17.28,17.28]}
+{"kind":"textbox","id":"sh/ydcnatkn","slide":10,"name":"Text 3","text":"Proposed an Adaptive Physics-Informed Battery Digital Twin for accurate SOH and RUL estimation.","textPreview":"Proposed an Adaptive Physics-Informed Battery Digital Twin for accurate SOH and RUL estimation.","textChars":95,"textLines":1,"bbox":[86.4,172.8,1145.28,62.4]}
+{"kind":"shape","id":"sh/l036l83y","slide":10,"name":"Shape 4","bbox":[48,256.32,17.28,17.28]}
+{"kind":"textbox","id":"sh/kzu5c32t","slide":10,"name":"Text 5","text":"Integrated Transformer Encoder, PINN and Feedforward DNN to combine data-driven learning with battery physics.","textPreview":"Integrated Transformer Encoder, PINN and Feedforward DNN to combine data-driven learning with battery physics.","textChars":110,"textLines":1,"bbox":[86.4,244.8,1145.28,62.4]}
+{"kind":"shape","id":"sh/725onyl4","slide":10,"name":"Shape 6","bbox":[48,328.32,17.28,17.28]}
+{"kind":"textbox","id":"sh/m1cnetkj","slide":10,"name":"Text 7","text":"Introduced incremental adaptive learning to keep the Digital Twin current without full model retraining.","textPreview":"Introduced incremental adaptive learning to keep the Digital Twin current without full model retraining.","textChars":104,"textLines":1,"bbox":[86.4,316.8,1145.28,62.4]}
+{"kind":"shape","id":"sh/s7yt4b21","slide":10,"name":"Shape 8","bbox":[48,400.32,17.28,17.28]}
+{"kind":"textbox","id":"sh/d87uxg3m","slide":10,"name":"Text 9","text":"Overcomes key limits of pure deep-learning and pure physics-based models with real-time, physically consistent predictions.","textPreview":"Overcomes key limits of pure deep-learning and pure physics-based models with real-time, physically consistent predictions.","textChars":123,"textLines":1,"bbox":[86.4,388.8,1145.28,62.4]}
+{"kind":"shape","id":"sh/q5gb21kb","slide":10,"name":"Shape 10","bbox":[48,480,1183.68,81.6]}
+{"kind":"textbox","id":"sh/r6pcv6lw","slide":10,"name":"Text 11","text":"Potential impact:  Electric Vehicles, Battery Management Systems, Renewable Energy Storage, Smart Grids, Drones and Consumer Electronics.","textPreview":"Potential impact:  Electric Vehicles, Battery Management Systems, Renewable Energy Storage, Smart Grids, Drones and Consumer Electronics.","textChars":137,"textLines":1,"bbox":[76.8,480,1126.08,81.6]}
+{"kind":"textbox","id":"sh/0bit8b2d","slide":10,"name":"Text 12","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/1cru1g3y","slide":10,"name":"Text 13","text":"10 / 11","textPreview":"10 / 11","textChars":7,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"textbox","id":"sh/e9gb61k7","slide":10,"name":"Text 14","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/fapcz6ls","slide":10,"name":"Text 15","text":"9 / 10","textPreview":"9 / 10","textChars":6,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":""}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"SOURCES","textShapes":19}
+{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"name":"Text 0","text":"SOURCES","textPreview":"SOURCES","textChars":7,"textLines":1,"bbox":[48,33.6,960,28.8]}
+{"kind":"textbox","id":"sh/wbih4b6d","slide":11,"name":"Text 1","text":"References","textPreview":"References","textChars":10,"textLines":1,"bbox":[48,59.52,1183.68,62.4]}
+{"kind":"shape","id":"sh/n69grmpw","slide":11,"name":"Shape 2","bbox":[48,153.6,32.64,32.64]}
+{"kind":"textbox","id":"sh/250zy18b","slide":11,"name":"Text 3","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[48,153.6,32.64,32.64]}
+{"kind":"textbox","id":"sh/98rytw72","slide":11,"name":"Text 4","text":"Physics-informed neural networks for battery modeling and state estimation: A methodological review","textPreview":"Physics-informed neural networks for battery modeling and state estimation: A methodological review","textChars":99,"textLines":1,"bbox":[96,148.8,1135.68,38.4]}
+{"kind":"textbox","id":"sh/o7ih0r6h","slide":11,"name":"Text 5","text":"Renewable and Sustainable Energy Reviews, 2026   https://www.sciencedirect.com/science/article/pii/S1364032126005253","textPreview":"Renewable and Sustainable Energy Reviews, 2026   https://www.sciencedirect.com/science/article/pii/S1364032126005253","textChars":116,"textLines":1,"bbox":[96,190.08,1135.68,28.8]}
+{"kind":"shape","id":"sh/72t03qp0","slide":11,"name":"Shape 6","bbox":[48,251.52,32.64,32.64]}
+{"kind":"textbox","id":"sh/61kzalof","slide":11,"name":"Text 7","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[48,251.52,32.64,32.64]}
+{"kind":"textbox","id":"sh/ofqtgnyt","slide":11,"name":"Text 8","text":"Physics-informed neural network for co-estimation of state of health, remaining useful life, and short-term degradation path in Lithium-ion batteries","textPreview":"Physics-informed neural network for co-estimation of state of health, remaining useful life, and short-term degradation path in Lithium-i...","textChars":149,"textLines":1,"bbox":[96,246.72,1135.68,38.4]}
+{"kind":"textbox","id":"sh/9gza9sze","slide":11,"name":"Text 9","text":"Applied Energy, 2025   https://www.sciencedirect.com/science/article/pii/S0306261925011572","textPreview":"Applied Energy, 2025   https://www.sciencedirect.com/science/article/pii/S0306261925011572","textChars":90,"textLines":1,"bbox":[96,288,1135.68,28.8]}
+{"kind":"shape","id":"sh/mdobedg3","slide":11,"name":"Shape 10","bbox":[48,349.44,32.64,32.64]}
+{"kind":"textbox","id":"sh/nehs7iho","slide":11,"name":"Text 11","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[48,349.44,32.64,32.64]}
+{"kind":"textbox","id":"sh/0b6tc3yx","slide":11,"name":"Text 12","text":"Physical informed neural network for SOH estimation of Lithium-ion battery with electrochemical mechanism","textPreview":"Physical informed neural network for SOH estimation of Lithium-ion battery with electrochemical mechanism","textChars":105,"textLines":1,"bbox":[96,344.64,1135.68,38.4]}
+{"kind":"textbox","id":"sh/1cfa58zi","slide":11,"name":"Text 13","text":"Energy, 2026   https://www.sciencedirect.com/science/article/pii/S0360544225053964","textPreview":"Energy, 2026   https://www.sciencedirect.com/science/article/pii/S0360544225053964","textChars":82,"textLines":1,"bbox":[96,385.92,1135.68,28.8]}
+{"kind":"shape","id":"sh/epobatgr","slide":11,"name":"Shape 14","bbox":[48,447.36,32.64,32.64]}
+{"kind":"textbox","id":"sh/zaxs3yhc","slide":11,"name":"Text 15","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[48,447.36,32.64,32.64]}
+{"kind":"textbox","id":"sh/cn6t83y1","slide":11,"name":"Text 16","text":"A cycle-aware and physics-informed framework for battery remaining useful life prediction","textPreview":"A cycle-aware and physics-informed framework for battery remaining useful life prediction","textChars":89,"textLines":1,"bbox":[96,442.56,1135.68,38.4]}
+{"kind":"textbox","id":"sh/dofa18z6","slide":11,"name":"Text 17","text":"Scientific Reports, 2025   https://www.researchgate.net/publication/399255851_A_cycle-aware_and_physics-informed_framework_for_battery_remaining_useful_life_prediction","textPreview":"Scientific Reports, 2025   https://www.researchgate.net/publication/399255851_A_cycle-aware_and_physics-informed_framework_for_battery_re...","textChars":167,"textLines":1,"bbox":[96,483.84,1135.68,28.8]}
+{"kind":"shape","id":"sh/tsnip0ny","slide":11,"name":"Shape 18","bbox":[48,545.28,32.64,32.64]}
+{"kind":"textbox","id":"sh/87ehgv6d","slide":11,"name":"Text 19","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[48,545.28,32.64,32.64]}
+{"kind":"textbox","id":"sh/7650nq5s","slide":11,"name":"Text 20","text":"Physics-informed neural network and momentum contrastive learning for battery state of health estimation","textPreview":"Physics-informed neural network and momentum contrastive learning for battery state of health estimation","textChars":104,"textLines":1,"bbox":[96,540.48,1135.68,38.4]}
+{"kind":"textbox","id":"sh/65wzelo7","slide":11,"name":"Text 21","text":"Complex & Intelligent Systems, 2025   https://www.researchgate.net/publication/398786756_Physics-informed_neural_network_and_momentum_contrastive_learning_for_battery_state_of_health_estimation","textPreview":"Complex & Intelligent Systems, 2025   https://www.researchgate.net/publication/398786756_Physics-informed_neural_network_and_momentum_con...","textChars":193,"textLines":1,"bbox":[96,581.76,1135.68,28.8]}
+{"kind":"textbox","id":"sh/l43ilgn2","slide":11,"name":"Text 22","text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[48,681.6,768,28.8]}
+{"kind":"textbox","id":"sh/k3uhcb6h","slide":11,"name":"Text 23","text":"11 / 11","textPreview":"11 / 11","textChars":7,"textLines":1,"bbox":[1154.88,681.6,76.8,28.8]}
+{"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":""}
+{"kind":"slide","id":"sl/8f2psfyx","slide":12,"title":"PHASE II · REVIEW 2","textShapes":9}
+{"kind":"textbox","id":"sh/xw3q94ne","slide":12,"text":"PHASE II · REVIEW 2","textPreview":"PHASE II · REVIEW 2","textChars":19,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/1gbm9s3a","slide":12,"text":"Model Design & Experimental Study","textPreview":"Model Design & Experimental Study","textChars":33,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/0f2lgnmp","slide":12,"text":"Completed implementation, evaluation evidence, and faculty-ready proof of concept","textPreview":"Completed implementation, evaluation evidence, and faculty-ready proof of concept","textChars":81,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"textbox","id":"sh/ra943il8","slide":12,"text":"NASA-first evidence bundle","textPreview":"NASA-first evidence bundle","textChars":26,"textLines":1,"bbox":[58,235,500,26]}
+{"kind":"textbox","id":"sh/q903ad4n","slide":12,"text":"54 hyperparameter combinations · 3 random seeds · 18 ablation rows · 12 robustness rows","textPreview":"54 hyperparameter combinations · 3 random seeds · 18 ablation rows · 12 robustness rows","textChars":87,"textLines":1,"bbox":[58,270,850,28]}
+{"kind":"shape","id":"sh/dcbm583y","slide":12,"bbox":[58,355,1090,3]}
+{"kind":"textbox","id":"sh/sb2lcnmd","slide":12,"text":"Course rubric focus","textPreview":"Course rubric focus","textChars":19,"textLines":1,"bbox":[58,405,250,24]}
+{"kind":"textbox","id":"sh/b6d4f2lc","slide":12,"text":"Model architecture · Multiple models · Hyperparameter tuning · Experimental analysis · Presentation and AI reflection","textPreview":"Model architecture · Multiple models · Hyperparameter tuning · Experimental analysis · Presentation and AI reflection","textChars":117,"textLines":1,"bbox":[58,438,1060,48]}
+{"kind":"textbox","id":"sh/a543mx4r","slide":12,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/wvupgz6t","slide":12,"text":"12 / 21","textPreview":"12 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"notes","id":"nt/8f2psfyx","slide":12,"text":"Phase II section appended to the supplied deck. Evidence source: D:/DL/battery_twin/outputs/final_evidence_v2/evidence_results.json."}
+{"kind":"slide","id":"sl/hgzapcr6","slide":13,"title":"PHASE II · DELIVERABLE","textShapes":23}
+{"kind":"textbox","id":"sh/jqlkfyds","slide":13,"text":"PHASE II · DELIVERABLE","textPreview":"PHASE II · DELIVERABLE","textChars":22,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/q50nydsj","slide":13,"text":"Phase II focus: DL model design and hyperparameter tuning","textPreview":"Phase II focus: DL model design and hyperparameter tuning","textChars":57,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/bq9orito","slide":13,"text":"The required work is explicit: design the DL models, tune their hyperparameters, deploy multiple models, and compare results.","textPreview":"The required work is explicit: design the DL models, tune their hyperparameters, deploy multiple models, and compare results.","textChars":125,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/o3i5w3ad","slide":13,"bbox":[70,222,24,24]}
+{"kind":"textbox","id":"sh/p4r6p8by","slide":13,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[77,224,14,16]}
+{"kind":"textbox","id":"sh/21gnuts7","slide":13,"text":"Data contract","textPreview":"Data contract","textChars":13,"textLines":1,"bbox":[110,220,480,24]}
+{"kind":"textbox","id":"sh/32ponyts","slide":13,"text":"NASA B0005, B0006, B0007, and B0018 are parsed into ordered discharge-cycle records with voltage, current, temperature, time-gap, and capacity.","textPreview":"NASA B0005, B0006, B0007, and B0018 are parsed into ordered discharge-cycle records with voltage, current, temperature, time-gap, and cap...","textChars":143,"textLines":1,"bbox":[110,248,480,48]}
+{"kind":"shape","id":"sh/gzy5s3a1","slide":13,"bbox":[70,342,24,24]}
+{"kind":"textbox","id":"sh/1076lobm","slide":13,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[77,344,14,16]}
+{"kind":"textbox","id":"sh/hcfy9k3u","slide":13,"text":"Model stack","textPreview":"Model stack","textChars":11,"textLines":1,"bbox":[110,340,480,24]}
+{"kind":"textbox","id":"sh/gb6x0zm9","slide":13,"text":"DNN, GRU, Transformer-only, PINN, and adaptive Transformer-plus-physics models run under the same held-out-cell protocol.","textPreview":"DNN, GRU, Transformer-only, PINN, and adaptive Transformer-plus-physics models run under the same held-out-cell protocol.","textChars":121,"textLines":1,"bbox":[110,368,480,48]}
+{"kind":"shape","id":"sh/vaxg7ulo","slide":13,"bbox":[70,462,24,24]}
+{"kind":"textbox","id":"sh/u9ofyp43","slide":13,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[77,464,14,16]}
+{"kind":"textbox","id":"sh/t8fy5k3i","slide":13,"text":"Online learning","textPreview":"Online learning","textChars":15,"textLines":1,"bbox":[110,460,480,24]}
+{"kind":"textbox","id":"sh/876xwfmx","slide":13,"text":"A drift detector triggers low-cost replay-buffer updates as the held-out stream arrives in time order.","textPreview":"A drift detector triggers low-cost replay-buffer updates as the held-out stream arrives in time order.","textChars":102,"textLines":1,"bbox":[110,488,480,48]}
+{"kind":"shape","id":"sh/7mdg3als","slide":13,"bbox":[665,222,24,24]}
+{"kind":"textbox","id":"sh/6l4fu547","slide":13,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[672,224,14,16]}
+{"kind":"textbox","id":"sh/lkvy103m","slide":13,"text":"Faculty evidence","textPreview":"Faculty evidence","textChars":16,"textLines":1,"bbox":[705,220,480,24]}
+{"kind":"textbox","id":"sh/kjmxsfm1","slide":13,"text":"The run exports final comparison tables, ablations, robustness results, physical diagnostics, figures, and a reflection script.","textPreview":"The run exports final comparison tables, ablations, robustness results, physical diagnostics, figures, and a reflection script.","textChars":127,"textLines":1,"bbox":[705,248,480,48]}
+{"kind":"shape","id":"sh/cnqh8fux","slide":13,"bbox":[665,342,24,24]}
+{"kind":"textbox","id":"sh/xozyhkbi","slide":13,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[672,344,14,16]}
+{"kind":"textbox","id":"sh/q18f65cr","slide":13,"text":"What remains a proposal","textPreview":"What remains a proposal","textChars":23,"textLines":1,"bbox":[705,340,480,24]}
+{"kind":"textbox","id":"sh/bmhgfatc","slide":13,"text":"SEI-PDE physics and broad multi-chemistry validation remain extensions because the NASA POC does not expose every required electrochemical variable.","textPreview":"SEI-PDE physics and broad multi-chemistry validation remain extensions because the NASA POC does not expose every required electrochemica...","textChars":148,"textLines":1,"bbox":[705,368,480,48]}
+{"kind":"shape","id":"sh/oz6x4vul","slide":13,"bbox":[665,462,24,24]}
+{"kind":"textbox","id":"sh/p0zyd0b6","slide":13,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[672,464,14,16]}
+{"kind":"textbox","id":"sh/2xof2lcv","slide":13,"text":"Evidence discipline","textPreview":"Evidence discipline","textChars":19,"textLines":1,"bbox":[705,460,480,24]}
+{"kind":"textbox","id":"sh/3yxgbqdg","slide":13,"text":"Reported paper metrics stay separate from new project metrics. The project claims only what the executed protocol measures.","textPreview":"Reported paper metrics stay separate from new project metrics. The project claims only what the executed protocol measures.","textChars":123,"textLines":1,"bbox":[705,488,480,48]}
+{"kind":"textbox","id":"sh/8vahgzu5","slide":13,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/9wjyp4bq","slide":13,"text":"13 / 21","textPreview":"13 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"notes","id":"nt/hgzapcr6","slide":13,"text":"Project implementation files: D:/DL/battery_twin/src/battery_twin and D:/DL/battery_twin/scripts. The source audit in the HTML report distinguishes proposal claims, literature evidence, and new student evidence."}
+{"kind":"slide","id":"sl/6lsnupw7","slide":14,"title":"PHASE II · DATASET","textShapes":15}
+{"kind":"textbox","id":"sh/fqdg3q98","slide":14,"text":"PHASE II · DATASET","textPreview":"PHASE II · DATASET","textChars":18,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/xc7eds76","slide":14,"text":"NASA cells and a leakage-safe evaluation protocol","textPreview":"NASA cells and a leakage-safe evaluation protocol","textChars":49,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/wbydknq1","slide":14,"text":"The official NASA PCoE repository provides the first committed dataset for this proof of concept.","textPreview":"The official NASA PCoE repository provides the first committed dataset for this proof of concept.","textChars":97,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/idgvmx8r","slide":14,"bbox":[58,520,200,70]}
+{"kind":"textbox","id":"sh/5grehs7i","slide":14,"text":"EOL RULE","textPreview":"EOL RULE","textChars":8,"textLines":1,"bbox":[74,532,168,16]}
+{"kind":"textbox","id":"sh/kfidonqx","slide":14,"text":"70% SOH","textPreview":"70% SOH","textChars":7,"textLines":1,"bbox":[74,552,168,26]}
+{"kind":"shape","id":"sh/zi5c3y98","slide":14,"bbox":[280,520,200,70]}
+{"kind":"textbox","id":"sh/ehwvat8n","slide":14,"text":"HELD-OUT CELL","textPreview":"HELD-OUT CELL","textChars":13,"textLines":1,"bbox":[296,532,168,16]}
+{"kind":"textbox","id":"sh/c3e1gjyd","slide":14,"text":"B0018","textPreview":"B0018","textChars":5,"textLines":1,"bbox":[296,552,168,26]}
+{"kind":"shape","id":"sh/x4ni9ofy","slide":14,"bbox":[502,520,200,70]}
+{"kind":"textbox","id":"sh/a1wze9g7","slide":14,"text":"CYCLES PARSED","textPreview":"CYCLES PARSED","textChars":13,"textLines":1,"bbox":[518,532,168,16]}
+{"kind":"textbox","id":"sh/b2507exs","slide":14,"text":"636 total","textPreview":"636 total","textChars":9,"textLines":1,"bbox":[518,552,168,26]}
+{"kind":"shape","id":"sh/kre1k3y9","slide":14,"bbox":[724,520,200,70]}
+{"kind":"textbox","id":"sh/ls7idofu","slide":14,"text":"ORDER","textPreview":"ORDER","textChars":5,"textLines":1,"bbox":[740,532,168,16]}
+{"kind":"textbox","id":"sh/y5wjitgj","slide":14,"text":"Time-aware","textPreview":"Time-aware","textChars":10,"textLines":1,"bbox":[740,552,168,26]}
+{"kind":"shape","id":"sh/z650byxo","slide":14,"bbox":[946,520,230,70]}
+{"kind":"textbox","id":"sh/0buh8zy5","slide":14,"text":"METRIC UNIT","textPreview":"METRIC UNIT","textChars":11,"textLines":1,"bbox":[962,532,198,16]}
+{"kind":"textbox","id":"sh/1w3i14fq","slide":14,"text":"RUL in cycles","textPreview":"RUL in cycles","textChars":13,"textLines":1,"bbox":[962,552,198,26]}
+{"kind":"textbox","id":"sh/hsvy50re","slide":14,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/grmxwvqt","slide":14,"text":"14 / 21","textPreview":"14 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"table","id":"tb/1sjap8zi","slide":14,"name":"","rows":6,"cols":3,"preview":"Item | Project choice | Why it matters","bbox":[58,205,1165,270]}
+{"kind":"notes","id":"nt/6lsnupw7","slide":14,"text":"Dataset source: https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/. Local audit and labels are implemented in data.py and features.py. The 636-cycle count is the parser audit across the four selected NASA files."}
+{"kind":"slide","id":"sl/vaxsvy10","slide":15,"title":"PHASE II · ARCHITECTURE","textShapes":26}
+{"kind":"textbox","id":"sh/294vi9c7","slide":15,"text":"PHASE II · ARCHITECTURE","textPreview":"PHASE II · ARCHITECTURE","textChars":23,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/547mhg3m","slide":15,"text":"From measured cycle to adaptive digital-twin state","textPreview":"From measured cycle to adaptive digital-twin state","textChars":50,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/k3y5ov21","slide":15,"text":"The first-stage physics model uses relationships supported by the NASA measurements.","textPreview":"The first-stage physics model uses relationships supported by the NASA measurements.","textChars":84,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/76p4jqls","slide":15,"bbox":[58,225,178,170]}
+{"kind":"shape","id":"sh/65gnqlk7","slide":15,"bbox":[73,240,28,28]}
+{"kind":"textbox","id":"sh/t87ml0ji","slide":15,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[81,239,12,20]}
+{"kind":"textbox","id":"sh/s7y5sv2x","slide":15,"text":"NASA records","textPreview":"NASA records","textChars":12,"textLines":1,"bbox":[73,277,148,22]}
+{"kind":"textbox","id":"sh/na5476l8","slide":15,"text":"Cycle-level voltage, current, temperature, time, capacity","textPreview":"Cycle-level voltage, current, temperature, time, capacity","textChars":57,"textLines":1,"bbox":[73,303,148,80]}
+{"kind":"shape","id":"sh/m9c3e1kn","slide":15,"bbox":[240,308,10,4]}
+{"kind":"shape","id":"sh/wrm9kvep","slide":15,"bbox":[254,225,178,170]}
+{"kind":"shape","id":"sh/hsvat0fa","slide":15,"bbox":[269,240,28,28]}
+{"kind":"textbox","id":"sh/upkrilwj","slide":15,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[277,239,12,20]}
+{"kind":"textbox","id":"sh/vqdsrqx4","slide":15,"text":"Masked encoder","textPreview":"Masked encoder","textChars":14,"textLines":1,"bbox":[269,277,148,22]}
+{"kind":"textbox","id":"sh/4vm9ovel","slide":15,"text":"Measured points + delta_t, no blind interpolation","textPreview":"Measured points + delta_t, no blind interpolation","textChars":49,"textLines":1,"bbox":[269,303,148,80]}
+{"kind":"shape","id":"sh/5wvax0f6","slide":15,"bbox":[436,308,10,4]}
+{"kind":"shape","id":"sh/it4rm5wv","slide":15,"bbox":[450,225,178,170]}
+{"kind":"shape","id":"sh/judsvqxg","slide":15,"bbox":[465,240,28,28]}
+{"kind":"textbox","id":"sh/0z29cbyh","slide":15,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[473,239,12,20]}
+{"kind":"textbox","id":"sh/l0bqlgf2","slide":15,"text":"Temporal model","textPreview":"Temporal model","textChars":14,"textLines":1,"bbox":[465,277,148,22]}
+{"kind":"textbox","id":"sh/1kjyt83e","slide":15,"text":"History across cycles with Transformer context","textPreview":"History across cycles with Transformer context","textChars":46,"textLines":1,"bbox":[465,303,148,80]}
+{"kind":"shape","id":"sh/gjax03m9","slide":15,"bbox":[632,308,10,4]}
+{"kind":"shape","id":"sh/fi1grylo","slide":15,"bbox":[646,225,178,170]}
+{"kind":"shape","id":"sh/ehsfyt43","slide":15,"bbox":[661,240,28,28]}
+{"kind":"textbox","id":"sh/p8jyx83q","slide":15,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[669,239,12,20]}
+{"kind":"textbox","id":"sh/o7ah4nm5","slide":15,"text":"SOH / RUL heads","textPreview":"SOH / RUL heads","textChars":15,"textLines":1,"bbox":[661,277,148,22]}
+{"kind":"textbox","id":"sh/361gvilk","slide":15,"text":"Bounded SOH 0–100 and non-negative RUL","textPreview":"Bounded SOH 0–100 and non-negative RUL","textChars":38,"textLines":1,"bbox":[661,303,148,80]}
+{"kind":"shape","id":"sh/25sf2d4z","slide":15,"bbox":[828,308,10,4]}
+{"kind":"shape","id":"sh/dc3y1s3m","slide":15,"bbox":[842,225,178,170]}
+{"kind":"shape","id":"sh/cbuh8nmh","slide":15,"bbox":[857,240,28,28]}
+{"kind":"textbox","id":"sh/uh4v2pkj","slide":15,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[865,239,12,20]}
+{"kind":"textbox","id":"sh/vixcvu14","slide":15,"text":"Physics losses","textPreview":"Physics losses","textChars":14,"textLines":1,"bbox":[857,277,148,22]}
+{"kind":"textbox","id":"sh/wj6d4z2p","slide":15,"text":"Soft degradation, RUL order, capacity-curve residual","textPreview":"Soft degradation, RUL order, capacity-curve residual","textChars":52,"textLines":1,"bbox":[857,303,148,80]}
+{"kind":"shape","id":"sh/hkfexkja","slide":15,"bbox":[1024,308,10,4]}
+{"kind":"shape","id":"sh/ilov6pkv","slide":15,"bbox":[1038,225,178,170]}
+{"kind":"shape","id":"sh/jmxwzu1g","slide":15,"bbox":[1053,240,28,28]}
+{"kind":"textbox","id":"sh/4n6d8z21","slide":15,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[1061,239,12,20]}
+{"kind":"textbox","id":"sh/5ofe14j6","slide":15,"text":"Replay adaptation","textPreview":"Replay adaptation","textChars":17,"textLines":1,"bbox":[1053,277,148,22]}
+{"kind":"textbox","id":"sh/6p8va9kr","slide":15,"text":"Drift trigger, recent + representative history","textPreview":"Drift trigger, recent + representative history","textChars":46,"textLines":1,"bbox":[1053,303,148,80]}
+{"kind":"shape","id":"sh/rqhw3e1c","slide":15,"bbox":[58,455,1165,112]}
+{"kind":"textbox","id":"sh/f6dcnetg","slide":15,"text":"Training objective","textPreview":"Training objective","textChars":18,"textLines":1,"bbox":[84,478,210,22]}
+{"kind":"textbox","id":"sh/e54ve9cv","slide":15,"text":"L_total = L_data + λ_phys L_phys + λ_cons L_cons","textPreview":"L_total = L_data + λ_phys L_phys + λ_cons L_cons","textChars":48,"textLines":1,"bbox":[300,472,520,34]}
+{"kind":"textbox","id":"sh/18vup4bm","slide":15,"text":"The SEI-growth PDE formulation remains a Stage 2 extension until every variable and parameter is available and verified.","textPreview":"The SEI-growth PDE formulation remains a Stage 2 extension until every variable and parameter is available and verified.","textChars":120,"textLines":1,"bbox":[84,522,1080,25]}
+{"kind":"textbox","id":"sh/07mdgzu1","slide":15,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/nadwrets","slide":15,"text":"15 / 21","textPreview":"15 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"notes","id":"nt/vaxsvy10","slide":15,"text":"Implementation sources: models.py, physics.py, training.py. The methodology review and EM-PINN paper inform the physics discussion, but the student POC does not claim to reproduce the SEI-PDE experiment."}
+{"kind":"slide","id":"sl/gny5sjyp","slide":16,"title":"PHASE II · TUNING","textShapes":16}
+{"kind":"textbox","id":"sh/9c7i1o7u","slide":16,"text":"PHASE II · TUNING","textPreview":"PHASE II · TUNING","textChars":17,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/8z2h8bq1","slide":16,"text":"The selected configuration came from the complete grid","textPreview":"The selected configuration came from the complete grid","textChars":54,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/9kby1g7m","slide":16,"text":"Every requested combination ran across seeds 7, 17, and 27 before the final evidence pass.","textPreview":"Every requested combination ran across seeds 7, 17, and 27 before the final evidence pass.","textChars":90,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/zutgvm94","slide":16,"bbox":[650,210,573,280]}
+{"kind":"textbox","id":"sh/kv2h4rqp","slide":16,"text":"Selected configuration","textPreview":"Selected configuration","textChars":22,"textLines":1,"bbox":[682,235,430,24]}
+{"kind":"textbox","id":"sh/lwbyxwra","slide":16,"text":"Hidden size  64\nLearning rate  0.001\nPhysics weight  0.1\nReplay size  128","textPreview":"Hidden size  64 | Learning rate  0.001 | Physics weight  0.1 | Replay size  128","textChars":73,"textLines":4,"bbox":[682,280,480,140]}
+{"kind":"textbox","id":"sh/ip4zel83","slide":16,"text":"The final evidence runner then used the selected configuration on the full default cycle-window representation.","textPreview":"The final evidence runner then used the selected configuration on the full default cycle-window representation.","textChars":111,"textLines":1,"bbox":[682,440,480,34]}
+{"kind":"shape","id":"sh/3qdg7qpo","slide":16,"bbox":[58,540,250,70]}
+{"kind":"textbox","id":"sh/fm1gzq5o","slide":16,"text":"GRID STATUS","textPreview":"GRID STATUS","textChars":11,"textLines":1,"bbox":[74,552,218,16]}
+{"kind":"textbox","id":"sh/e1sf65o3","slide":16,"text":"54 / 54 complete","textPreview":"54 / 54 complete","textChars":16,"textLines":1,"bbox":[74,572,218,26]}
+{"kind":"shape","id":"sh/1ojy10ne","slide":16,"bbox":[330,540,230,70]}
+{"kind":"textbox","id":"sh/gnax8v6t","slide":16,"text":"MODEL COUNT","textPreview":"MODEL COUNT","textChars":11,"textLines":1,"bbox":[346,552,198,16]}
+{"kind":"textbox","id":"sh/nqlg3a5k","slide":16,"text":"5 comparisons","textPreview":"5 comparisons","textChars":13,"textLines":1,"bbox":[346,572,198,26]}
+{"kind":"shape","id":"sh/2pcfa5oz","slide":16,"bbox":[580,540,230,70]}
+{"kind":"textbox","id":"sh/ps3y5knq","slide":16,"text":"EVIDENCE MODE","textPreview":"EVIDENCE MODE","textChars":13,"textLines":1,"bbox":[596,552,198,16]}
+{"kind":"textbox","id":"sh/oruhcf65","slide":16,"text":"Held-out cell","textPreview":"Held-out cell","textChars":13,"textLines":1,"bbox":[596,572,198,26]}
+{"kind":"shape","id":"sh/bulg7u5g","slide":16,"bbox":[830,540,260,70]}
+{"kind":"textbox","id":"sh/atczepob","slide":16,"text":"OUTPUT","textPreview":"OUTPUT","textChars":6,"textLines":1,"bbox":[846,552,228,16]}
+{"kind":"textbox","id":"sh/mpgj6t8j","slide":16,"text":"JSON + CSV + PNG","textPreview":"JSON + CSV + PNG","textChars":16,"textLines":1,"bbox":[846,572,228,26]}
+{"kind":"textbox","id":"sh/7qp0zepo","slide":16,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/8by18jq9","slide":16,"text":"16 / 21","textPreview":"16 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"table","id":"tb/5kb2xwby","slide":16,"name":"","rows":6,"cols":2,"preview":"Grid dimension | Values tested","bbox":[58,210,520,280]}
+{"kind":"notes","id":"nt/gny5sjyp","slide":16,"text":"Tuning source: D:/DL/battery_twin/outputs/tuning/grid.json. The grid JSON records combinations_requested = 54, combinations_run = 54, and seeds = [7, 17, 27]."}
+{"kind":"slide","id":"sl/14bup87q","slide":17,"title":"PHASE II · MODEL COMPARISON","textShapes":9}
+{"kind":"textbox","id":"sh/3ap8fm50","slide":17,"text":"PHASE II · MODEL COMPARISON","textPreview":"PHASE II · MODEL COMPARISON","textChars":27,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/1c7e50ni","slide":17,"text":"The standalone PINN led frozen SOH accuracy","textPreview":"The standalone PINN led frozen SOH accuracy","textChars":43,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/gbedwfmx","slide":17,"text":"All model rows use the same B0018 held-out evaluation protocol and four training epochs.","textPreview":"All model rows use the same B0018 held-out evaluation protocol and four training epochs.","textChars":88,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/6lwvql4v","slide":17,"bbox":[58,525,560,80]}
+{"kind":"textbox","id":"sh/t8ne10n6","slide":17,"text":"Adaptive twin","textPreview":"Adaptive twin","textChars":13,"textLines":1,"bbox":[82,545,180,18]}
+{"kind":"textbox","id":"sh/snedsvml","slide":17,"text":"10.05 ± 1.46 SOH MAE  ·  38.36 ± 3.39 RUL MAE","textPreview":"10.05 ± 1.46 SOH MAE  ·  38.36 ± 3.39 RUL MAE","textChars":45,"textLines":1,"bbox":[82,570,500,22]}
+{"kind":"shape","id":"sh/jilcvq54","slide":17,"bbox":[650,525,573,80]}
+{"kind":"textbox","id":"sh/ihcvml4j","slide":17,"text":"Best frozen SOH row","textPreview":"Best frozen SOH row","textChars":19,"textLines":1,"bbox":[675,545,210,18]}
+{"kind":"textbox","id":"sh/4by9or6l","slide":17,"text":"PINN: 7.76 ± 1.42 SOH MAE","textPreview":"PINN: 7.76 ± 1.42 SOH MAE","textChars":25,"textLines":1,"bbox":[675,570,480,22]}
+{"kind":"textbox","id":"sh/pc7qhwn6","slide":17,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/29grm1of","slide":17,"text":"17 / 21","textPreview":"17 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"table","id":"tb/rid0z25g","slide":17,"name":"","rows":6,"cols":4,"preview":"Model | SOH MAE | RUL MAE (cycles) | SOH R²","bbox":[58,205,1165,285]}
+{"kind":"notes","id":"nt/14bup87q","slide":17,"text":"Metrics source: D:/DL/battery_twin/outputs/final_evidence_v2/evidence_results.json and final_summary.csv. Paper metrics are not numerically ranked against this table because datasets, splits, labels, and metric scales differ."}
+{"kind":"slide","id":"sl/y5wne50z","slide":18,"title":"PHASE II · ABLATIONS","textShapes":13}
+{"kind":"textbox","id":"sh/qh03ql8j","slide":18,"text":"PHASE II · ABLATIONS","textPreview":"PHASE II · ABLATIONS","textChars":20,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/wrelszu9","slide":18,"text":"Replay adaptation delivered the low-cost online update","textPreview":"Replay adaptation delivered the low-cost online update","textChars":54,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/hsn2l4bu","slide":18,"text":"The ablation table shows which components mattered in the ordered B0018 stream.","textPreview":"The ablation table shows which components mattered in the ordered B0018 stream.","textChars":79,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/je5knut0","slide":18,"bbox":[58,545,265,70]}
+{"kind":"textbox","id":"sh/4felwzu5","slide":18,"text":"TARGET 1","textPreview":"TARGET 1","textChars":8,"textLines":1,"bbox":[74,557,233,16]}
+{"kind":"textbox","id":"sh/5gnmp4bq","slide":18,"text":"80.63% improvement","textPreview":"80.63% improvement","textChars":18,"textLines":1,"bbox":[74,577,233,26]}
+{"kind":"shape","id":"sh/6hw3y9sb","slide":18,"bbox":[340,545,230,70]}
+{"kind":"textbox","id":"sh/rip4retw","slide":18,"text":"TARGET 2","textPreview":"TARGET 2","textChars":8,"textLines":1,"bbox":[356,557,198,16]}
+{"kind":"textbox","id":"sh/fapkr6pw","slide":18,"text":"8.75% work","textPreview":"8.75% work","textChars":10,"textLines":1,"bbox":[356,577,198,26]}
+{"kind":"shape","id":"sh/upg3i18r","slide":18,"bbox":[590,545,265,70]}
+{"kind":"textbox","id":"sh/1cr2tg72","slide":18,"text":"TARGET 3","textPreview":"TARGET 3","textChars":8,"textLines":1,"bbox":[606,557,233,16]}
+{"kind":"textbox","id":"sh/gbylkbqh","slide":18,"text":"−10.20% forgetting","textPreview":"−10.20% forgetting","textChars":18,"textLines":1,"bbox":[606,577,233,26]}
+{"kind":"shape","id":"sh/7mpknmp0","slide":18,"bbox":[875,545,250,70]}
+{"kind":"textbox","id":"sh/6lg3e18f","slide":18,"text":"DETECTOR","textPreview":"DETECTOR","textChars":8,"textLines":1,"bbox":[891,557,218,16]}
+{"kind":"textbox","id":"sh/to72pw76","slide":18,"text":"7 updates / seed","textPreview":"7 updates / seed","textChars":16,"textLines":1,"bbox":[891,577,218,26]}
+{"kind":"textbox","id":"sh/snylgrql","slide":18,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/bi94zqp4","slide":18,"text":"18 / 21","textPreview":"18 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"table","id":"tb/doju50bi","slide":18,"name":"","rows":7,"cols":5,"preview":"Variant | Post-shift SOH MAE | Improvement | Work | Events","bbox":[58,200,1165,310]}
+{"kind":"notes","id":"nt/y5wne50z","slide":18,"text":"Ablation source: evidence_results.json and ablation_summary.csv. Negative forgetting means the initial-domain SOH MAE improved after adaptation. Full retraining is the cost reference."}
+{"kind":"slide","id":"sl/nid43ytk","slide":19,"title":"PHASE II · ROBUSTNESS","textShapes":7}
+{"kind":"textbox","id":"sh/dsri9sr6","slide":19,"text":"PHASE II · ROBUSTNESS","textPreview":"PHASE II · ROBUSTNESS","textChars":21,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/9gb6xgbi","slide":19,"text":"The adaptive state remained useful under sensor corruption","textPreview":"The adaptive state remained useful under sensor corruption","textChars":58,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/8v2pobax","slide":19,"text":"Robustness scenarios use the same trained proposal and corrupt the ordered stream before adaptation.","textPreview":"Robustness scenarios use the same trained proposal and corrupt the ordered stream before adaptation.","textChars":100,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/xkbq10be","slide":19,"bbox":[58,490,1165,88]}
+{"kind":"textbox","id":"sh/wj2psvat","slide":19,"text":"Interpretation","textPreview":"Interpretation","textChars":14,"textLines":1,"bbox":[82,511,180,18]}
+{"kind":"textbox","id":"sh/jmd83atk","slide":19,"text":"Hard bounds stayed at zero. Soft monotonic diagnostics stayed nonzero, so the result supports a measured proof of concept with calibration limits rather than perfect electrochemical validity.","textPreview":"Hard bounds stayed at zero. Soft monotonic diagnostics stayed nonzero, so the result supports a measured proof of concept with calibratio...","textChars":191,"textLines":1,"bbox":[82,536,1078,28]}
+{"kind":"textbox","id":"sh/il47u5sz","slide":19,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/cri1gnql","slide":19,"text":"19 / 21","textPreview":"19 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"table","id":"tb/14ryhsbq","slide":19,"name":"","rows":5,"cols":4,"preview":"Scenario | Frozen SOH MAE | Adaptive SOH MAE | Updates","bbox":[58,195,650,250]}
+{"kind":"table","id":"tb/03ihonu5","slide":19,"name":"","rows":6,"cols":2,"preview":"Diagnostic | Mean ± SD","bbox":[750,195,473,250]}
+{"kind":"notes","id":"nt/nid43ytk","slide":19,"text":"Robustness and physical-validity source: evidence_results.json. The monotonic rates are diagnostics because real cells can show local capacity regeneration. Capacity-curve residual is the first-stage data-supported residual, not an SEI-PDE residual."}
+{"kind":"slide","id":"sl/zyxsni5k","slide":20,"title":"PHASE II · FACULTY EVIDENCE","textShapes":7}
+{"kind":"textbox","id":"sh/dkfmp4zy","slide":20,"text":"PHASE II · FACULTY EVIDENCE","textPreview":"PHASE II · FACULTY EVIDENCE","textChars":27,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/qpwjmh8n","slide":20,"text":"Proof of experiment mapped to the course rubric","textPreview":"Proof of experiment mapped to the course rubric","textChars":47,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/rq50vmp8","slide":20,"text":"The deck now points to concrete artifacts a reviewer can inspect.","textPreview":"The deck now points to concrete artifacts a reviewer can inspect.","textChars":65,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/po3itc72","slide":20,"bbox":[58,535,1165,64]}
+{"kind":"textbox","id":"sh/2lczih8r","slide":20,"text":"Recording checklist","textPreview":"Recording checklist","textChars":19,"textLines":1,"bbox":[82,550,180,18]}
+{"kind":"textbox","id":"sh/3ml0rmpw","slide":20,"text":"Show the design diagram · show all five models · open the 54-combination grid · show one ablation and one robustness figure · read PASS status exactly","textPreview":"Show the design diagram · show all five models · open the 54-combination grid · show one ablation and one robustness figure · read PASS s...","textChars":150,"textLines":1,"bbox":[278,550,900,24]}
+{"kind":"textbox","id":"sh/gjuhg7ql","slide":20,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/hk3ipcr6","slide":20,"text":"20 / 21","textPreview":"20 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"table","id":"tb/jy1wvit0","slide":20,"name":"","rows":6,"cols":3,"preview":"Rubric criterion | What to show | Artifact","bbox":[58,200,1165,300]}
+{"kind":"notes","id":"nt/zyxsni5k","slide":20,"text":"Faculty rubric source: D:/DL/RUBRICS FOR COURSE BASED DESIGN PROJECT - FALL 26-27.pdf and the supplied Phase II screenshots. The actual recording must be made and uploaded by the student; this slide and video_reflection_script.md prepare the evidence."}
+{"kind":"slide","id":"sl/m1wvqtk3","slide":21,"title":"PHASE II · FINAL STATUS","textShapes":16}
+{"kind":"textbox","id":"sh/nm9cru18","slide":21,"text":"PHASE II · FINAL STATUS","textPreview":"PHASE II · FINAL STATUS","textChars":23,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/1gbmxs7a","slide":21,"text":"A tested adaptive POC with a clear next experiment","textPreview":"A tested adaptive POC with a clear next experiment","textChars":50,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/0f2lon6p","slide":21,"text":"The strongest evidence is the low-cost online update. The main limitation is the small four-cell dataset.","textPreview":"The strongest evidence is the low-cost online update. The main limitation is the small four-cell dataset.","textChars":105,"textLines":1,"bbox":[58,135,1110,42]}
+{"kind":"shape","id":"sh/ra9kryp8","slide":21,"bbox":[58,215,520,250]}
+{"kind":"textbox","id":"sh/qp03yt8n","slide":21,"text":"What the run supports","textPreview":"What the run supports","textChars":21,"textLines":1,"bbox":[88,242,380,22]}
+{"kind":"shape","id":"sh/dcb2t87y","slide":21,"bbox":[88,290,24,24]}
+{"kind":"textbox","id":"sh/sb2lk36t","slide":21,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[95,292,14,16]}
+{"kind":"textbox","id":"sh/b6d432pc","slide":21,"text":"Adaptation benefit","textPreview":"Adaptation benefit","textChars":18,"textLines":1,"bbox":[128,288,390,24]}
+{"kind":"textbox","id":"sh/al43uxor","slide":21,"text":"80.63% lower post-shift SOH MAE than frozen.","textPreview":"80.63% lower post-shift SOH MAE than frozen.","textChars":44,"textLines":1,"bbox":[128,316,390,48]}
+{"kind":"shape","id":"sh/4jax4nqd","slide":21,"bbox":[88,370,24,24]}
+{"kind":"textbox","id":"sh/5kjydsri","slide":21,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[95,372,14,16]}
+{"kind":"textbox","id":"sh/ixsf2d87","slide":21,"text":"Low update cost","textPreview":"Low update cost","textChars":15,"textLines":1,"bbox":[128,368,390,24]}
+{"kind":"textbox","id":"sh/jy1gbi9s","slide":21,"text":"8.75% of full-retraining work.","textPreview":"8.75% of full-retraining work.","textChars":30,"textLines":1,"bbox":[128,396,390,48]}
+{"kind":"shape","id":"sh/wvax03q1","slide":21,"bbox":[635,215,588,250]}
+{"kind":"textbox","id":"sh/hwjy98rm","slide":21,"text":"What the run does not prove","textPreview":"What the run does not prove","textChars":27,"textLines":1,"bbox":[665,242,450,22]}
+{"kind":"textbox","id":"sh/utsfyt8v","slide":21,"text":"• Universal chemistry or temperature generalization\n• Perfect monotonic degradation behavior\n• SEI-PDE validity without additional variables\n• A direct numerical ranking against the four papers","textPreview":"• Universal chemistry or temperature generalization | • Perfect monotonic degradation behavior | • SEI-PDE validity without additional va...","textChars":193,"textLines":4,"bbox":[665,292,500,120]}
+{"kind":"shape","id":"sh/vu1w7y9g","slide":21,"bbox":[58,520,1165,72]}
+{"kind":"textbox","id":"sh/8rqxw3q5","slide":21,"text":"Next experiment","textPreview":"Next experiment","textChars":15,"textLines":1,"bbox":[84,540,170,20]}
+{"kind":"textbox","id":"sh/9sze58rq","slide":21,"text":"Calibrate physics weights, add longer training, and repeat leave-one-cell-out validation before making a broader scientific claim.","textPreview":"Calibrate physics weights, add longer training, and repeat leave-one-cell-out validation before making a broader scientific claim.","textChars":130,"textLines":1,"bbox":[260,540,900,22]}
+{"kind":"textbox","id":"sh/porutkje","slide":21,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/onid0f2t","slide":21,"text":"21 / 21","textPreview":"21 / 21","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"notes","id":"nt/m1wvqtk3","slide":21,"text":"Closing reflection: AI helped translate the proposal and rubric into code, tests, and evidence tables. Human scientific judgment kept unsupported SEI-PDE claims out of the first NASA implementation. Manual video recording remains the only presentation step not automated here."}
+{"kind":"slide","id":"sl/5ast2s","slide":22,"title":"PHASE II · PRESENTATION","textShapes":9}
+{"kind":"textbox","id":"sh/kja98n2t","slide":22,"text":"PHASE II · PRESENTATION","textPreview":"PHASE II · PRESENTATION","textChars":23,"textLines":1,"bbox":[58,42,500,20]}
+{"kind":"textbox","id":"sh/zi18zil8","slide":22,"text":"Video demonstration","textPreview":"Video demonstration","textChars":19,"textLines":1,"bbox":[58,75,1060,55]}
+{"kind":"textbox","id":"sh/yxsr6dkn","slide":22,"text":"Empty submission slide for the Moodle, Stream, or Drive video link","textPreview":"Empty submission slide for the Moodle, Stream, or Drive video link","textChars":66,"textLines":1,"bbox":[58,138,1050,30]}
+{"kind":"shape","id":"sh/xwjqx83i","slide":22,"bbox":[150,260,980,165]}
+{"kind":"textbox","id":"sh/cvap432x","slide":22,"text":"VIDEO LINK","textPreview":"VIDEO LINK","textChars":10,"textLines":1,"bbox":[200,294,250,22]}
+{"kind":"textbox","id":"sh/bu18vylc","slide":22,"text":"PASTE VIDEO URL HERE","textPreview":"PASTE VIDEO URL HERE","textChars":20,"textLines":1,"bbox":[200,335,820,40]}
+{"kind":"textbox","id":"sh/ats72dkr","slide":22,"text":"Replace this placeholder with the actual uploaded video URL before submitting.","textPreview":"Replace this placeholder with the actual uploaded video URL before submitting.","textChars":78,"textLines":1,"bbox":[200,480,900,28]}
+{"kind":"textbox","id":"sh/hsnq9c3m","slide":22,"text":"No external video URL was present in the supplied files, so this slide intentionally keeps the link field open.","textPreview":"No external video URL was present in the supplied files, so this slide intentionally keeps the link field open.","textChars":111,"textLines":1,"bbox":[200,520,900,24]}
+{"kind":"textbox","id":"sh/gru9g721","slide":22,"text":"Adaptive PINN Battery Digital Twin","textPreview":"Adaptive PINN Battery Digital Twin","textChars":34,"textLines":1,"bbox":[58,688,360,18]}
+{"kind":"textbox","id":"sh/ap83m9s3","slide":22,"text":"22 / 22","textPreview":"22 / 22","textChars":7,"textLines":1,"bbox":[1135,688,85,18]}
+{"kind":"notes","id":"nt/5ast2s","slide":22,"text":"Before faculty submission, replace PASTE VIDEO URL HERE with the actual Moodle, Stream, Drive, or other approved video URL. The user did not provide a video URL in the request."}

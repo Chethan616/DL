@@ -1,0 +1,147 @@
+{
+  "communities": {
+    "0": [
+      "3_bat_t_gnn",
+      "3_cycle_aware_patching",
+      "3_pinn_rul",
+      "3_t_patchgnn"
+    ],
+    "1": [
+      "adaptive_battery_twin_analysis_em_pinn",
+      "adaptive_battery_twin_analysis_pde_loss",
+      "adaptive_battery_twin_analysis_sei_growth_model",
+      "adaptive_battery_twin_analysis_soh_estimation"
+    ],
+    "2": [
+      "4_momentum_contrastive_learning",
+      "4_pda",
+      "4_pinne"
+    ],
+    "3": [
+      "adaptive_battery_twin_analysis_battery_digital_twin",
+      "adaptive_battery_twin_analysis_nasa_pcoe",
+      "adaptive_battery_twin_analysis_replay_buffer"
+    ],
+    "4": [
+      "phse_adaptive_pibdt",
+      "phse_nasa_dataset",
+      "phse_yang_2025"
+    ]
+  },
+  "cohesion": {
+    "0": 0.5,
+    "1": 0.6666666666666666,
+    "2": 0.6666666666666666,
+    "3": 0.6666666666666666,
+    "4": 0.6666666666666666
+  },
+  "gods": [
+    {
+      "id": "3_bat_t_gnn",
+      "label": "Bat-T-GNN",
+      "degree": 5
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_em_pinn",
+      "label": "EM-PINN Framework",
+      "degree": 4
+    },
+    {
+      "id": "4_pinne",
+      "label": "PINNE (Physics-Informed Neural Network-based Estimation)",
+      "degree": 4
+    },
+    {
+      "id": "phse_adaptive_pibdt",
+      "label": "Adaptive Physics-Informed Battery Digital Twin",
+      "degree": 4
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_battery_digital_twin",
+      "label": "Adaptive Physics-Informed Battery Digital Twin",
+      "degree": 3
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_sei_growth_model",
+      "label": "SEI Layer Growth Model",
+      "degree": 2
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_soh_estimation",
+      "label": "State of Health (SOH) Estimation",
+      "degree": 2
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_nasa_pcoe",
+      "label": "NASA PCoE Dataset",
+      "degree": 1
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_pde_loss",
+      "label": "PDE Loss",
+      "degree": 1
+    },
+    {
+      "id": "adaptive_battery_twin_analysis_replay_buffer",
+      "label": "Replay-Buffer Learner",
+      "degree": 1
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Bat-T-GNN",
+      "target": "PINNE (Physics-Informed Neural Network-based Estimation)",
+      "source_files": [
+        "3.pdf",
+        "4.pdf"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Adaptive Physics-Informed Battery Digital Twin",
+      "target": "Bat-T-GNN",
+      "source_files": [
+        "phse.pdf",
+        "3.pdf"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Adaptive Physics-Informed Battery Digital Twin",
+      "target": "PINNE (Physics-Informed Neural Network-based Estimation)",
+      "source_files": [
+        "phse.pdf",
+        "4.pdf"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Bat-T-GNN` connect `Community 0` to `Community 2`, `Community 4`?",
+      "why": "High betweenness centrality (0.175) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `PINNE (Physics-Informed Neural Network-based Estimation)` connect `Community 2` to `Community 0`, `Community 4`?",
+      "why": "High betweenness centrality (0.125) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Adaptive Physics-Informed Battery Digital Twin` connect `Community 4` to `Community 0`, `Community 2`?",
+      "why": "High betweenness centrality (0.125) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `NASA PCoE Dataset`, `PDE Loss`, `Replay-Buffer Learner` to the rest of the system?",
+      "why": "10 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}

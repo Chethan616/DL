@@ -1,0 +1,77 @@
+ 
+Contents lists available at ScienceDirect
+Energy
+journal homepage: www.elsevier.com/locate/energy  
+Physical informed neural network for SOH estimation of lithium-ion battery 
+with electrochemical mechanism
+Kai Gao a, Qi Li a
+ , Lin Hu a,∗, Jing Huang b, Heng Li c
+ ,∗, Yue Wu c
+a College of Mechanical and Vehicle Engineering, Changsha University of Science and Technology, Changsha 410114, China
+b College of Mechanical and Vehicle Engineering, Hunan University, Changsha 410012, China
+c School of Electronic Information, Central South University, Changsha 410004, China
+A R T I C L E  I N F O
+Keywords:
+Lithium-ion batteries
+State of health
+Neural network
+Electrochemical model
+SEI layer
+ A B S T R A C T
+In recent years, Physics-Informed Neural Networks (PINNs) have emerged as a promising research approach 
+for estimating the State of Health (SOH) of lithium-ion batteries. Compared to traditional purely data-driven 
+methods, PINNs embed physical laws directly into the neural network’s loss function. This integration enhances 
+predictive accuracy and generalization while ensuring physical consistency, thereby improving the model’s 
+interpretability. Therefore, this study proposes a EM-PINN model based on the electrochemical degradation 
+mechanism of solid electrolyte interphase (SEI) layer growth. First, the battery capacity degradation process 
+is modeled from the perspective of the electrochemical principles governing SEI layer growth, establishing 
+explicit correlations between SEI layer growth kinetics and the rate of SOH degradation to form the physical 
+constraints. Second, the EM-PINN framework is designed, incorporating the partial differential equation (PDE) 
+loss, boundary condition loss, initial condition loss, and SOH physical loss to jointly guide the learning process 
+of the model, thereby enhancing both its interpretability and prediction accuracy. Experimental validation on 
+three public datasets (XJTU, MIT, and HUST) demonstrates that the proposed EM-PINN method achieves high-
+accuracy SOH estimation across different datasets. Notably, across six testing scenarios with different data 
+volumes, the mean absolute percentage error (MAPE) reaches as low as 0.873%. This study provides a novel 
+solution for integrating electrochemical mechanisms with PINN models for battery SOH estimation.
+1. Introduction
+The accelerating global energy transition [1] and pursuit of carbon 
+neutrality [2] goals are profoundly reshaping transportation and energy 
+systems. Electric vehicles (EVs), serving as the pivotal solution for 
+greening the transportation sector, are being deployed on a large scale. 
+Concurrently, Vehicle to Grid (V2G) technology [3,4] is emerging as a 
+critical component for achieving deep synergy between the transporta-
+tion and energy sectors. This innovative approach enables bidirectional 
+energy flow, not only drawing power from the grid but also feeding 
+stored energy from EV batteries back into it.
+Lithium-ion batteries (LIBs) serve as fundamental energy storage 
+units in EVs and V2G systems [5,6]. Their performance directly affect 
+the driving range, safety, and service life of the vehicle, as well as the 
+economic benefits and reliability of V2G participation. However, bat-
+tery aging is an inevitable process. The SOH of the battery progressively 
+degrades to failure under the influence of factors such as usage time [7], 
+charge/discharge cycles [8], depth of discharge (DOD) [9], C-rate [10], 
+and temperature [11]. Consequently, ensuring the safe, reliable, and 
+∗ Corresponding authors.
+E-mail addresses: hulin@csust.edu.cn (L. Hu), huangjing926@hnu.edu.cn (J. Huang), liheng@csu.edu.cn (H. Li).
+efficient operation of LIBs requires long-term condition monitoring 
+(including SOH assessment [12]) and appropriate maintenance, both 
+of which are crucial. As is well known, the SOH is quantified by the 
+ratio of available capacity to initial capacity, and is employed as an 
+essential indicator for assessing battery degradation [13].
+Currently, SOH estimation methods for LIBs can be broadly catego-
+rized into three types: physics-based models [14,15], data-driven [16–
+18], and hybrid methods [19,20]. Among them, physics-based models 
+typically employ multiphysics-coupled approaches to simulate inter-
+nal degradation mechanisms and quantify battery degradation. For 
+instance, Tang et al. [21] developed an electrochemical–thermal model 
+incorporating loss of lithium inventory (LLI) and SEI layer growth to 
+predict LIB capacity degradation. However, to more accurately char-
+acterize the battery degradation process, Luo et al. [22] proposed 
+an electrochemical–thermal–mechanical coupled model to characterize 
+capacity degradation. This framework incorporates stress effects on 
+degradation behavior and introduces temperature-dependent dynamic 
+https://doi.org/10.1016/j.energy.2025.139753
+Received 9 November 2025; Received in revised form 5 December 2025; Accepted 20 December 2025
+Energy 342 (2026) 139753 
+Available online 20 December 2025 
+0360-5442/© 2025 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies. 
