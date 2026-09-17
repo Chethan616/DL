@@ -162,7 +162,7 @@ The base paper (*Yang et al. 2025*) proposed a PINN framework based on internal 
 
 ---
 
-## 🏗️ 3. DL Model Architecture & Comparison (Phase II Rubric)
+## 📊 3. Result and Comparisons (Base Paper Method Accuracy vs. Mine)
 
 ### Q3: What models did you compare and how does your architecture work?
 
