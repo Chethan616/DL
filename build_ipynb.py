@@ -236,10 +236,25 @@ def compute_total_loss(soh_pred, rul_pred, target_soh, target_rul, valid_mask, l
 print("Physics loss equations compiled successfully!")
 '''))
 
-# Cell 7: Model Architecture Implementations - Code
-nb.cells.append(new_code_cell('''# PyTorch Model Architectures: Intra-Cycle Encoder, DNN, GRU, Transformer & Adaptive Twin
+# Markdown Cell introducing Model Architectures
+nb.cells.append(new_markdown_cell('''---
+### 🏗️ PyTorch Implementation of All Model Architectures
+
+Below are the explicit PyTorch module implementations for all **5 benchmarked model architectures**:
+1. **`IntraCycleEncoder`**: Masked projection & pooling across 256 intra-cycle points.
+2. **`HealthHeads`**: Sigmoid-bounded output heads for SOH ($[0, 100\%]$) and RUL ($[0, 250\text{ cycles}]$).
+3. **`FeedForwardTwin`**: Per-cycle DNN baseline without temporal memory.
+4. **`GRUBatteryTwin`**: Recurrent GRU baseline modeling sequential cycle history.
+5. **`TransformerBatteryTwin`**: Multi-head self-attention temporal Transformer encoder.
+6. **`PINNBatteryTwin`**: Offline Physics-Informed Neural Network with monotonicity constraints.
+7. **`AdaptiveBatteryTwin`**: Proposed Adaptive Digital Twin combining Transformer + Physics + Replay Buffer.
+'''))
+
+# Cell 7: Full PyTorch Model Architecture Implementations - Code
+nb.cells.append(new_code_cell('''# Complete PyTorch Implementations for All Model Architectures
 
 class IntraCycleEncoder(nn.Module):
+    """Encode voltage, current, temperature, and delta_t points inside one cycle using masked pooling."""
     def __init__(self, input_features=5, hidden_size=128, dropout=0.1):
         super().__init__()
         self.projection = nn.Sequential(
@@ -249,6 +264,7 @@ class IntraCycleEncoder(nn.Module):
             nn.Dropout(dropout)
         )
     def forward(self, x, point_mask):
+        # x: [Batch, History, Points=256, Features=5]
         B, H, P, F = x.shape
         flat_x = x.reshape(B * H, P, F)
         encoded = self.projection(flat_x)
@@ -260,6 +276,7 @@ class IntraCycleEncoder(nn.Module):
         return pooled.reshape(B, H, -1)
 
 class HealthHeads(nn.Module):
+    """Bounded projections ensuring SOH in [0, 100%] and non-negative RUL in [0, 250 cycles]."""
     def __init__(self, hidden_size=128, rul_scale=250.0):
         super().__init__()
         self.soh_head = nn.Sequential(nn.Linear(hidden_size, hidden_size // 2), nn.GELU(), nn.Linear(hidden_size // 2, 1))
@@ -268,9 +285,35 @@ class HealthHeads(nn.Module):
     def forward(self, sequence):
         soh = 100.0 * torch.sigmoid(self.soh_head(sequence).squeeze(-1))
         rul = self.rul_scale * torch.sigmoid(self.rul_head(sequence).squeeze(-1))
-        return soh, rul
+        return {"soh": soh, "rul": rul, "embedding": sequence}
 
-class AdaptiveBatteryTwin(nn.Module):
+# 1. Per-Cycle DNN Baseline Model
+class FeedForwardTwin(nn.Module):
+    """Per-cycle DNN baseline without temporal attention or recurrence."""
+    def __init__(self, input_features=5, hidden_size=128, dropout=0.1, rul_scale=250.0):
+        super().__init__()
+        self.cycle_encoder = IntraCycleEncoder(input_features, hidden_size, dropout)
+        self.output_heads = HealthHeads(hidden_size, rul_scale)
+    def forward(self, x, point_mask, cycle_mask):
+        pooled = self.cycle_encoder(x, point_mask)
+        return self.output_heads(pooled)
+
+# 2. Recurrent GRU Baseline Model
+class GRUBatteryTwin(nn.Module):
+    """Recurrent sequence baseline with GRU temporal state propagation."""
+    def __init__(self, input_features=5, hidden_size=128, dropout=0.1, rul_scale=250.0):
+        super().__init__()
+        self.cycle_encoder = IntraCycleEncoder(input_features, hidden_size, dropout)
+        self.temporal_encoder = nn.GRU(hidden_size, hidden_size, batch_first=True)
+        self.output_heads = HealthHeads(hidden_size, rul_scale)
+    def forward(self, x, point_mask, cycle_mask):
+        c_emb = self.cycle_encoder(x, point_mask)
+        seq, _ = self.temporal_encoder(c_emb)
+        return self.output_heads(seq)
+
+# 3. Temporal Transformer-Only Model
+class TransformerBatteryTwin(nn.Module):
+    """Multi-head self-attention Transformer Encoder without physics constraints."""
     def __init__(self, input_features=5, hidden_size=128, num_heads=4, num_layers=2, dropout=0.1, rul_scale=250.0, max_history=12):
         super().__init__()
         self.cycle_encoder = IntraCycleEncoder(input_features, hidden_size, dropout)
@@ -280,15 +323,64 @@ class AdaptiveBatteryTwin(nn.Module):
             d_model=hidden_size, nhead=num_heads, dim_feedforward=hidden_size*4, dropout=dropout, batch_first=True, norm_first=True, activation='gelu'
         )
         self.temporal_encoder = nn.TransformerEncoder(layer, num_layers=num_layers)
-        self.heads = HealthHeads(hidden_size, rul_scale)
-        
+        self.output_heads = HealthHeads(hidden_size, rul_scale)
     def forward(self, x, point_mask, cycle_mask):
-        c_emb = self.cycle_encoder(x, point_mask)
-        c_emb = c_emb + self.pos_embed[:, :c_emb.shape[1]]
+        c_emb = self.cycle_encoder(x, point_mask) + self.pos_embed[:, :x.shape[1]]
         seq = self.temporal_encoder(c_emb, src_key_padding_mask=~cycle_mask.bool())
-        return self.heads(seq)
+        return self.output_heads(seq)
 
-print("Adaptive Battery Digital Twin architecture initialized!")
+# 4. Offline Physics-Informed Neural Network (PINN Baseline)
+class PINNBatteryTwin(nn.Module):
+    """Offline PINN model enforcing physical monotonicity during training."""
+    def __init__(self, input_features=5, hidden_size=128, num_heads=4, num_layers=2, dropout=0.1, rul_scale=250.0, max_history=12):
+        super().__init__()
+        self.cycle_encoder = IntraCycleEncoder(input_features, hidden_size, dropout)
+        self.pos_embed = nn.Parameter(torch.zeros(1, max_history, hidden_size))
+        nn.init.normal_(self.pos_embed, mean=0.0, std=0.02)
+        layer = nn.TransformerEncoderLayer(
+            d_model=hidden_size, nhead=num_heads, dim_feedforward=hidden_size*4, dropout=dropout, batch_first=True, norm_first=True, activation='gelu'
+        )
+        self.temporal_encoder = nn.TransformerEncoder(layer, num_layers=num_layers)
+        self.output_heads = HealthHeads(hidden_size, rul_scale)
+    def forward(self, x, point_mask, cycle_mask):
+        c_emb = self.cycle_encoder(x, point_mask) + self.pos_embed[:, :x.shape[1]]
+        seq = self.temporal_encoder(c_emb, src_key_padding_mask=~cycle_mask.bool())
+        return self.output_heads(seq)
+
+# 5. Proposed Adaptive Physics-Informed Battery Digital Twin
+class AdaptiveBatteryTwin(nn.Module):
+    """Transformer Encoder + Monotonic Physics Losses + Replay-Buffer Adaptation."""
+    def __init__(self, input_features=5, hidden_size=128, num_heads=4, num_layers=2, dropout=0.1, rul_scale=250.0, max_history=12):
+        super().__init__()
+        self.cycle_encoder = IntraCycleEncoder(input_features, hidden_size, dropout)
+        self.pos_embed = nn.Parameter(torch.zeros(1, max_history, hidden_size))
+        nn.init.normal_(self.pos_embed, mean=0.0, std=0.02)
+        layer = nn.TransformerEncoderLayer(
+            d_model=hidden_size, nhead=num_heads, dim_feedforward=hidden_size*4, dropout=dropout, batch_first=True, norm_first=True, activation='gelu'
+        )
+        self.temporal_encoder = nn.TransformerEncoder(layer, num_layers=num_layers)
+        self.output_heads = HealthHeads(hidden_size, rul_scale)
+    def forward(self, x, point_mask, cycle_mask):
+        c_emb = self.cycle_encoder(x, point_mask) + self.pos_embed[:, :x.shape[1]]
+        seq = self.temporal_encoder(c_emb, src_key_padding_mask=~cycle_mask.bool())
+        return self.output_heads(seq)
+
+# Model Factory Function
+def build_model(name: str, **kwargs):
+    key = name.lower().replace("_", "-")
+    if key in {"dnn", "feedforward"}:
+        return FeedForwardTwin(**kwargs)
+    elif key in {"gru", "lstm"}:
+        return GRUBatteryTwin(**kwargs)
+    elif key in {"transformer"}:
+        return TransformerBatteryTwin(**kwargs)
+    elif key in {"pinn"}:
+        return PINNBatteryTwin(**kwargs)
+    elif key in {"adaptive", "proposed"}:
+        return AdaptiveBatteryTwin(**kwargs)
+    raise ValueError(f"Unknown model architecture: {name}")
+
+print("All 5 PyTorch Model Architectures (FeedForwardTwin, GRUBatteryTwin, TransformerBatteryTwin, PINNBatteryTwin, AdaptiveBatteryTwin) successfully compiled!")
 '''))
 
 # Cell 8: Section 3: Result and comparisions - Section 3 Markdown
@@ -504,4 +596,4 @@ out_path = r'd:\DL\Adaptive_Physics_Informed_Battery_Digital_Twin.ipynb'
 with open(out_path, 'w', encoding='utf-8') as f:
     nbformat.write(nb, f)
 
-print('Successfully added metric origin breakdown and base paper page citation to build_ipynb.py at', out_path)
+print('Successfully added all 5 PyTorch model classes explicitly to build_ipynb.py at', out_path)
