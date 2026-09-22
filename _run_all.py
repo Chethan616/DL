@@ -1,45 +1,4 @@
-#!/usr/bin/env python3
-"""
-Rebuilds the complete Adaptive_Physics_Informed_Battery_Digital_Twin.ipynb
-with full training, hyperparameter tuning, online adaptation, and evaluation code.
-"""
-import json, nbformat
-from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
-
-nb = new_notebook()
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 0 — Title / Header Markdown
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""# Adaptive Physics-Informed Battery Digital Twin for SOH & RUL Prediction
-**Course**: BCSE332L - Deep Learning (Phase II Review)  
-**Team No**: 12 | **Members**: 23BAI0093, 23BAI0157, 23BAI0143  
-**Reviewer Evaluator**: CHELLATAMILAN SIR  
-**Base Reference Paper**: *L. Yang et al., "Physics-informed neural network for co-estimation of state of health, remaining useful life, and short-term degradation path in lithium-ion batteries", Applied Energy, 2025.*
-
----
-
-## Executive Summary
-This Jupyter Notebook contains the **complete data preparation, exploratory data analysis, physics loss formulation, PyTorch model implementations, hyperparameter tuning, and experimental evaluation** for the **Adaptive Physics-Informed Battery Digital Twin**.
-
-### Key Architectural & Methodological Highlights:
-1. **Raw NASA MAT File Parsing**: Extracting discharge cycles from `B0005`, `B0006`, `B0007`, and `B0018`.
-2. **Irregular Time Preservation**: Variable-length discharge curves encoded with masked pooling instead of fixed-grid interpolation.
-3. **Physics-Informed Monotonic Degradation Loss**: Enforces that SOH never increases and RUL never overshoots end-of-life.
-4. **Drift-Triggered Replay Buffer**: Detects sensor distribution shift using CUSUM; triggers fine-tuning on 128-sample replay buffer — no full retraining required.
-5. **Five Model Comparison**: FeedForwardDNN, GRU, Transformer, PINN (offline), and our Adaptive Digital Twin.
-6. **Hyperparameter Grid Search**: Automated search over learning rate, hidden size, and dropout across all 5 architectures.
-7. **Section 3**: Results & comparison across all 5 models, one identical protocol.
-8. **Section 4**: Measured computational efficiency of replay adaptation vs. a full retrain.
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 1 — Imports & Seed Setting
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 1: Imports & Seed Setting
 # ═══════════════════════════════════════════════════════════════
 import os, sys, math, json, random, time, copy, warnings
@@ -49,12 +8,7 @@ import numpy as np
 import scipy.io
 import pandas as pd
 import matplotlib
-try:
-    get_ipython()  # only defined inside IPython/Jupyter/Colab
-    # Inside a real notebook kernel, leave matplotlib on its default inline
-    # backend so charts render in the cell output as expected.
-except NameError:
-    matplotlib.use('Agg')  # plain-script run: never block on plt.show() without a display
+matplotlib.use('Agg')  # headless: never block on plt.show() without a display
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import seaborn as sns
@@ -89,55 +43,15 @@ plt.rcParams['figure.titlesize'] = 14
 print(f"PyTorch version : {torch.__version__}")
 print(f"Compute device  : {DEVICE}")
 print(f"Random seed set : {SEED}")
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 2 — Section 1: Data Analysis & Data Preparation  (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 📊 Section 1: Data Analysis & Data Preparation Pipeline
 
-### 1.1 Dataset Overview — NASA Prognostics Center of Excellence Battery Dataset
-The dataset consists of **Li-ion battery cells** (`B0005`, `B0006`, `B0007`, `B0018`) cycled under controlled
-charge/discharge conditions at NASA Ames Research Center.
-
-| Cell | Role in Experiment |
-|------|-------------------|
-| B0005 | Training |
-| B0006 | Training |
-| B0007 | Training |
-| B0018 | **Held-Out Test** (never seen during training) |
-
-**State-of-Health (SOH)** is defined as:
-
-$$\\text{SOH}(n) = \\frac{Q_n}{Q_{\\text{nominal}}} \\times 100\\%$$
-
-where $Q_n$ is measured discharge capacity at cycle $n$ and $Q_{\\text{nominal}} = 2.0\\,\\text{Ah}$.
-
-**Remaining Useful Life (RUL)** is defined as:
-
-$$\\text{RUL}(n) = n_{\\text{EOL}} - n \\quad (\\text{cycles until SOH} < 70\\%)$$
-
-### 1.2 Irregular Time Encoding Strategy
-- **Base Paper** (Yang et al., 2025): Resamples all cycles to a fixed 256-point voltage grid.
-- **Our Approach**: Preserves irregular time steps via masked intra-cycle pooling.  
-  Each discharge point contributes $(V, I, T, \\Delta t, \\text{mask})$ — no information lost at endpoints.
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 3 — Load NASA MAT Files
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 3: Data Preparation — Loading & Auditing NASA MAT Files
 # ═══════════════════════════════════════════════════════════════
-DATA_DIR = Path(r'd:\\DL\\battery_twin\\data\\raw')
+DATA_DIR = Path(r'd:\DL\battery_twin\data\raw')
 
 def load_nasa_cell(mat_path, cell_name):
-    \"\"\"Parse discharge cycles from NASA MAT file and return list of cycle dicts.\"\"\"
+    """Parse discharge cycles from NASA MAT file and return list of cycle dicts."""
     mat = scipy.io.loadmat(str(mat_path))
     cycles_struct = mat[cell_name][0, 0]['cycle'][0]
     records = []
@@ -195,14 +109,9 @@ for cell, records in raw_records.items():
           f"SOH {min(sohs):.1f}%–{max(sohs):.1f}% | "
           f"Max RUL {max(ruls):.0f} cycles")
 print(f"  Total discharge cycles : {total_cycles}")
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 4 — EDA Visualizations
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
 # CELL 4: Exploratory Data Analysis & Capacity Fade Visualizations
 # ═══════════════════════════════════════════════════════════════
 fig, axes = plt.subplots(2, 2, figsize=(16, 11))
@@ -255,20 +164,9 @@ plt.tight_layout()
 plt.savefig('eda_summary.png', dpi=120, bbox_inches='tight')
 plt.show()
 print("EDA complete. Figure saved as eda_summary.png")
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 5 — Dataset Class & DataLoader
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 🔢 Section 1.3: Dataset Class & Sequence Windows for Deep Learning
-"""
-))
 
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 5: PyTorch Dataset Class + DataLoader Construction
 # ═══════════════════════════════════════════════════════════════
 
@@ -276,13 +174,13 @@ MAX_POINTS   = 256   # Padded length for each discharge curve
 MAX_HISTORY  = 12    # How many previous cycles to look back
 
 def pad_cycle(arr, max_len=MAX_POINTS):
-    \"\"\"Zero-pad or truncate a 1-D sensor array to max_len.\"\"\"
+    """Zero-pad or truncate a 1-D sensor array to max_len."""
     arr = arr[:max_len]
     pad = max_len - len(arr)
     return np.pad(arr, (0, pad), 'constant'), np.concatenate([np.ones(len(arr)), np.zeros(pad)]).astype(np.float32)
 
 class BatterySequenceDataset(Dataset):
-    \"\"\"
+    """
     Creates sliding window sequences of (history_cycles → target_cycle).
     Each sample:
       x          : [MAX_HISTORY, MAX_POINTS, 5]  (V, I, T, dt, 1.0)
@@ -291,7 +189,7 @@ class BatterySequenceDataset(Dataset):
       soh_target : scalar
       rul_target : scalar
       cycle_id   : scalar
-    \"\"\"
+    """
     def __init__(self, records_list, history=MAX_HISTORY):
         self.samples = []
         self.history = history
@@ -355,46 +253,15 @@ print(f"Train batches : {len(train_loader)}")
 print(f"Feature shape : x={train_dataset[0]['x'].shape}, "
       f"pm={train_dataset[0]['point_mask'].shape}, "
       f"cm={train_dataset[0]['cycle_mask'].shape}")
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 6 — Section 2: Physics Loss  (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## ⚡ Section 2: Physics-Informed Loss Formulation
 
-### 2.1 Base Paper vs. Our Loss Functions
-
-| Component | Base Paper (Yang et al., 2025) | **Our Approach** |
-|-----------|-------------------------------|-----------------|
-| Empirical loss | MSE on SOH + RUL | Huber loss (robust to outliers) on SOH + RUL |
-| Monotonicity | Soft penalty on consecutive SOH pairs | **Hard clamp** on SOH sequence gradient + Huber penalty |
-| PDE residual | SEI growth PDE + Butler-Volmer + Fickian diffusion (complex, slow) | Simplified exponential capacity fade model (closed-form, fast) |
-| RUL coupling | Separate head | **Coupled** via physics constraint: $\\text{RUL} \\propto (\\text{SOH} - 0.70)$ |
-
-### 2.2 Our Complete Loss Formula
-
-$$\\mathcal{L}_{\\text{total}} = \\mathcal{L}_{\\text{Huber}}^{\\text{SOH}} + \\lambda_1 \\mathcal{L}_{\\text{Huber}}^{\\text{RUL}} + \\lambda_2 \\mathcal{L}_{\\text{mono}} + \\lambda_3 \\mathcal{L}_{\\text{physics}}$$
-
-Where:
-- $\\mathcal{L}_{\\text{mono}} = \\max(0,\\; \\text{SOH}(n) - \\text{SOH}(n-1))^2$ — penalises SOH increase over cycles
-- $\\mathcal{L}_{\\text{physics}} = |\\text{RUL} - \\frac{1}{k}(\\text{SOH} - 0.70)|^2$ — couples RUL to remaining capacity buffer
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 7 — Physics Loss Code
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 7: PyTorch Physics Loss Functions
 # ═══════════════════════════════════════════════════════════════
 
 def compute_physics_loss(soh_pred, rul_pred, valid_mask,
                          lambda_mono=0.5, lambda_rul_coupling=0.3):
-    \"\"\"
+    """
     Combined physics-informed loss.
 
     Args:
@@ -406,7 +273,7 @@ def compute_physics_loss(soh_pred, rul_pred, valid_mask,
 
     Returns:
         scalar physics loss
-    \"\"\"
+    """
     total_loss = torch.tensor(0.0, device=soh_pred.device, requires_grad=True)
 
     # ── 1. Monotonic Degradation: SOH(n) <= SOH(n-1) ──────────
@@ -428,11 +295,11 @@ def compute_physics_loss(soh_pred, rul_pred, valid_mask,
 
 
 def total_loss_fn(out, soh_target, rul_target, cycle_mask, model_type='adaptive'):
-    \"\"\"
+    """
     Computes the full training loss.
     soh_target, rul_target: [B] (target for the LAST cycle in sequence)
     out: dict with keys 'soh' and 'rul'  — shape [B, H]
-    \"\"\"
+    """
     # Prediction for last valid cycle position
     soh_pred_seq = out['soh'] / 100.0        # normalise to 0-1
     rul_pred_seq = out['rul'] / 250.0        # normalise to 0-1
@@ -454,31 +321,9 @@ def total_loss_fn(out, soh_target, rul_target, cycle_mask, model_type='adaptive'
 print("Physics loss functions defined successfully!")
 print("  compute_physics_loss() — monotonicity + RUL–SOH coupling")
 print("  total_loss_fn()        — Huber(SOH) + Huber(RUL) + physics terms")
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 8 — All Model Architectures  (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 🏗️ Section 2.2: All 5 PyTorch Model Architectures
 
-| # | Model | Temporal Encoder | Physics Constraint | Online Adaptation |
-|---|-------|-----------------|-------------------|-------------------|
-| 1 | **FeedForward DNN** | None (per-cycle) | ❌ | ❌ |
-| 2 | **Recurrent GRU** | GRU (1 layer) | ❌ | ❌ |
-| 3 | **Transformer-Only** | Self-Attention (2 layers) | ❌ | ❌ |
-| 4 | **PINN (Offline)** | Self-Attention (2 layers) | ✅ (training only) | ❌ |
-| 5 | **Adaptive Digital Twin (Ours)** | Self-Attention (2 layers) | ✅ (training + inference) | ✅ Replay Buffer |
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 9 — All Model Classes
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 9: Complete PyTorch Model Implementations (All 5 Models)
 # ═══════════════════════════════════════════════════════════════
 
@@ -487,10 +332,10 @@ nb.cells.append(new_code_cell(
 # ──────────────────────────────────────────────────────────────
 
 class IntraCycleEncoder(nn.Module):
-    \"\"\"
+    """
     Masked mean+max pooling over irregular-length discharge curves.
     Input: [B, H, P, F]  Output: [B, H, hidden]
-    \"\"\"
+    """
     def __init__(self, input_features=5, hidden_size=128, dropout=0.1):
         super().__init__()
         self.projection = nn.Sequential(
@@ -513,7 +358,7 @@ class IntraCycleEncoder(nn.Module):
 
 
 class HealthHeads(nn.Module):
-    \"\"\"SOH ∈ [0, 100]% and RUL ∈ [0, 250] cycle bounded output heads.\"\"\"
+    """SOH ∈ [0, 100]% and RUL ∈ [0, 250] cycle bounded output heads."""
     def __init__(self, hidden_size=128, rul_scale=250.0):
         super().__init__()
         self.soh_head = nn.Sequential(
@@ -539,7 +384,7 @@ class HealthHeads(nn.Module):
 # ──────────────────────────────────────────────────────────────
 
 class FeedForwardTwin(nn.Module):
-    \"\"\"Per-cycle DNN — no temporal attention, no physics, no adaptation.\"\"\"
+    """Per-cycle DNN — no temporal attention, no physics, no adaptation."""
     def __init__(self, input_features=5, hidden_size=128, dropout=0.1, rul_scale=250.0, **kw):
         super().__init__()
         self.cycle_encoder = IntraCycleEncoder(input_features, hidden_size, dropout)
@@ -561,7 +406,7 @@ class FeedForwardTwin(nn.Module):
 # ──────────────────────────────────────────────────────────────
 
 class GRUBatteryTwin(nn.Module):
-    \"\"\"GRU temporal encoder — no physics, no adaptation.\"\"\"
+    """GRU temporal encoder — no physics, no adaptation."""
     def __init__(self, input_features=5, hidden_size=128, dropout=0.1, rul_scale=250.0,
                  num_layers=2, **kw):
         super().__init__()
@@ -583,7 +428,7 @@ class GRUBatteryTwin(nn.Module):
 # ──────────────────────────────────────────────────────────────
 
 class TransformerBatteryTwin(nn.Module):
-    \"\"\"Multi-head self-attention encoder — no physics, no adaptation.\"\"\"
+    """Multi-head self-attention encoder — no physics, no adaptation."""
     def __init__(self, input_features=5, hidden_size=128, num_heads=4, num_layers=2,
                  dropout=0.1, rul_scale=250.0, max_history=12, **kw):
         super().__init__()
@@ -608,7 +453,7 @@ class TransformerBatteryTwin(nn.Module):
 # ──────────────────────────────────────────────────────────────
 
 class PINNBatteryTwin(nn.Module):
-    \"\"\"Physics-informed Transformer — physics loss during training, no online adaptation.\"\"\"
+    """Physics-informed Transformer — physics loss during training, no online adaptation."""
     def __init__(self, input_features=5, hidden_size=128, num_heads=4, num_layers=2,
                  dropout=0.1, rul_scale=250.0, max_history=12, **kw):
         super().__init__()
@@ -633,7 +478,7 @@ class PINNBatteryTwin(nn.Module):
 # ──────────────────────────────────────────────────────────────
 
 class AdaptiveBatteryTwin(nn.Module):
-    \"\"\"
+    """
     PROPOSED MODEL — Physics-Informed Transformer +
     Drift-Triggered Replay Buffer Online Adaptation.
     
@@ -642,7 +487,7 @@ class AdaptiveBatteryTwin(nn.Module):
       2. Monotonic degradation + RUL-coupling physics losses.
       3. At inference: CUSUM drift detector triggers 2-epoch fine-tuning
          on a 128-sample prioritised replay buffer.
-    \"\"\"
+    """
     def __init__(self, input_features=5, hidden_size=128, num_heads=4, num_layers=2,
                  dropout=0.1, rul_scale=250.0, max_history=12, **kw):
         super().__init__()
@@ -673,7 +518,7 @@ class AdaptiveBatteryTwin(nn.Module):
         return self.output_heads(seq)
 
     def update_cusum(self, residual):
-        \"\"\"CUSUM change-point detector for sensor drift.\"\"\"
+        """CUSUM change-point detector for sensor drift."""
         self.cusum_sum = max(0.0, self.cusum_sum + abs(residual) - self.cusum_k)
         drift_detected = self.cusum_sum > self.cusum_threshold
         if drift_detected:
@@ -681,16 +526,16 @@ class AdaptiveBatteryTwin(nn.Module):
         return drift_detected
 
     def add_to_replay(self, sample):
-        \"\"\"Add a training sample to the replay buffer.\"\"\"
+        """Add a training sample to the replay buffer."""
         self.replay_buffer.append(sample)
 
     def adapt(self, optimizer, n_epochs=6):
-        \"\"\"
+        """
         Fine-tune on replay buffer for n_epochs.
         Uses up to 96 of the 128 buffered samples per epoch (recent +
         representative older cycles), which is still a fraction of
         full retraining work (502 samples * 14 epochs).
-        \"\"\"
+        """
         if len(self.replay_buffer) < 8:
             return 0.0
         self.train()
@@ -742,36 +587,15 @@ for name in MODEL_CLASSES:
     params = sum(p.numel() for p in m.parameters() if p.requires_grad)
     print(f"  {name:15s} | SOH shape: {out['soh'].shape} | RUL shape: {out['rul'].shape} | Params: {params:,}")
 
-print("\\nAll 5 model architectures compiled and verified!")
-"""
-))
+print("\nAll 5 model architectures compiled and verified!")
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 10 — Training & Hyperparameter Tuning (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 🔬 Section 2.3: Training Loop & Hyperparameter Grid Search
 
-Each model is trained with a grid search over:
-- **Learning rate**: {1e-3, 3e-4}
-- **Hidden size**: {64, 128}
-- **Dropout**: {0.1, 0.2}
-
-Best configuration is selected by minimum validation Huber loss on B0018 (frozen evaluation, no adaptation).
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 11 — Training Engine + Hyperparameter Search
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 11: Training Engine + Hyperparameter Grid Search
 # ═══════════════════════════════════════════════════════════════
 
 def evaluate_model(model, loader, model_type='adaptive'):
-    \"\"\"Evaluate model on DataLoader. Returns MAE in original units.\"\"\"
+    """Evaluate model on DataLoader. Returns MAE in original units."""
     model.eval()
     soh_preds, soh_targets = [], []
     rul_preds, rul_targets = [], []
@@ -799,7 +623,7 @@ def evaluate_model(model, loader, model_type='adaptive'):
 
 
 def train_one_epoch(model, loader, optimizer, scheduler, model_type):
-    \"\"\"Single epoch training pass. Returns mean loss.\"\"\"
+    """Single epoch training pass. Returns mean loss."""
     model.train()
     losses = []
     for batch in loader:
@@ -821,10 +645,10 @@ def train_one_epoch(model, loader, optimizer, scheduler, model_type):
 
 
 def run_hyperparameter_search(model_name, n_epochs=25):
-    \"\"\"
+    """
     Grid search over lr, hidden_size, dropout.
     Returns best model, its config, and training history.
-    \"\"\"
+    """
     # Reduced grid for a faster review run: earlier full 2x2x2 sweeps across
     # all 5 architectures consistently selected lr=3e-4 and dropout~0.1-0.2
     # (lr=1e-3 always diverged to a worse optimum), so we fix those at their
@@ -841,7 +665,7 @@ def run_hyperparameter_search(model_name, n_epochs=25):
     best_mdl = None
     all_results = []
 
-    print(f"\\n{'='*60}")
+    print(f"\n{'='*60}")
     print(f"  Hyperparameter Search: {model_name.upper()} — {len(combos)} configs × {n_epochs} epochs")
     print(f"{'='*60}")
 
@@ -871,7 +695,7 @@ def run_hyperparameter_search(model_name, n_epochs=25):
             best_cfg = cfg
             best_mdl = copy.deepcopy(m)
 
-    print(f"\\n  BEST config: {best_cfg} → SOH MAE: {best_val:.4f}%")
+    print(f"\n  BEST config: {best_cfg} → SOH MAE: {best_val:.4f}%")
     return best_mdl, best_cfg, all_results
 
 
@@ -886,34 +710,10 @@ for model_name in ['dnn', 'gru', 'transformer', 'pinn', 'adaptive']:
     trained_models[model_name] = best_model
     search_results[model_name] = {'best_cfg': best_cfg, 'all_results': all_res}
 
-print("\\n✅ Hyperparameter search complete for all 5 models!")
-"""
-))
+print("\n✅ Hyperparameter search complete for all 5 models!")
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 12 — Online Adaptation with Replay Buffer
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 🔄 Section 2.4: Online Adaptation — Drift-Triggered Replay Buffer
 
-Our Adaptive Digital Twin uses a **CUSUM change-point detector** to monitor incoming sensor residuals.
-When the accumulated drift statistic exceeds its threshold, the model fine-tunes on a sample drawn
-from its 128-slot replay buffer for a few epochs only — never full retraining.
-
-**Compute comparison** (exact figures are computed live in Cells 12 and 16b from this run,
-not retyped by hand):
-| Step | Base Paper | Our Model |
-|------|-----------|-----------|
-| Adaptation trigger | Manual retraining | CUSUM auto-detection |
-| Samples used per full retrain | All historical samples × full epoch budget | small replay buffer × few epochs, only on detected drift |
-| Compute ratio | 100% | *see "Compute work ratio" printed below* |
-| Time | Minutes (full retrain) | *see measured adaptation time below* |
-"""
-))
-
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 12: Online Adaptation on Held-Out Cell B0018
 #          (Drift-Triggered Replay Buffer)
 # ═══════════════════════════════════════════════════════════════
@@ -926,14 +726,14 @@ def run_online_adaptation(adaptive_model, test_dataset, adapt_lr=4e-4, adapt_epo
     # live demo search. Comparing adaptation cost against the same shortened
     # budget used for a fast review run would understate the real efficiency
     # gain of replay-based adaptation over genuine full retraining.
-    \"\"\"
+    """
     Simulates streaming deployment on B0018:
       1. Process each cycle sequentially.
       2. Add cycle to replay buffer.
       3. Compute prediction residual → CUSUM.
       4. If drift detected → fine-tune 2 epochs on buffer.
     Returns cycle-by-cycle predictions (before + after adaptation).
-    \"\"\"
+    """
     adapt_opt = optim.AdamW(adaptive_model.parameters(), lr=adapt_lr, weight_decay=1e-4)
     adaptive_model.eval()
 
@@ -1020,30 +820,9 @@ def run_online_adaptation(adaptive_model, test_dataset, adapt_lr=4e-4, adapt_epo
 # (which had already been fine-tuned on parts of this very held-out stream),
 # silently leaking adaptation into what should be the frozen baseline.
 adaptation_results = run_online_adaptation(copy.deepcopy(trained_models['adaptive']), test_dataset)
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 13 — Section 3: Results & Comparisons (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 📈 Section 3: Results and Model Comparison
 
-All five architectures are trained under one identical protocol — same data
-split (B0005/B0006/B0007 train, **B0018 held out**), same feature encoding,
-same epoch budget, same optimizer — so the comparison below is apples-to-apples
-across our own models. Only the Adaptive Digital Twin additionally runs the
-proposed online replay-adaptation mechanism on the held-out stream, because
-that mechanism is the actual contribution being tested.
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 14 — Results Table & Comparison Plots
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 14: Results Table & Comparison Plots (Section 3)
 # ═══════════════════════════════════════════════════════════════
 
@@ -1081,7 +860,7 @@ display(df_results.to_string(index=False))
 fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 fig.suptitle('Section 3: Model Accuracy Comparison on Held-Out Cell B0018', fontweight='bold', fontsize=14)
 
-models_plot = [row['Model'].replace(' (Ours)', '\\n(Ours)').replace('Digital Twin', 'Twin') for row in results_table]
+models_plot = [row['Model'].replace(' (Ours)', '\n(Ours)').replace('Digital Twin', 'Twin') for row in results_table]
 frozen_mae  = [row['SOH MAE – Frozen (%)']  for row in results_table]
 adapted_mae = [row['SOH MAE – Adapted (%)'] for row in results_table]
 
@@ -1133,14 +912,9 @@ plt.tight_layout()
 plt.savefig('results_comparison.png', dpi=120, bbox_inches='tight')
 plt.show()
 print("Results comparison figure saved as results_comparison.png")
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 15 — RUL Comparison Plot
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
 # CELL 15: RUL Comparison & Hyperparameter Search Summary
 # ═══════════════════════════════════════════════════════════════
 
@@ -1163,7 +937,7 @@ axes[0].grid(True, linestyle='--', alpha=0.5)
 hp_labels, hp_maes = [], []
 for name in ['dnn', 'gru', 'transformer', 'pinn', 'adaptive']:
     best_res = min(search_results[name]['all_results'], key=lambda r: r['soh_mae'])
-    hp_labels.append(model_display[name].replace(' ', '\\n'))
+    hp_labels.append(model_display[name].replace(' ', '\n'))
     hp_maes.append(best_res['soh_mae'])
 
 bar_colors2 = ['#4477AA', '#66CCEE', '#228833', '#CCBB44', '#EE6677']
@@ -1177,27 +951,9 @@ axes[1].grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.savefig('rul_and_hparam_summary.png', dpi=120, bbox_inches='tight')
 plt.show()
-"""
-))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 16 — Section 4: Computational Efficiency (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## ⚙️ Section 4: Computational Efficiency (measured, internal comparison)
 
-Every number in this section is measured on this machine from this run — no
-externally-assumed figures. The comparison is the Adaptive Digital Twin's own
-**replay-buffer adaptation** against what a **full retraining pass** on the
-same data would cost, since that is the actual efficiency claim being tested
-(not a cross-paper hardware comparison, which would need identical hardware
-and code to be meaningful).
-"""
-))
-
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
 # CELL 16b: Efficiency summary — built from real measured values only
 # ═══════════════════════════════════════════════════════════════
 from IPython.display import Markdown, display
@@ -1208,7 +964,7 @@ best_baseline  = min(row['SOH MAE – Frozen (%)'] for row in results_table if r
 best_baseline_name = [row['Model'] for row in results_table
                        if row['SOH MAE – Frozen (%)'] == best_baseline and row['Model'] != 'Adaptive Digital Twin (Ours)'][0]
 
-summary = f\"\"\"
+summary = f"""
 **Measured summary — held-out cell B0018**
 
 | Metric | Value | Source |
@@ -1224,16 +980,11 @@ Online replay adaptation took the Adaptive Twin from {ours_frozen:.2f}% to
 improvement) using only a fraction of the compute of a full retrain — that
 improvement, not the raw parameter count or architecture name, is the
 evidence for the proposed method.
-\"\"\"
-display(Markdown(summary))
 """
-))
+display(Markdown(summary))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 17 — Computational Efficiency Plots
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_code_cell(
-"""# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
 # CELL 17: Computational Efficiency Visualization (Section 4)
 # ═══════════════════════════════════════════════════════════════
 
@@ -1263,15 +1014,15 @@ fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 fig.suptitle('Section 4: Measured Computational Cost (this run only)', fontweight='bold', fontsize=14)
 
 work_pct = adaptation_results['work_ratio'] * 100.0
-axes[0].bar(['Replay adaptation\\n(measured)'], [work_pct], color='#4DAF4A', edgecolor='white', width=0.5)
-axes[0].bar(['Full retrain\\n(reference = 100%)'], [100.0], color='#999999', edgecolor='white', width=0.5)
+axes[0].bar(['Replay adaptation\n(measured)'], [work_pct], color='#4DAF4A', edgecolor='white', width=0.5)
+axes[0].bar(['Full retrain\n(reference = 100%)'], [100.0], color='#999999', edgecolor='white', width=0.5)
 for i, v in enumerate([work_pct, 100.0]):
     axes[0].text(i, v + 1.5, f'{v:.1f}%', ha='center', fontweight='bold')
 axes[0].set_ylabel('Compute work (%, sample x epoch units)')
 axes[0].set_title('Adaptation Compute vs. Full Retrain Budget', fontweight='bold')
 axes[0].grid(True, axis='y', alpha=0.4)
 
-axes[1].bar(['Adaptive Twin\\ninference (measured)'], [our_latency_ms], color='#984EA3', edgecolor='white', width=0.5)
+axes[1].bar(['Adaptive Twin\ninference (measured)'], [our_latency_ms], color='#984EA3', edgecolor='white', width=0.5)
 axes[1].text(0, our_latency_ms + 0.05, f'{our_latency_ms:.2f} ms', ha='center', fontweight='bold')
 axes[1].set_ylabel('Latency (ms)')
 axes[1].set_title('Measured Per-Cycle Inference Latency (CPU)', fontweight='bold')
@@ -1282,57 +1033,3 @@ plt.savefig('compute_efficiency.png', dpi=120, bbox_inches='tight')
 plt.show()
 print(f"Adaptation used {work_pct:.1f}% of a full-retrain compute budget for a "
       f"{(1 - adaptation_results['adapted_mae']/adaptation_results['frozen_mae'])*100:.1f}% SOH MAE improvement.")
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CELL 18 — Final Summary Takeaways
-# ─────────────────────────────────────────────────────────────────────────────
-nb.cells.append(new_markdown_cell(
-"""---
-## 🏆 Section 4.3: Key Takeaways & Conclusions
-
-All five architectures below were trained under the **same protocol, same
-epoch budget, same data split** — the only asymmetry is that the Adaptive
-Digital Twin additionally runs its proposed online replay-adaptation
-mechanism on the held-out stream, since that mechanism is the thing being
-evaluated. Exact figures are in the Section 3 table and the Cell 16b summary
-above (computed live from this run, not retyped by hand).
-
-### Why the Adaptive Digital Twin is the strongest candidate here
-1. **It is the only model that keeps improving after deployment** — DNN, GRU,
-   Transformer, and offline PINN are frozen once trained; the Adaptive Twin
-   detects distribution drift (CUSUM) and corrects itself from a small replay
-   buffer, at a measured fraction of a full retrain's compute cost.
-2. **Physics-informed constraints are present** (soft SOH/RUL monotonicity +
-   RUL–SOH coupling), same as the offline PINN baseline, so the accuracy
-   difference between PINN and the Adaptive Twin isolates the effect of
-   *online adaptation specifically*, not "physics vs. no physics."
-3. **Bounded, physically valid outputs by construction** — sigmoid output
-   heads guarantee SOH ∈ [0, 100]% and RUL ≥ 0 for every model in this
-   comparison, so 0% bounds-violation is a shared property, not a unique
-   selling point.
-4. **Cross-cell generalization** — every model here is trained on
-   B0005/B0006/B0007 and evaluated on the completely unseen B0018 cell.
-
-### Honest limitations to state in the review
-- Four NASA cells is a proof-of-concept scale, not a broad-chemistry claim.
-- The soft monotonicity penalty is a diagnostic, not a hard constraint —
-  real batteries show local capacity regeneration, so some violation rate is
-  expected and reported rather than hidden.
-- Numbers vary run-to-run on this small dataset; the reported table is one
-  seeded, reproducible run, not an average over many seeds (a natural next
-  step, matching the tuning-grid methodology used in the earlier
-  `battery_twin/` evidence bundle).
-"""
-))
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Write the notebook
-# ─────────────────────────────────────────────────────────────────────────────
-NB_PATH = r'd:\DL\Adaptive_Physics_Informed_Battery_Digital_Twin.ipynb'
-with open(NB_PATH, 'w', encoding='utf-8') as f:
-    nbformat.write(nb, f)
-
-print(f"Notebook written: {NB_PATH}")
-print(f"Total cells: {len(nb.cells)}")

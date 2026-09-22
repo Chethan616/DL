@@ -1,0 +1,87 @@
+PyTorch version : 2.13.0+cpu
+Compute device  : cpu
+Random seed set : 42
+============================================================
+  NASA BATTERY DATASET AUDIT
+============================================================
+  Cell B0005: 168 cycles | Cap 1.287–1.856 Ah | SOH 64.4%–92.8% | Max RUL 124 cycles
+  Cell B0006: 168 cycles | Cap 1.154–2.035 Ah | SOH 57.7%–101.8% | Max RUL 108 cycles
+  Cell B0007: 168 cycles | Cap 1.400–1.891 Ah | SOH 70.0%–94.6% | Max RUL 167 cycles
+  Cell B0018: 132 cycles | Cap 1.341–1.855 Ah | SOH 67.1%–92.8% | Max RUL 96 cycles
+  Total discharge cycles : 636
+EDA complete. Figure saved as eda_summary.png
+Train samples : 504
+Test  samples : 132
+Train batches : 16
+Feature shape : x=torch.Size([12, 256, 5]), pm=torch.Size([12, 256]), cm=torch.Size([12])
+Physics loss functions defined successfully!
+  compute_physics_loss() — monotonicity + RUL–SOH coupling
+  total_loss_fn()        — Huber(SOH) + Huber(RUL) + physics terms
+  dnn             | SOH shape: torch.Size([2, 12]) | RUL shape: torch.Size([2, 12]) | Params: 83,586
+  gru             | SOH shape: torch.Size([2, 12]) | RUL shape: torch.Size([2, 12]) | Params: 215,810
+  transformer     | SOH shape: torch.Size([2, 12]) | RUL shape: torch.Size([2, 12]) | Params: 415,746
+  pinn            | SOH shape: torch.Size([2, 12]) | RUL shape: torch.Size([2, 12]) | Params: 415,746
+  adaptive        | SOH shape: torch.Size([2, 12]) | RUL shape: torch.Size([2, 12]) | Params: 415,746
+
+All 5 model architectures compiled and verified!
+
+============================================================
+  Hyperparameter Search: DNN — 2 configs × 6 epochs
+============================================================
+  Config [lr=3e-04 h=64 dr=0.15] → SOH MAE (frozen): 7.4000%  RUL MAE: 29.37 cyc
+  Config [lr=3e-04 h=128 dr=0.15] → SOH MAE (frozen): 7.3856%  RUL MAE: 31.71 cyc
+
+  BEST config: {'lr': 0.0003, 'hidden_size': 128, 'dropout': 0.15} → SOH MAE: 7.3856%
+
+============================================================
+  Hyperparameter Search: GRU — 2 configs × 6 epochs
+============================================================
+  Config [lr=3e-04 h=64 dr=0.15] → SOH MAE (frozen): 7.6030%  RUL MAE: 29.22 cyc
+  Config [lr=3e-04 h=128 dr=0.15] → SOH MAE (frozen): 7.0287%  RUL MAE: 29.40 cyc
+
+  BEST config: {'lr': 0.0003, 'hidden_size': 128, 'dropout': 0.15} → SOH MAE: 7.0287%
+
+============================================================
+  Hyperparameter Search: TRANSFORMER — 2 configs × 6 epochs
+============================================================
+  Config [lr=3e-04 h=64 dr=0.15] → SOH MAE (frozen): 10.0855%  RUL MAE: 37.27 cyc
+  Config [lr=3e-04 h=128 dr=0.15] → SOH MAE (frozen): 11.0173%  RUL MAE: 37.79 cyc
+
+  BEST config: {'lr': 0.0003, 'hidden_size': 64, 'dropout': 0.15} → SOH MAE: 10.0855%
+
+============================================================
+  Hyperparameter Search: PINN — 2 configs × 6 epochs
+============================================================
+  Config [lr=3e-04 h=64 dr=0.15] → SOH MAE (frozen): 7.7530%  RUL MAE: 41.95 cyc
+  Config [lr=3e-04 h=128 dr=0.15] → SOH MAE (frozen): 10.1316%  RUL MAE: 46.09 cyc
+
+  BEST config: {'lr': 0.0003, 'hidden_size': 64, 'dropout': 0.15} → SOH MAE: 7.7530%
+
+============================================================
+  Hyperparameter Search: ADAPTIVE — 2 configs × 6 epochs
+============================================================
+  Config [lr=3e-04 h=64 dr=0.15] → SOH MAE (frozen): 7.6371%  RUL MAE: 38.89 cyc
+  Config [lr=3e-04 h=128 dr=0.15] → SOH MAE (frozen): 8.6549%  RUL MAE: 40.68 cyc
+
+  BEST config: {'lr': 0.0003, 'hidden_size': 64, 'dropout': 0.15} → SOH MAE: 7.6371%
+
+✅ Hyperparameter search complete for all 5 models!
+Online Adaptation Results (Cell B0018):
+  Frozen  model SOH MAE : 7.6371%
+  Adapted model SOH MAE : 5.4342%
+  Drift events detected : 8 at cycles [9, 26, 36, 44, 63]...
+  Total adaptation time : 1.156 minutes
+  Compute work ratio    : 22.95% (96 samples x 6 epochs x 8 events vs 502 x 40)
+================================================================================
+  COMPLETE EVALUATION RESULTS — HELD-OUT CELL B0018
+================================================================================
+                       Model  SOH MAE – Frozen (%)  SOH MAE – Adapted (%)  RUL MAE (cycles)        Compute Work Ratio Physics Constraint
+             FeedForward DNN                  7.39                   7.39              31.7 0% (no online adaptation)                 No
+               Recurrent GRU                  7.03                   7.03              29.4 0% (no online adaptation)                 No
+            Transformer-Only                 10.09                  10.09              37.3 0% (no online adaptation)                 No
+              PINN (Offline)                  7.75                   7.75              41.9 0% (no online adaptation)                Yes
+Adaptive Digital Twin (Ours)                  7.64                   5.43              38.9     22.9% (online replay)                Yes
+Results comparison figure saved as results_comparison.png
+<IPython.core.display.Markdown object>
+Measured inference latency (Adaptive Twin, CPU): 3.52 ms
+Adaptation used 22.9% of a full-retrain compute budget for a 28.8% SOH MAE improvement.
